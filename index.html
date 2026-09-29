@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registro del Patrimonio Cultural · San Andrés de Giles</title>
+<meta name="description" content="Registro Oficial del Patrimonio Cultural de San Andrés de Giles (PCSAG): mapa de bienes declarados, fichas patrimoniales, parcelario actual y mensuras históricas del AHGBA.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23233b2f'/%3E%3Cpath d='M8 24V13l8-5 8 5v11h-5v-6h-6v6z' fill='%23e9c46a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="top">
+  <a class="brand" href="#/">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" class="b-bg"/><path d="M8 24V13l8-5 8 5v11h-5v-6h-6v6z" class="b-fg"/></svg>
+    <span><b>Patrimonio Cultural</b><small>San Andrés de Giles · PCSAG</small></span>
+  </a>
+  <nav class="tabs" aria-label="Secciones">
+    <a href="#/" data-r="inicio">Inicio</a>
+    <a href="#/mapa" data-r="mapa">Mapa</a>
+    <a href="#/fichas" data-r="fichas">Fichas</a>
+    <a href="#/normativa" data-r="normativa">Normativa</a>
+    <a href="#/acerca" data-r="acerca">Método y hallazgos</a>
+  </nav>
+  <button class="icon-btn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema claro u oscuro">
+    <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/></svg>
+  </button>
+</header>
+
+<main id="main">
+  <!-- INICIO -->
+  <section class="view" id="v-inicio">
+    <div class="hero">
+      <div class="hero-in">
+        <p class="kicker">Comisión Municipal Asesora de Patrimonio Cultural · Ord. 2182/19</p>
+        <h1>Registro del Patrimonio Cultural<br><em>de San Andrés de Giles</em></h1>
+        <p class="lede">Inventario nominal de los bienes declarados por el Honorable Concejo Deliberante desde 1988, reconstruido inciso por inciso a partir del texto de cada ordenanza, con su localización sobre imagen satelital, el parcelario vigente y las mensuras históricas del Archivo de Geodesia.</p>
+        <div class="hero-cta">
+          <a class="btn primary" href="#/mapa">Abrir el mapa</a>
+          <a class="btn" href="#/fichas">Consultar fichas</a>
+        </div>
+      </div>
+      <dl class="stats" id="stats"></dl>
+    </div>
+    <div class="wrap">
+      <div class="grid2">
+        <article class="panel">
+          <h2>Categorías del régimen</h2>
+          <p class="muted">Art. 4º de la Ord. 2182/19, ampliado por la Ord. 2446/21. Un bien puede tener doble encuadre.</p>
+          <ul class="cats" id="catList"></ul>
+        </article>
+        <article class="panel">
+          <h2>Declaratorias por año</h2>
+          <p class="muted">Asientos del Registro Oficial según el año de la ordenanza de origen.</p>
+          <div id="chartYears" class="chart"></div>
+        </article>
+      </div>
+      <article class="panel">
+        <h2>Localidades</h2>
+        <div class="loc-strip" id="locStrip"></div>
+      </article>
+      <article class="panel quote">
+        <p>Un registro no es sólo un listado: es la decisión colectiva sobre qué merece durar. Cada asiento de este inventario abre una pregunta — qué se protege, para quién, y qué queda fuera de la mirada normativa.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- MAPA -->
+  <section class="view" id="v-mapa">
+    <div class="map-shell">
+      <aside class="side" id="side">
+        <div class="side-head">
+          <input type="search" id="mapSearch" placeholder="Buscar bien, ordenanza o nomenclatura (I-A-95-2)…" aria-label="Buscar en el mapa">
+          <div class="chips" id="mapFilters"></div>
+        </div>
+        <div class="side-list" id="mapList"></div>
+        <div class="side-foot" id="locPanel"></div>
+      </aside>
+      <div class="map-wrap">
+        <div id="map" role="region" aria-label="Mapa del patrimonio"></div>
+        <button class="side-toggle" id="sideToggle" aria-label="Mostrar u ocultar lista">☰ Lista</button>
+        <div class="layers" id="layers">
+          <h3>Capas</h3>
+          <label><input type="checkbox" data-l="bienes" checked> Bienes declarados</label>
+          <label><input type="checkbox" data-l="parcelario"> Parcelario 2024 <span class="note" id="parcNote"></span></label>
+          <label><input type="checkbox" data-l="mensuras"> Mensuras históricas AHGBA</label>
+          <label><input type="checkbox" data-l="caminos"> Caminos de las mensuras</label>
+          <label><input type="checkbox" data-l="estancias"> Estancias, puestos y postas</label>
+          <label class="op">Opacidad mensuras <input type="range" id="mensOp" min="0" max="100" value="55"></label>
+          <h3>Base</h3>
+          <label><input type="radio" name="base" value="sat" checked> Satelital + nombres</label>
+          <label><input type="radio" name="base" value="satp"> Satelital puro</label>
+          <label><input type="radio" name="base" value="osm"> Callejero</label>
+          <div class="legend" id="legend"></div>
+        </div>
+        <div class="locate-bar" id="locateBar" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FICHAS -->
+  <section class="view" id="v-fichas">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="kicker">Catálogo</p>
+        <h1>Fichas patrimoniales</h1>
+        <p class="muted">Una ficha por asiento del Registro Oficial (103 bienes con ordenanza) y por cada asiento sin respaldo de ordenanza (12).</p>
+      </header>
+      <div class="filters" id="fFilters">
+        <input type="search" id="fSearch" placeholder="Buscar por nombre, ubicación, ordenanza…" aria-label="Buscar fichas">
+        <select id="fLoc" aria-label="Localidad"></select>
+        <select id="fCat" aria-label="Categoría"></select>
+        <select id="fTipo" aria-label="Tipo de bien"></select>
+        <select id="fLst" aria-label="Localización"></select>
+        <label class="chk"><input type="checkbox" id="fSin"> Incluir sin ordenanza</label>
+      </div>
+      <p class="count" id="fCount"></p>
+      <div class="cards" id="cards"></div>
+    </div>
+  </section>
+
+  <!-- FICHA -->
+  <section class="view" id="v-ficha"><div class="wrap" id="ficha"></div></section>
+
+  <!-- NORMATIVA -->
+  <section class="view" id="v-normativa">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="kicker">Marco normativo</p>
+        <h1>Ordenanzas y régimen</h1>
+        <p class="muted">Régimen orgánico y ordenanzas declaratorias del H.C.D., con el número de asientos que cada una genera en el Registro.</p>
+      </header>
+      <div id="normas"></div>
+      <h2 class="mt">Solicitudes con dictamen desfavorable</h2>
+      <div id="desf"></div>
+    </div>
+  </section>
+
+  <!-- ACERCA -->
+  <section class="view" id="v-acerca">
+    <div class="wrap prose" id="acerca"></div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p>Registro Oficial del Patrimonio Cultural de San Andrés de Giles · Ord. 2182/19 (mod. 2446/21) · Datos: Registro Oficial PCSAG, KML de lugares declarados, Parcelario ARBA/COU 2024, Mensuras AHGBA. Imágenes: Esri World Imagery, © OpenStreetMap.</p>
+</footer>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
