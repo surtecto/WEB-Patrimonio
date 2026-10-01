@@ -1,0 +1,26 @@
+{
+  "name": "Registro del Patrimonio Cultural · San Andrés de Giles",
+  "short_name": "Patrimonio SAG",
+  "description": "Registro Oficial del Patrimonio Cultural de San Andrés de Giles (PCSAG), mapa interactivo, catálogo, itinerarios temáticos y agenda cultural.",
+  "start_url": "./#/",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f6f2ea",
+  "theme_color": "#233b2f",
+  "lang": "es-AR",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='36' fill='%23233b2f'/%3E%3Cpath d='M48 144V78l48-30 48 30v66h-30v-36h-36v36z' fill='%23e9c46a'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%23233b2f'/%3E%3Cpath d='M128 384V208l128-80 128 80v176h-80v-96h-96v96z' fill='%23e9c46a'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

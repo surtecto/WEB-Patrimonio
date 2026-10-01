@@ -1,1 +1,389 @@
-{"type":"FeatureCollection","features":[]}
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "13",
+    "nombre": "Estancia \"La Paterna\" de Díaz",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.2071033,
+     -34.3869377
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "19",
+    "nombre": "Tumba de Larrañaga",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.4484645,
+     -34.4227123
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "22",
+    "nombre": "Tumba del Capitán Justiniano Marcos Alvis",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.4484645,
+     -34.4227123
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "35",
+    "nombre": "Templete de Nuestra Señora de Luján",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.372499,
+     -34.3654022
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "44",
+    "nombre": "Antiguo almacén de García",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.4370276,
+     -34.4383939
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "54",
+    "nombre": "Mural de Adobes de Azcuénaga",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.3740654,
+     -34.3667882
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "64",
+    "nombre": "Localidad de Azcuénaga",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.3737503,
+     -34.3640839
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "65",
+    "nombre": "Edificio ex sede de la Escuela de Educación Primaria Nº 3 'Gral. José de San Martín' ('escuelita de Sobot')",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.4408524,
+     -34.4532093
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "67",
+    "nombre": "Edificio del Remate de Burgos",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.4470912,
+     -34.4461492
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "69",
+    "nombre": "Panadería 'La Moderna'",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.3749183,
+     -34.3656856
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "70",
+    "nombre": "Edificio de la antigua Sastrería 'La Porteña'",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.3746287,
+     -34.3659646
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "71",
+    "nombre": "Edificio del Restaurante 'La Casona'",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.3742156,
+     -34.3663808
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "77",
+    "nombre": "Documentación de la investigación científica de identificación de los restos del Soldado Jorge Alfredo Maciel",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.4478101,
+     -34.4477396
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "78",
+    "nombre": "Murales del Artista Plástico Gilense Walter Leonelli (1981-2016)",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.4515544,
+     -34.4402034
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "88",
+    "nombre": "Antiguas luminarias de alumbrado público",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.4472253,
+     -34.4429773
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "89",
+    "nombre": "Parlantes de la antigua red de publicidad en la vía pública de la Emisora 'Radio Tito'",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.4471771,
+     -34.4430304
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "90",
+    "nombre": "Buzones o Estafetas Postales",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.4453639,
+     -34.4378763
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "91",
+    "nombre": "Surtidores antiguos de combustible",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.4454014,
+     -34.4378143
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "92",
+    "nombre": "Sepulcro del Dr. Héctor J. Cámpora",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.4484645,
+     -34.4227123
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "102",
+    "nombre": "Edificio de la Estación del Ferrocarril de Villa Ruiz",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.262802,
+     -34.4336289
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "103",
+    "nombre": "Fiesta del Camino Real",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.2533231,
+     -34.4344518
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "S81",
+    "nombre": "Equipamientos Urbanos y Rurales Tradicionales",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.4397688,
+     -34.4413183
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "S85",
+    "nombre": "Mural Donación Familia Cesario (Obra \"Pampa Bonaerense\" de Ítalo Ferraris)",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.4464046,
+     -34.44384
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "S86",
+    "nombre": "Manuscrito Breve Memoria de Origen y Progreso de SAG",
+    "metodo": "Punto marcado en el mapa",
+    "fecha": "2026-09-30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -59.4463214,
+     -34.4440457
+    ]
+   }
+  }
+ ]
+}

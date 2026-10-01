@@ -2,43 +2,38 @@
 
 Sitio web estático del **Registro Oficial del Patrimonio Cultural de San Andrés de Giles (PCSAG)** — Ord. 2182/19, mod. Ord. 2446/21. Comisión Municipal Asesora de Patrimonio Cultural (CMAPCSAG).
 
-- **Mapa**: bienes declarados (KML de lugares declarados + parcelas vinculadas) sobre imagen satelital Esri, con capas encendibles de **Parcelario 2024 (COU)** y **Mensuras históricas del AHGBA** (mensuras, caminos, estancias/puestos/postas).
-- **Fichas**: una ficha patrimonial por cada asiento del Registro Oficial (103 bienes con ordenanza) y por cada asiento sin ordenanza (12), con reseña investigada, datos clave, instrumento, catastro, fotografías y fuentes. Se pueden imprimir.
-- **Normativa**: régimen y ordenanzas declaratorias con el número de asientos de cada una.
-- **Localizar**: los bienes que el instrumento no permite ubicar se localizan desde el propio mapa.
+- **Mapa interactivo**: bienes declarados (KML de lugares declarados + parcelas vinculadas) sobre imagen satelital Esri y callejero OSM, con capas encendibles de **Parcelario 2024 (COU)** y **Mensuras históricas del AHGBA** (mensuras 1830–1925, caminos antiguos, estancias/puestos/postas).
+- **Herramientas GIS en mapa**: geolocalización GPS móvil en tiempo real («Mi ubicación») con detección del bien más cercano, regla interactiva para medir distancias y áreas, y exportación directa de capas filtradas a **GeoJSON** y **KML**.
+- **Fichas patrimoniales**: catálogo exhaustivo con 103 bienes con ordenanza y 12 asientos sin ordenanza. Reseña histórica, datos clave, instrumento, catastro parcelario, fotografías y fuentes. Incluye filtros facetados (por localidad, categoría, tipo, estado registral y época), botón para compartir enlace y navegación directa («Cómo llegar con GPS»).
+- **Itinerarios temáticos**: circuitos patrimoniales autoguiados (Casco Histórico Fundacional, Postas y Camino Real, Pueblos Rurales y Estaciones, Memoria Cívica y Monumentos) y generador personalizado a medida (a pie, en bicicleta o vehículo) con trazado de ruta en el mapa y navegación paso a paso.
+- **Calendario y fiestas**: cronograma anual de festividades patronales, fiestas populares gastronómicas (Fiesta Provincial de la Galleta de Campo en Azcuénaga, Fiesta del Hornero en Cucullú, Fiesta del Camino Real en Villa Ruiz), vigilias de patrimonio inmaterial (Fogón Criollo de Malvinas) y efemérides históricas, con exportación de eventos a calendarios (.ics).
+- **Normativa**: régimen orgánico y ordenanzas declaratorias del H.C.D. con el desglose de asientos y expedientes.
+- **Localización colaborativa**: herramienta interactiva para que la Comisión y la comunidad propongan la ubicación de bienes pendientes sobre el parcelario o imagen satelital, con exportación a GeoJSON.
+- **PWA y soporte móvil**: barra de navegación inferior táctil para smartphones, `manifest.json` y Service Worker (`sw.js`) para consulta offline en áreas rurales del partido con baja cobertura.
 
 ## Publicar en GitHub Pages
 
-1. Crear un repositorio (por ejemplo `patrimonio-sag`) y subir **todo el contenido de esta carpeta** a la raíz (incluido `.nojekyll`).
-2. En *Settings → Pages*, elegir *Deploy from a branch*, rama `main`, carpeta `/ (root)`.
-3. El sitio queda en `https://<usuario>.github.io/patrimonio-sag/`.
+1. Subir **todo el contenido de esta carpeta** a la raíz del repositorio de GitHub (incluido `.nojekyll` y `manifest.json`).
+2. En *Settings → Pages*, seleccionar *Deploy from a branch*, rama `main`, carpeta `/ (root)`.
+3. El sitio queda activo en `https://<usuario>.github.io/<repositorio>/`.
 
-> Abrir `index.html` con doble clic no funciona (los navegadores bloquean la lectura de los datos desde `file://`). Para probar localmente: `python -m http.server` dentro de la carpeta y abrir `http://localhost:8000`.
+> Para probar localmente: ejecutar `python3 -m http.server 8000` en esta carpeta y abrir `http://localhost:8000`.
 
-## Flujo de localización
-
-1. En el mapa o en una ficha: **Localizar este bien**.
-2. Marcar el punto (clic, arrastrable), elegir una parcela con el Parcelario encendido, buscar una dirección, o escribir una nomenclatura (`I-A-95-2`) en el buscador.
-3. Las propuestas se guardan en el navegador. **Exportar GeoJSON** descarga `localizaciones.json`.
-4. Reemplazar `data/localizaciones.json` en el repositorio por el archivo exportado: la localización queda publicada para todos (estado «Localización incorporada»).
-
-## Estructura
+## Estructura de archivos
 
 ```
-index.html            página única (rutas con #/)
-css/styles.css        estilos (tema claro/oscuro, impresión de fichas)
-js/app.js             aplicación
-vendor/leaflet/       Leaflet 1.9.4 (local, sin depender de CDN)
-data/registro.json    115 asientos: registro + investigación + geometría
-data/declarados_kml.geojson  KML original convertido, con los ID vinculados
-data/parcelario.geojson      Parcelario SAG 2024 (EPSG:22185 → WGS84)
-data/mensuras.geojson / caminos.geojson / estancias.geojson   AHGBA
-data/localizaciones.json     localizaciones incorporadas por la Comisión
-img/                  fotografías del archivo de la CMAPCSAG
+index.html                  Página única (SPA con hash router #/)
+manifest.json               Configuración PWA (instalable en móviles)
+sw.js                       Service Worker para soporte offline
+css/styles.css              Estilos (tema claro/oscuro, móvil y print)
+js/app.js                   Lógica de la aplicación, mapas, itinerarios y agenda
+vendor/leaflet/             Leaflet 1.9.4 local (sin dependencias CDN)
+data/registro.json          115 asientos: registro + investigación + geometría
+data/declarados_kml.geojson Polígonos y puntos declarados
+data/parcelario.geojson     Parcelario SAG 2024 (ARBA/COU)
+data/mensuras.geojson       Mensuras históricas 1830-1925 (AHGBA)
+data/caminos.geojson        Trazas y caminos de las mensuras
+data/estancias.geojson      Postas, pulperías y puestos históricos
+data/localizaciones.json    Localizaciones aprobadas por la Comisión
+img/                        Fotografías del archivo de la CMAPCSAG
 ```
-
-## Datos y privacidad
-
-El parcelario se publica **sin nombres de titulares ni domicilios**: sólo nomenclatura, partida, zona COU y superficie. La nomenclatura catastral tomada de la planilla 2024 (no del texto de la ordenanza) se dibuja con borde punteado y debe cotejarse con ARBA antes de dar fe registral.
-
-Para actualizar el registro, editar `data/registro.json` (cada bien tiene `res` = reseña, `datos`, `fuentes`, `fotos`, `g` = geometría GeoJSON).

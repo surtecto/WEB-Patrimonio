@@ -1,3 +1,13 @@
+
+[hidden],
+.itinerary-banner[hidden],
+.measure-bar[hidden],
+.gps-bar[hidden],
+.locate-bar[hidden],
+.toast[hidden] {
+  display: none !important;
+}
+
 :root{
   --bg:#f6f2ea; --surface:#fffdf8; --surface-2:#efe8db; --line:#ddd3c2; --line-2:#c9bca6;
   --ink:#1f1a14; --ink-2:#4a4034; --ink-3:#7c705f;
@@ -229,3 +239,430 @@ body.map-on .foot{display:none}
   .minimap{height:220px}
   .panel,.dl,.box{box-shadow:none}
 }
+
+/* ========================================================
+   MEJORAS GIS, ITINERARIOS, CALENDARIO Y MÓVIL (PCSAG)
+   ======================================================== */
+
+/* Herramientas flotantes del mapa */
+.map-tools {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 650;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tool-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line-2);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: all .15s ease;
+}
+.tool-btn svg { width: 20px; height: 20px; fill: currentColor; }
+.tool-btn:hover { background: var(--surface-2); border-color: var(--brand); color: var(--brand); }
+.tool-btn.active { background: var(--brand); border-color: var(--brand); color: var(--surface); }
+
+/* Banners flotantes en el mapa */
+.itinerary-banner, .measure-bar, .gps-bar {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 660;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  padding: 10px 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.18);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: min(92vw, 680px);
+  backdrop-filter: blur(8px);
+  animation: slideDown .2s ease-out;
+}
+.itinerary-banner { top: 12px; }
+.measure-bar { bottom: 20px; }
+.gps-bar { bottom: 20px; }
+@keyframes slideDown { from { transform: translate(-50%, -12px); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
+
+.itinerary-banner b, .measure-bar b, .gps-bar b { color: var(--brand); }
+.itinerary-banner span, .measure-bar span, .gps-bar span { font-size: .88rem; }
+.itinerary-banner .it-controls { display: flex; gap: 6px; margin-left: auto; }
+
+/* Marcador GPS de usuario */
+.gps-user-marker {
+  width: 18px;
+  height: 18px;
+  background: #2563eb;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(37,99,235,.35);
+  animation: gpsPulse 2s infinite;
+}
+@keyframes gpsPulse {
+  0% { box-shadow: 0 0 0 2px rgba(37,99,235,.6); }
+  70% { box-shadow: 0 0 0 14px rgba(37,99,235,0); }
+  100% { box-shadow: 0 0 0 2px rgba(37,99,235,0); }
+}
+
+/* Marcadores numerados de itinerario */
+.itin-marker-badge {
+  background: var(--brand);
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  font: 700 .85rem var(--mono);
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
+
+/* Pestañas de la vista Itinerarios */
+.itin-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 8px;
+}
+.itin-tab-btn {
+  border: 1px solid transparent;
+  background: none;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font: 600 .9rem var(--sans);
+  cursor: pointer;
+  color: var(--ink-2);
+  transition: all .15s;
+}
+.itin-tab-btn:hover { background: var(--surface-2); }
+.itin-tab-btn.on { background: var(--brand); color: var(--surface); }
+.itin-tab-content { display: none; }
+.itin-tab-content.on { display: block; }
+
+/* Grid de Circuitos Curados */
+.itin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 20px;
+}
+.itin-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  transition: transform .15s ease, border-color .15s ease;
+}
+.itin-card:hover { transform: translateY(-3px); border-color: var(--line-2); }
+.itin-card-head {
+  padding: 18px 20px 12px;
+  border-bottom: 1px solid var(--line);
+}
+.itin-badge-strip {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.itin-badge {
+  font: 500 .75rem/1.2 var(--mono);
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--surface-2);
+  color: var(--ink-2);
+}
+.itin-badge.accent { background: var(--accent); color: #2a2010; font-weight: 600; }
+.itin-card h3 { margin: 0 0 6px; font-size: 1.25rem; }
+.itin-card-body {
+  padding: 16px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.itin-card-body p { margin: 0; font-size: .92rem; color: var(--ink-2); line-height: 1.5; }
+.itin-stops-preview {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+}
+.itin-stops-preview b { display: block; font: 500 .78rem var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); margin-bottom: 6px; }
+.itin-stops-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: .84rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.itin-stops-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-2);
+}
+.itin-stops-list li span.step-n {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  font: 700 .7rem var(--mono);
+  flex-none: 0;
+}
+.itin-card-foot {
+  padding: 14px 20px;
+  background: var(--surface-2);
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Formulario Generador a medida */
+.custom-itin-form .form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+.custom-itin-form label { display: flex; flex-direction: column; gap: 6px; font-size: .88rem; }
+.custom-itin-form select {
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--line-2);
+  background: var(--surface);
+  color: var(--ink);
+  font: 500 .9rem var(--sans);
+}
+.gen-result {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 20px;
+}
+.gen-result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.gen-stops-grid {
+  display: grid;
+  gap: 10px;
+}
+.stop-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+.stop-item .idx {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--brand);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font: 700 .8rem var(--mono);
+  flex: none;
+}
+.stop-item .info { flex: 1; min-width: 0; }
+.stop-item .info b { display: block; font-size: .95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.stop-item .info small { color: var(--ink-3); font-size: .8rem; }
+
+/* Vista Calendario */
+.cal-controls {
+  margin-bottom: 24px;
+}
+.cal-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+.cal-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  transition: border-color .15s ease, transform .15s ease;
+}
+.cal-card:hover { transform: translateY(-2px); border-color: var(--brand); }
+.cal-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.cal-date-badge {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 6px 12px;
+  text-align: center;
+  flex: none;
+  min-width: 64px;
+}
+.cal-date-badge .day { font: 700 1.4rem/1 var(--serif); color: var(--brand); }
+.cal-date-badge .mon { font: 600 .75rem/1 var(--mono); text-transform: uppercase; color: var(--accent-ink); margin-top: 2px; }
+.cal-title-wrap { flex: 1; min-width: 0; }
+.cal-title-wrap h3 { margin: 0 0 4px; font-size: 1.15rem; line-height: 1.25; }
+.cal-title-wrap .sub { font: 500 .8rem var(--mono); color: var(--ink-3); }
+.cal-desc { font-size: .9rem; color: var(--ink-2); line-height: 1.5; margin: 0; }
+.cal-bienes-wrap {
+  background: var(--surface-2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: .82rem;
+  color: var(--ink-2);
+}
+.cal-bienes-wrap b { color: var(--ink); }
+.cal-bienes-wrap a { text-decoration: underline; margin-left: 4px; }
+.cal-foot {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Toast flotante */
+.toast {
+  position: fixed;
+  bottom: 74px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--brand);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font: 500 .88rem var(--sans);
+  box-shadow: 0 4px 16px rgba(0,0,0,.3);
+  z-index: 2000;
+  animation: toastFade 2.5s forwards;
+  pointer-events: none;
+}
+@keyframes toastFade {
+  0% { opacity: 0; transform: translate(-50%, 10px); }
+  15% { opacity: 1; transform: translate(-50%, 0); }
+  80% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -10px); }
+}
+
+/* Barra inferior móvil (Bottom Navigation Bar) */
+.bottom-nav {
+  display: none;
+}
+@media (max-width: 768px) {
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 58px;
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    z-index: 1000;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: env(safe-area-inset-bottom);
+    box-shadow: 0 -2px 10px rgba(0,0,0,.06);
+  }
+  .bottom-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    height: 100%;
+    color: var(--ink-3);
+    text-decoration: none;
+    font-size: .68rem;
+    font-weight: 500;
+    gap: 3px;
+    transition: color .15s;
+  }
+  .bottom-nav a svg { width: 22px; height: 22px; fill: currentColor; }
+  .bottom-nav a.on { color: var(--brand); font-weight: 700; }
+  .bottom-nav a.on svg { fill: var(--brand); }
+  
+  body { padding-bottom: 58px; }
+  body.map-on #map { height: calc(100vh - var(--top) - 58px); }
+  .map-tools { top: 10px; right: 10px; }
+  .itinerary-banner { width: calc(100% - 24px); flex-wrap: wrap; top: 10px; }
+  .measure-bar, .gps-bar { bottom: 12px; width: calc(100% - 24px); }
+}
+
+/* Selector de modos de transporte en itinerarios (Peatonal, Bici, Moto, Auto) */
+.itin-mode-bar {
+  display: flex;
+  gap: 4px;
+  background: var(--surface-2);
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.itin-mode-btn {
+  border: none;
+  background: transparent;
+  padding: 5px 9px;
+  border-radius: 6px;
+  font: 600 .78rem var(--sans);
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: all .15s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.itin-mode-btn:hover { background: var(--surface); color: var(--ink); }
+.itin-mode-btn.on { background: var(--brand); color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+
+.itin-card-modes {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.itin-card-mode-badge {
+  font: 500 .74rem var(--mono);
+  padding: 3px 6px;
+  border-radius: 5px;
+  background: var(--surface-2);
+  color: var(--ink-2);
+}
+.itin-card-mode-badge b { color: var(--brand); }
