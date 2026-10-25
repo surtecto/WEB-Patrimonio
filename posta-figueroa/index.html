@@ -1,0 +1,1645 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>[hidden]{display:none!important}img{max-width:100%}body{margin:0}</style>
+<title>Posta de Figueroa</title>
+<meta name="description" content="La Merced · Posta de Figueroa, San Andrés de Giles. Nube de puntos, territorio, camino de postas, la Carta de la Hacienda de Figueroa y su eco en el pensamiento del papa Francisco.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* required styles */
+
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container,
+.leaflet-pane > svg,
+.leaflet-pane > canvas,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	}
+.leaflet-container {
+	overflow: hidden;
+	}
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	        user-select: none;
+	  -webkit-user-drag: none;
+	}
+/* Prevents IE11 from highlighting tiles in blue */
+.leaflet-tile::selection {
+	background: transparent;
+}
+/* Safari renders non-retina tile on retina better with this, but Chrome is worse */
+.leaflet-safari .leaflet-tile {
+	image-rendering: -webkit-optimize-contrast;
+	}
+/* hack that prevents hw layers "stretching" when loading new tiles */
+.leaflet-safari .leaflet-tile-container {
+	width: 1600px;
+	height: 1600px;
+	-webkit-transform-origin: 0 0;
+	}
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	display: block;
+	}
+/* .leaflet-container svg: reset svg max-width decleration shipped in Joomla! (joomla.org) 3.x */
+/* .leaflet-container img: map is broken in FF if you have max-width: 100% on tiles */
+.leaflet-container .leaflet-overlay-pane svg {
+	max-width: none !important;
+	max-height: none !important;
+	}
+.leaflet-container .leaflet-marker-pane img,
+.leaflet-container .leaflet-shadow-pane img,
+.leaflet-container .leaflet-tile-pane img,
+.leaflet-container img.leaflet-image-layer,
+.leaflet-container .leaflet-tile {
+	max-width: none !important;
+	max-height: none !important;
+	width: auto;
+	padding: 0;
+	}
+
+.leaflet-container img.leaflet-tile {
+	/* See: https://bugs.chromium.org/p/chromium/issues/detail?id=600120 */
+	mix-blend-mode: plus-lighter;
+}
+
+.leaflet-container.leaflet-touch-zoom {
+	-ms-touch-action: pan-x pan-y;
+	touch-action: pan-x pan-y;
+	}
+.leaflet-container.leaflet-touch-drag {
+	-ms-touch-action: pinch-zoom;
+	/* Fallback for FF which doesn't support pinch-zoom */
+	touch-action: none;
+	touch-action: pinch-zoom;
+}
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+	-ms-touch-action: none;
+	touch-action: none;
+}
+.leaflet-container {
+	-webkit-tap-highlight-color: transparent;
+}
+.leaflet-container a {
+	-webkit-tap-highlight-color: rgba(51, 181, 229, 0.4);
+}
+.leaflet-tile {
+	filter: inherit;
+	visibility: hidden;
+	}
+.leaflet-tile-loaded {
+	visibility: inherit;
+	}
+.leaflet-zoom-box {
+	width: 0;
+	height: 0;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	z-index: 800;
+	}
+/* workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=888319 */
+.leaflet-overlay-pane svg {
+	-moz-user-select: none;
+	}
+
+.leaflet-pane         { z-index: 400; }
+
+.leaflet-tile-pane    { z-index: 200; }
+.leaflet-overlay-pane { z-index: 400; }
+.leaflet-shadow-pane  { z-index: 500; }
+.leaflet-marker-pane  { z-index: 600; }
+.leaflet-tooltip-pane   { z-index: 650; }
+.leaflet-popup-pane   { z-index: 700; }
+
+.leaflet-map-pane canvas { z-index: 100; }
+.leaflet-map-pane svg    { z-index: 200; }
+
+.leaflet-vml-shape {
+	width: 1px;
+	height: 1px;
+	}
+.lvml {
+	behavior: none;
+	display: inline-block;
+	position: absolute;
+	}
+
+
+/* control positioning */
+
+.leaflet-control {
+	position: relative;
+	z-index: 800;
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+.leaflet-top,
+.leaflet-bottom {
+	position: absolute;
+	z-index: 1000;
+	pointer-events: none;
+	}
+.leaflet-top {
+	top: 0;
+	}
+.leaflet-right {
+	right: 0;
+	}
+.leaflet-bottom {
+	bottom: 0;
+	}
+.leaflet-left {
+	left: 0;
+	}
+.leaflet-control {
+	float: left;
+	clear: both;
+	}
+.leaflet-right .leaflet-control {
+	float: right;
+	}
+.leaflet-top .leaflet-control {
+	margin-top: 10px;
+	}
+.leaflet-bottom .leaflet-control {
+	margin-bottom: 10px;
+	}
+.leaflet-left .leaflet-control {
+	margin-left: 10px;
+	}
+.leaflet-right .leaflet-control {
+	margin-right: 10px;
+	}
+
+
+/* zoom and fade animations */
+
+.leaflet-fade-anim .leaflet-popup {
+	opacity: 0;
+	-webkit-transition: opacity 0.2s linear;
+	   -moz-transition: opacity 0.2s linear;
+	        transition: opacity 0.2s linear;
+	}
+.leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
+	opacity: 1;
+	}
+.leaflet-zoom-animated {
+	-webkit-transform-origin: 0 0;
+	    -ms-transform-origin: 0 0;
+	        transform-origin: 0 0;
+	}
+svg.leaflet-zoom-animated {
+	will-change: transform;
+}
+
+.leaflet-zoom-anim .leaflet-zoom-animated {
+	-webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1);
+	   -moz-transition:    -moz-transform 0.25s cubic-bezier(0,0,0.25,1);
+	        transition:         transform 0.25s cubic-bezier(0,0,0.25,1);
+	}
+.leaflet-zoom-anim .leaflet-tile,
+.leaflet-pan-anim .leaflet-tile {
+	-webkit-transition: none;
+	   -moz-transition: none;
+	        transition: none;
+	}
+
+.leaflet-zoom-anim .leaflet-zoom-hide {
+	visibility: hidden;
+	}
+
+
+/* cursors */
+
+.leaflet-interactive {
+	cursor: pointer;
+	}
+.leaflet-grab {
+	cursor: -webkit-grab;
+	cursor:    -moz-grab;
+	cursor:         grab;
+	}
+.leaflet-crosshair,
+.leaflet-crosshair .leaflet-interactive {
+	cursor: crosshair;
+	}
+.leaflet-popup-pane,
+.leaflet-control {
+	cursor: auto;
+	}
+.leaflet-dragging .leaflet-grab,
+.leaflet-dragging .leaflet-grab .leaflet-interactive,
+.leaflet-dragging .leaflet-marker-draggable {
+	cursor: move;
+	cursor: -webkit-grabbing;
+	cursor:    -moz-grabbing;
+	cursor:         grabbing;
+	}
+
+/* marker & overlays interactivity */
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-image-layer,
+.leaflet-pane > svg path,
+.leaflet-tile-container {
+	pointer-events: none;
+	}
+
+.leaflet-marker-icon.leaflet-interactive,
+.leaflet-image-layer.leaflet-interactive,
+.leaflet-pane > svg path.leaflet-interactive,
+svg.leaflet-image-layer.leaflet-interactive path {
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+
+/* visual tweaks */
+
+.leaflet-container {
+	background: #ddd;
+	outline-offset: 1px;
+	}
+.leaflet-container a {
+	color: #0078A8;
+	}
+.leaflet-zoom-box {
+	border: 2px dotted #38f;
+	background: rgba(255,255,255,0.5);
+	}
+
+
+/* general typography */
+.leaflet-container {
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-size: 0.75rem;
+	line-height: 1.5;
+	}
+
+
+/* general toolbar styles */
+
+.leaflet-bar {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+	border-radius: 4px;
+	}
+.leaflet-bar a {
+	background-color: #fff;
+	border-bottom: 1px solid #ccc;
+	width: 26px;
+	height: 26px;
+	line-height: 26px;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color: black;
+	}
+.leaflet-bar a,
+.leaflet-control-layers-toggle {
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	display: block;
+	}
+.leaflet-bar a:hover,
+.leaflet-bar a:focus {
+	background-color: #f4f4f4;
+	}
+.leaflet-bar a:first-child {
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	}
+.leaflet-bar a:last-child {
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-bottom: none;
+	}
+.leaflet-bar a.leaflet-disabled {
+	cursor: default;
+	background-color: #f4f4f4;
+	color: #bbb;
+	}
+
+.leaflet-touch .leaflet-bar a {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	}
+.leaflet-touch .leaflet-bar a:first-child {
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	}
+.leaflet-touch .leaflet-bar a:last-child {
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	}
+
+/* zoom control */
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+	font: bold 18px 'Lucida Console', Monaco, monospace;
+	text-indent: 1px;
+	}
+
+.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out  {
+	font-size: 22px;
+	}
+
+
+/* layers control */
+
+.leaflet-control-layers {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+	background: #fff;
+	border-radius: 5px;
+	}
+.leaflet-control-layers-toggle {
+	background-image: none;
+	width: 36px;
+	height: 36px;
+	}
+.leaflet-retina .leaflet-control-layers-toggle {
+	background-image: none;
+	background-size: 26px 26px;
+	}
+.leaflet-touch .leaflet-control-layers-toggle {
+	width: 44px;
+	height: 44px;
+	}
+.leaflet-control-layers .leaflet-control-layers-list,
+.leaflet-control-layers-expanded .leaflet-control-layers-toggle {
+	display: none;
+	}
+.leaflet-control-layers-expanded .leaflet-control-layers-list {
+	display: block;
+	position: relative;
+	}
+.leaflet-control-layers-expanded {
+	padding: 6px 10px 6px 6px;
+	color: #333;
+	background: #fff;
+	}
+.leaflet-control-layers-scrollbar {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding-right: 5px;
+	}
+.leaflet-control-layers-selector {
+	margin-top: 2px;
+	position: relative;
+	top: 1px;
+	}
+.leaflet-control-layers label {
+	display: block;
+	font-size: 13px;
+	font-size: 1.08333em;
+	}
+.leaflet-control-layers-separator {
+	height: 0;
+	border-top: 1px solid #ddd;
+	margin: 5px -10px 5px -6px;
+	}
+
+/* Default icon URLs */
+.leaflet-default-icon-path { /* used only in path-guessing heuristic, see L.Icon.Default */
+	background-image: none;
+	}
+
+
+/* attribution and scale controls */
+
+.leaflet-container .leaflet-control-attribution {
+	background: #fff;
+	background: rgba(255, 255, 255, 0.8);
+	margin: 0;
+	}
+.leaflet-control-attribution,
+.leaflet-control-scale-line {
+	padding: 0 5px;
+	color: #333;
+	line-height: 1.4;
+	}
+.leaflet-control-attribution a {
+	text-decoration: none;
+	}
+.leaflet-control-attribution a:hover,
+.leaflet-control-attribution a:focus {
+	text-decoration: underline;
+	}
+.leaflet-attribution-flag {
+	display: inline !important;
+	vertical-align: baseline !important;
+	width: 1em;
+	height: 0.6669em;
+	}
+.leaflet-left .leaflet-control-scale {
+	margin-left: 5px;
+	}
+.leaflet-bottom .leaflet-control-scale {
+	margin-bottom: 5px;
+	}
+.leaflet-control-scale-line {
+	border: 2px solid #777;
+	border-top: none;
+	line-height: 1.1;
+	padding: 2px 5px 1px;
+	white-space: nowrap;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	background: rgba(255, 255, 255, 0.8);
+	text-shadow: 1px 1px #fff;
+	}
+.leaflet-control-scale-line:not(:first-child) {
+	border-top: 2px solid #777;
+	border-bottom: none;
+	margin-top: -2px;
+	}
+.leaflet-control-scale-line:not(:first-child):not(:last-child) {
+	border-bottom: 2px solid #777;
+	}
+
+.leaflet-touch .leaflet-control-attribution,
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	box-shadow: none;
+	}
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	border: 2px solid rgba(0,0,0,0.2);
+	background-clip: padding-box;
+	}
+
+
+/* popup */
+
+.leaflet-popup {
+	position: absolute;
+	text-align: center;
+	margin-bottom: 20px;
+	}
+.leaflet-popup-content-wrapper {
+	padding: 1px;
+	text-align: left;
+	border-radius: 12px;
+	}
+.leaflet-popup-content {
+	margin: 13px 24px 13px 20px;
+	line-height: 1.3;
+	font-size: 13px;
+	font-size: 1.08333em;
+	min-height: 1px;
+	}
+.leaflet-popup-content p {
+	margin: 17px 0;
+	margin: 1.3em 0;
+	}
+.leaflet-popup-tip-container {
+	width: 40px;
+	height: 20px;
+	position: absolute;
+	left: 50%;
+	margin-top: -1px;
+	margin-left: -20px;
+	overflow: hidden;
+	pointer-events: none;
+	}
+.leaflet-popup-tip {
+	width: 17px;
+	height: 17px;
+	padding: 1px;
+
+	margin: -10px auto 0;
+	pointer-events: auto;
+
+	-webkit-transform: rotate(45deg);
+	   -moz-transform: rotate(45deg);
+	    -ms-transform: rotate(45deg);
+	        transform: rotate(45deg);
+	}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+	background: white;
+	color: #333;
+	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+	}
+.leaflet-container a.leaflet-popup-close-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: none;
+	text-align: center;
+	width: 24px;
+	height: 24px;
+	font: 16px/24px Tahoma, Verdana, sans-serif;
+	color: #757575;
+	text-decoration: none;
+	background: transparent;
+	}
+.leaflet-container a.leaflet-popup-close-button:hover,
+.leaflet-container a.leaflet-popup-close-button:focus {
+	color: #585858;
+	}
+.leaflet-popup-scrolled {
+	overflow: auto;
+	}
+
+.leaflet-oldie .leaflet-popup-content-wrapper {
+	-ms-zoom: 1;
+	}
+.leaflet-oldie .leaflet-popup-tip {
+	width: 24px;
+	margin: 0 auto;
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";
+	filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678);
+	}
+
+.leaflet-oldie .leaflet-control-zoom,
+.leaflet-oldie .leaflet-control-layers,
+.leaflet-oldie .leaflet-popup-content-wrapper,
+.leaflet-oldie .leaflet-popup-tip {
+	border: 1px solid #999;
+	}
+
+
+/* div icon */
+
+.leaflet-div-icon {
+	background: #fff;
+	border: 1px solid #666;
+	}
+
+
+/* Tooltip */
+/* Base styles for the element that has a tooltip */
+.leaflet-tooltip {
+	position: absolute;
+	padding: 6px;
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 3px;
+	color: #222;
+	white-space: nowrap;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	pointer-events: none;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+	}
+.leaflet-tooltip.leaflet-interactive {
+	cursor: pointer;
+	pointer-events: auto;
+	}
+.leaflet-tooltip-top:before,
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	position: absolute;
+	pointer-events: none;
+	border: 6px solid transparent;
+	background: transparent;
+	content: "";
+	}
+
+/* Directions */
+
+.leaflet-tooltip-bottom {
+	margin-top: 6px;
+}
+.leaflet-tooltip-top {
+	margin-top: -6px;
+}
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-top:before {
+	left: 50%;
+	margin-left: -6px;
+	}
+.leaflet-tooltip-top:before {
+	bottom: 0;
+	margin-bottom: -12px;
+	border-top-color: #fff;
+	}
+.leaflet-tooltip-bottom:before {
+	top: 0;
+	margin-top: -12px;
+	margin-left: -6px;
+	border-bottom-color: #fff;
+	}
+.leaflet-tooltip-left {
+	margin-left: -6px;
+}
+.leaflet-tooltip-right {
+	margin-left: 6px;
+}
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	top: 50%;
+	margin-top: -6px;
+	}
+.leaflet-tooltip-left:before {
+	right: 0;
+	margin-right: -12px;
+	border-left-color: #fff;
+	}
+.leaflet-tooltip-right:before {
+	left: 0;
+	margin-left: -12px;
+	border-right-color: #fff;
+	}
+
+/* Printing */
+
+@media print {
+	/* Prevent printers from removing background-images of controls. */
+	.leaflet-control {
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+		}
+	}
+
+#map.leaflet-container{background:#1b1f1c;font-family:var(--f-body)}
+#map.nobase.leaflet-container{background:var(--noche-2)}
+.leaflet-control-attribution{font-family:var(--f-mono);font-size:.6rem!important;background:rgba(10,12,11,.65)!important;color:#cfcabb!important}
+.leaflet-control-attribution a{color:#cfcabb}
+.leaflet-control-zoom a{background:var(--noche)!important;color:var(--cal)!important;border-color:var(--hierro)!important}
+.leaflet-control-scale-line{background:rgba(10,12,11,.6);color:#ece8dc;border-color:#ece8dc;font-family:var(--f-mono);font-size:.62rem}
+.leaflet-tooltip{font-family:var(--f-mono);font-size:.68rem;background:var(--noche);color:var(--cal);border:1px solid var(--hierro);box-shadow:none}
+.leaflet-tooltip.ptip{font-family:var(--f-display);font-size:.95rem;background:rgba(10,12,11,.75);color:#fff;border-color:#c9b6e6}
+.mapread{z-index:500}
+fieldset.layers{border:0;padding:0;margin:0}
+/* Layout: un pliego largo de archivo — columna de lectura de 66ch con márgenes anchos para notas y coordenadas;
+   las piezas inmersivas (nube, mapa) rompen la columna a todo el ancho, como láminas desplegables. */
+:root{
+  --noche:#0e1311;      /* fondo: noche pampeana, verde-negro */
+  --noche-2:#161d1a;    /* superficies */
+  --cal:#e9e5d9;        /* texto: blanqueo de cal */
+  --cal-2:#a9a596;      /* texto secundario */
+  --hierro:#4a524d;     /* líneas, rejas */
+  --glicina:#b7a1d8;    /* acento: la glicina centenaria del patio */
+  --teja:#c98a63;       /* señal: tejas, mensuras antiguas */
+  --cardo:#8fa78a;      /* vegetación, caminos */
+  --ink-on-accent:#17121f;
+  --f-display:"IM Fell English", "Iowan Old Style", Georgia, serif;
+  --f-sc:"IM Fell English SC", "IM Fell English", Georgia, serif;
+  --f-body:"Spectral", "Iowan Old Style", Georgia, serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --step--1:clamp(.8rem,.78rem + .1vw,.86rem);
+  --step-0:clamp(1.02rem,.98rem + .2vw,1.13rem);
+  --step-1:clamp(1.25rem,1.1rem + .6vw,1.55rem);
+  --step-2:clamp(1.6rem,1.3rem + 1.3vw,2.4rem);
+  --step-3:clamp(2.3rem,1.6rem + 3vw,4.6rem);
+  --measure:66ch;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --noche:#f1eee6; --noche-2:#e6e2d6; --cal:#1d211e; --cal-2:#5a5c55; --hierro:#b9b6aa;
+  --glicina:#6a4f97; --teja:#9a5530; --cardo:#4f6d4a; --ink-on-accent:#fbf8ff; color-scheme:light}}
+:root[data-theme="light"]{
+  --noche:#f1eee6; --noche-2:#e6e2d6; --cal:#1d211e; --cal-2:#5a5c55; --hierro:#b9b6aa;
+  --glicina:#6a4f97; --teja:#9a5530; --cardo:#4f6d4a; --ink-on-accent:#fbf8ff; color-scheme:light}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--noche);color:var(--cal);font-family:var(--f-body);font-size:var(--step-0);line-height:1.62;font-weight:300}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--noche)}
+a{color:var(--glicina);text-underline-offset:.18em;text-decoration-thickness:1px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--glicina);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;text-wrap:balance;line-height:1.08;margin:0}
+p{margin:0}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.col{max-width:var(--measure);margin-inline:auto}
+.wide{max-width:1240px;margin-inline:auto}
+.mono{font-family:var(--f-mono);font-size:var(--step--1);letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cal-2)}
+.muted{color:var(--cal-2)}
+.flow>*+*{margin-top:1.05em}
+
+/* navegación */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--noche) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--hierro)}
+.nav-in{display:flex;gap:1.2rem;align-items:center;padding-block:.55rem;overflow-x:auto;scrollbar-width:none}
+.nav-in::-webkit-scrollbar{display:none}
+.nav a{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cal-2);text-decoration:none;white-space:nowrap}
+.nav a:hover,.nav a.on{color:var(--cal)}
+.nav .brand{font-family:var(--f-sc);font-size:1rem;letter-spacing:.02em;text-transform:none;color:var(--cal);margin-right:.4rem}
+.theme-btn{margin-left:auto;background:none;border:1px solid var(--hierro);color:var(--cal-2);font-family:var(--f-mono);font-size:.7rem;padding:.25rem .55rem;border-radius:2px;cursor:pointer;white-space:nowrap}
+
+/* visor LiDAR: ocupa la ventana; el texto va debajo */
+.viewer{position:relative;height:calc(100vh - 46px - env(safe-area-inset-top,0px));height:calc(100dvh - 46px - env(safe-area-inset-top,0px));min-height:420px;max-height:1100px;background:#050606;overflow:hidden;border-bottom:1px solid var(--hierro)}
+.viewer canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+.viewer canvas:active{cursor:grabbing}
+.vbar{position:absolute;left:0;right:0;bottom:0;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;padding:.7rem max(12px,env(safe-area-inset-right,0px)) calc(.7rem + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:linear-gradient(to top,rgba(5,6,6,.85),rgba(5,6,6,0));z-index:3}
+.vbar .lbl{font-family:var(--f-mono);font-size:.68rem;color:#bdb8a8;letter-spacing:.06em;margin-right:auto;min-width:0}
+.vbar .lbl b{color:#ece8dc;font-weight:500}
+.chip{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;padding:.42rem .66rem;border:1px solid rgba(236,232,220,.35);background:rgba(10,12,11,.6);color:#ece8dc;border-radius:2px;cursor:pointer;backdrop-filter:blur(4px)}
+.chip[aria-pressed="true"]{background:#c9b6e6;color:#17121f;border-color:#c9b6e6}
+.vtop{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));left:max(12px,env(safe-area-inset-left,0px));display:flex;gap:.4rem;flex-wrap:wrap;z-index:3}
+.walkpad{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(90px + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:repeat(3,44px);gap:4px;z-index:3}
+.walkpad button{width:44px;height:44px;border:1px solid rgba(236,232,220,.35);background:rgba(10,12,11,.6);color:#ece8dc;border-radius:2px;font-size:1rem;touch-action:none}
+.walkpad button:first-child{grid-column:2}
+.compass{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:max(12px,env(safe-area-inset-right,0px));z-index:3;font-family:var(--f-mono);font-size:.68rem;color:#bdb8a8;background:rgba(10,12,11,.55);padding:.35rem .55rem;border-radius:2px}
+.loadbar{position:absolute;left:0;top:0;height:2px;background:#c9b6e6;width:0;transition:width .3s,opacity .4s;z-index:4}
+.vfail{position:absolute;inset:0;display:grid;place-items:center;color:#bdb8a8;font-family:var(--f-mono);font-size:.8rem;padding:2rem;text-align:center}
+.intro{padding-block:clamp(2.2rem,5vw,3.6rem);border-bottom:1px solid var(--hierro)}
+.intro .wide{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2rem;align-items:end}
+.intro h1{font-size:var(--step-3);letter-spacing:-.01em}
+.intro h1 em{font-style:italic;color:var(--glicina)}
+.intro .sub{font-size:var(--step-1);font-family:var(--f-display);font-style:italic;margin-top:.6rem;max-width:40ch;color:var(--cal-2)}
+.coords{font-family:var(--f-mono);font-size:.76rem;line-height:1.7;text-align:right;color:var(--cal-2)}
+@media (max-width:760px){.intro .wide{grid-template-columns:minmax(0,1fr)}.coords{text-align:left}.vbar .lbl{flex-basis:100%}}
+
+/* secciones */
+section{padding-block:clamp(3.5rem,8vw,6.5rem)}
+section+section{border-top:1px solid var(--hierro)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr);gap:.6rem;margin-bottom:2.2rem}
+.sec-head h2{font-size:var(--step-2)}
+.sec-head .lede{font-size:var(--step-1);font-family:var(--f-display);font-style:italic;color:var(--cal-2);max-width:48ch}
+.two{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:start}
+@media (max-width:860px){.two{grid-template-columns:minmax(0,1fr)}.hero-text .wide{grid-template-columns:minmax(0,1fr)}.coords{text-align:left}}
+
+figure{margin:0}
+figcaption{font-family:var(--f-mono);font-size:.72rem;color:var(--cal-2);margin-top:.5rem;line-height:1.5}
+.plate img{display:block;width:100%;height:auto;border:1px solid var(--hierro)}
+
+/* nube: estaciones */
+.stations{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:12px}
+.stations button{all:unset;cursor:pointer;display:block}
+.stations img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border:1px solid var(--hierro);transition:border-color .2s}
+.stations button:hover img,.stations button:focus-visible img{border-color:var(--glicina)}
+.stations span{display:block;font-family:var(--f-mono);font-size:.7rem;color:var(--cal-2);margin-top:.35rem}
+video{display:block;width:100%;max-width:100%;max-height:440px;object-fit:contain;border:1px solid var(--hierro);background:#000}
+.note{border-left:2px solid var(--glicina);padding-left:1rem;color:var(--cal-2);font-size:.95rem}
+
+/* mapa */
+.map-shell{display:grid;grid-template-columns:minmax(0,1fr) 320px;border:1px solid var(--hierro);background:var(--noche-2)}
+@media (max-width:900px){.map-shell{grid-template-columns:minmax(0,1fr)}}
+#map{position:relative;height:min(72vh,640px);min-height:380px;overflow:hidden;cursor:grab;touch-action:none}
+.map-side{border-left:1px solid var(--hierro);padding:1rem;display:flex;flex-direction:column;gap:1rem;min-width:0}
+@media (max-width:900px){.map-side{border-left:0;border-top:1px solid var(--hierro)}}
+.yr{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem}
+.yr output{font-family:var(--f-display);font-size:2.4rem;line-height:1;color:var(--teja)}
+input[type=range]{width:100%;accent-color:var(--glicina)}
+.layers{display:grid;gap:.35rem}
+.layers label{display:flex;gap:.5rem;align-items:center;font-size:.92rem;cursor:pointer}
+.sw{width:18px;height:10px;display:inline-block;border:1px solid var(--hierro)}
+.info{font-size:.92rem;min-height:7rem;border-top:1px solid var(--hierro);padding-top:.8rem}
+.info h3{font-size:1.2rem;margin-bottom:.3rem}
+.map-btns{display:flex;gap:.4rem;flex-wrap:wrap}
+.btn{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;padding:.42rem .7rem;border:1px solid var(--hierro);background:transparent;color:var(--cal);border-radius:2px;cursor:pointer}
+.btn:hover{border-color:var(--glicina);color:var(--glicina)}
+.btn.primary{background:var(--glicina);border-color:var(--glicina);color:var(--ink-on-accent)}
+.scale{position:absolute;left:12px;bottom:12px;font-family:var(--f-mono);font-size:.66rem;color:var(--cal-2);pointer-events:none}
+.mapread{position:absolute;right:10px;top:10px;font-family:var(--f-mono);font-size:.66rem;color:var(--cal-2);background:color-mix(in srgb,var(--noche-2) 80%,transparent);padding:.2rem .45rem;pointer-events:none}
+
+/* dron */
+.strip{overflow-x:auto;overflow-y:hidden;border:1px solid var(--hierro);background:#000;cursor:grab;scrollbar-width:thin;max-width:100%}
+.strip img{display:block;height:min(52vh,460px);width:auto;min-width:100%;object-fit:cover;max-width:none;user-select:none}
+.strip.drag{cursor:grabbing}
+.vids{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:700px){.vids{grid-template-columns:minmax(0,1fr)}}
+.cnm{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.cnm{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.cnm img{display:block;width:100%;border:1px solid var(--hierro)}
+.cnm button{all:unset;cursor:zoom-in;display:block}
+.cond{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--hierro);border:1px solid var(--hierro)}
+.cond>div{background:var(--noche);padding:1.1rem;min-width:0;font-size:.93rem}
+.cond h3{font-size:1.25rem;margin-bottom:.4rem}
+.cond .st{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase}
+@media (max-width:900px){.cond{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.cond{grid-template-columns:minmax(0,1fr)}}
+/* postas */
+.route{overflow-x:auto;border:1px solid var(--hierro);background:var(--noche-2);padding:1rem}
+.route svg{display:block;min-width:720px;width:100%;height:auto}
+.stages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--hierro);border:1px solid var(--hierro)}
+.stages>div{background:var(--noche);padding:1.1rem;min-width:0}
+.stages h3{font-size:1.25rem;margin-bottom:.4rem}
+@media (max-width:760px){.stages{grid-template-columns:minmax(0,1fr)}}
+blockquote{margin:0;font-family:var(--f-display);font-size:var(--step-1);font-style:italic;line-height:1.4}
+blockquote cite{display:block;font-family:var(--f-mono);font-style:normal;font-size:.72rem;color:var(--cal-2);margin-top:.6rem}
+
+/* cronología */
+.filters{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.4rem}
+.filters button[aria-pressed="true"]{background:var(--cal);color:var(--noche);border-color:var(--cal)}
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.tl li{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:1rem;padding-block:.85rem;border-top:1px solid var(--hierro)}
+.tl .y{font-family:var(--f-display);font-size:1.6rem;line-height:1.05;color:var(--teja)}
+.tl .y small{display:block;font-family:var(--f-mono);font-size:.66rem;color:var(--cal-2);letter-spacing:.06em;margin-top:.2rem}
+.tl .tag{font-family:var(--f-mono);font-size:.64rem;text-transform:uppercase;letter-spacing:.1em;color:var(--cardo)}
+.tl li.key .y{color:var(--glicina)}
+@media (max-width:560px){.tl li{grid-template-columns:minmax(0,1fr);gap:.2rem}}
+
+/* carta */
+.letter{display:grid;grid-template-columns:minmax(0,var(--measure)) minmax(0,15rem);gap:2.5rem;justify-content:center}
+@media (max-width:980px){.letter{grid-template-columns:minmax(0,1fr)}}
+.letter-text{font-size:1.06rem}
+.letter-text p+p{margin-top:1em}
+.letter-text .salut{font-family:var(--f-display);font-style:italic;font-size:1.25rem}
+mark{background:none;color:inherit;border-bottom:2px solid var(--glicina);padding-bottom:1px;cursor:pointer}
+mark[data-p]::after{content:attr(data-p);font-family:var(--f-mono);font-size:.6rem;vertical-align:super;color:var(--glicina);margin-left:.15em}
+.letter-aside{position:sticky;top:4rem;display:grid;gap:1.2rem;font-size:.9rem}
+@media (max-width:980px){.letter-aside{position:static}}
+.letter-scroll{max-height:70vh;overflow:auto;padding-right:1rem;border-top:1px solid var(--hierro);border-bottom:1px solid var(--hierro);padding-block:1.2rem}
+.blood{color:var(--teja)}
+
+/* francisco */
+.principles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--hierro);border:1px solid var(--hierro)}
+@media (max-width:820px){.principles{grid-template-columns:minmax(0,1fr)}}
+.pr{background:var(--noche);padding:1.4rem;display:grid;gap:.8rem;align-content:start;min-width:0}
+.pr .n{font-family:var(--f-mono);font-size:.7rem;color:var(--glicina);letter-spacing:.1em}
+.pr h3{font-size:1.55rem}
+.pr .src{font-family:var(--f-mono);font-size:.68rem;color:var(--cal-2)}
+.pr .rosas{font-family:var(--f-display);font-style:italic;font-size:1.08rem;border-left:2px solid var(--teja);padding-left:.8rem}
+.pr .q{font-size:.93rem;color:var(--cal-2)}
+.pr .q b{font-weight:600;color:var(--cal)}
+.chain{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;border-top:1px solid var(--hierro)}
+.chain li{padding:.9rem .7rem 0 0;position:relative;min-width:0}
+.chain li::before{content:"";position:absolute;top:-5px;left:0;width:9px;height:9px;border-radius:50%;background:var(--glicina)}
+.chain .y{font-family:var(--f-display);font-size:1.35rem;color:var(--glicina)}
+.chain p{font-size:.86rem;color:var(--cal-2)}
+@media (max-width:900px){.chain{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:1.4rem}}
+
+/* libro */
+.book{columns:4 220px;column-gap:14px}
+.book figure{break-inside:avoid;margin-bottom:14px}
+.book button{all:unset;cursor:zoom-in;display:block}
+.book img{display:block;width:100%;height:auto;border:1px solid var(--hierro)}
+.credits{font-size:.9rem;color:var(--cal-2)}
+.credits b{color:var(--cal);font-weight:600}
+
+/* normativa */
+.norms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--hierro);border:1px solid var(--hierro)}
+.norms>div{background:var(--noche);padding:1.2rem;min-width:0}
+.norms .lvl{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cardo)}
+.norms h3{font-size:1.4rem;margin:.3rem 0 .5rem}
+@media (max-width:760px){.norms{grid-template-columns:minmax(0,1fr)}}
+details{border-top:1px solid var(--hierro);padding-block:.8rem}
+summary{cursor:pointer;font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+ol.arts{padding-left:1.3rem;margin:.8rem 0 0;display:grid;gap:.5rem;font-size:.95rem}
+
+.sources{list-style:none;padding:0;margin:0;display:grid;gap:.55rem;font-size:.92rem}
+.sources li{padding-left:1rem;border-left:1px solid var(--hierro)}
+footer{padding-block:2.5rem;border-top:1px solid var(--hierro);font-family:var(--f-mono);font-size:.72rem;color:var(--cal-2)}
+footer .wide{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;justify-content:space-between}
+footer img{height:54px;width:auto;opacity:.9}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:50;background:rgba(5,6,6,.92);display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lb img{max-height:86vh;max-width:100%;width:auto;border:1px solid #333}
+.lb p{color:#cfcabb;font-family:var(--f-mono);font-size:.74rem;margin-top:.6rem;text-align:center;max-width:70ch}
+.lb button{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px))}
+</style>
+
+</head>
+<body>
+<nav class="nav" aria-label="Secciones">
+  <div class="nav-in wrap">
+    <a class="brand" href="#inicio">La Merced</a>
+    <a href="#nube">Nube de puntos</a>
+    <a href="#dron">Dron</a>
+    <a href="#territorio">Territorio</a>
+    <a href="#postas">Camino de postas</a>
+    <a href="#cronologia">Cronología</a>
+    <a href="#carta">La Carta</a>
+    <a href="#francisco">Francisco</a>
+    <a href="#libro">Libro 1989</a>
+    <a href="#conservacion">Conservación</a>
+    <a href="#normativa">Normativa</a>
+    <a href="#fuentes">Fuentes</a>
+    <button class="theme-btn" id="themeBtn" type="button">Tema</button>
+  </div>
+</nav>
+
+<header id="inicio">
+  <div class="viewer" id="viewer">
+    <canvas id="pano" aria-label="Nube de puntos LiDAR navegable del casco de La Merced"></canvas>
+    <div class="loadbar" id="loadbar"></div>
+    <div class="vtop" role="group" aria-label="Modo del visor">
+      <button class="chip" data-vmode="orbit" aria-pressed="true" type="button">Nube 3D</button>
+      <button class="chip" data-vmode="walk" aria-pressed="false" type="button">Caminar</button>
+      <button class="chip" data-vmode="pano" aria-pressed="false" type="button">Panorama 360°</button>
+    </div>
+    <div class="compass" id="compass">N</div>
+    <div class="walkpad" id="walkPad" hidden>
+      <button type="button" data-k="f" aria-label="Avanzar">▲</button>
+      <button type="button" data-k="l" aria-label="Izquierda">◀</button><button type="button" data-k="b" aria-label="Retroceder">▼</button><button type="button" data-k="r" aria-label="Derecha">▶</button>
+    </div>
+    <div class="vbar">
+      <span class="lbl"><b id="vstat">Cargando la nube LiDAR…</b><br><span id="vlbl">Arrastrá para girar · rueda o pellizco para acercar · clic derecho o dos dedos para desplazar</span></span>
+      <button class="chip cloudonly" id="colBtn" type="button">Color: real</button>
+      <label class="chip cloudonly" style="display:flex;gap:.4rem;align-items:center;cursor:default" for="ptSize">Punto <input id="ptSize" type="range" min=".4" max="3" step=".1" value="1" style="width:64px"></label>
+      <button class="chip" id="autoBtn" aria-pressed="true" type="button">Giro automático</button>
+      <button class="chip" id="fsBtn" type="button">Pantalla completa</button>
+    </div>
+  </div>
+  <div class="intro wrap">
+    <div class="wide">
+      <div>
+        <p class="eyebrow">Monumento Histórico Nacional · San Andrés de Giles</p>
+        <h1>La Merced, <em>Posta de Figueroa</em></h1>
+        <p class="sub">Una casa de adobe sobre el Camino Real, donde en 1834 se escribió una carta que todavía se lee.</p>
+      </div>
+      <div class="coords">34°19′43″ S · 59°24′22″ O<br>Cuartel VII · Partida 709b<br>Cañada de Giles · Arroyo Suero<br>8 leguas de la Villa de Luján</div>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ============ NUBE ============ -->
+<section id="nube" class="wrap">
+  <div class="wide">
+    <div class="sec-head">
+      <p class="eyebrow">Relevamiento 2021</p>
+      <h2>Una nube de puntos para un lugar que se deshace despacio</h2>
+      <p class="lede">En enero de 2021 la Comisión registró el casco con escáner láser: unas cuarenta y cinco estaciones unificadas en una nube de 103,7 millones de puntos. Arriba se recorre esa misma nube, reducida a 5 millones (un punto cada 12 cm), orientada al norte y ubicada sobre la imagen satelital.</p>
+    </div>
+    <div class="two">
+      <div class="flow">
+        <video src="media/recorrido-nube.mp4" poster="img/poster-nube.jpg" controls muted playsinline preload="metadata"></video>
+        <p class="mono muted">Recorrido por la nube registrada (captura del visor, 1 feb 2021, 51 s).</p>
+      </div>
+      <div class="flow">
+        <p>Una nube de puntos no es una fotografía. Cada punto es una distancia medida y un color tomado: millones de pequeñas certezas que, juntas, devuelven la galería, la reja, la cumbrera, el molino. No hay superficie, hay densidad. Por eso conviene mirarla como se mira un lugar antiguo: de lejos se lee, de cerca se disuelve.</p>
+        <p>Lo negro del cielo no es noche: es lo que el láser no alcanzó. Las hojas del parral y de los árboles aparecen recortadas porque cada punto es un rebote; donde no hubo rebote no hay nada. Por eso la nube muestra la forma con una precisión que la fotografía no tiene, y a la vez deja ver sus propios límites.</p>
+        <p class="note">¿Qué se conserva cuando se conserva una medición? La nube guarda la forma del 2021 con precisión, pero no guarda el uso: el mate, el paso de las galeras, el ruido del balde en el jagüel. El registro es memoria, y también es una forma de olvido elegante.</p>
+      </div>
+    </div>
+    <div class="two" style="margin-top:2.6rem">
+      <figure class="plate"><button type="button" class="zoom" data-src="img/nube-altimetria.jpg" data-cap="Nube LiDAR coloreada por altura: casa principal, dependencias, molino y arboleda. Relevamiento 2021." style="all:unset;cursor:zoom-in;display:block"><img src="img/nube-altimetria.jpg" alt="Nube de puntos del casco coloreada por altura" loading="lazy"></button><figcaption>La misma nube coloreada por altura: del rojo del suelo al verde de las copas.</figcaption></figure>
+      <div class="flow">
+        <h3 style="font-size:var(--step-1)">Del archivo de 1,67 GB a la web</h3>
+        <p>El archivo original, <span class="mono">Est Figueroa Uni.e57</span>, reúne las estaciones del escáner en una sola nube de <b>103.756.173 puntos</b> con color. Para poder recorrerla en un navegador se la redujo a un punto por cada cubo de 12 cm: quedan 5,06 millones, que alcanzan para leer muros, aleros, rejas, el molino y cada árbol del monte.</p>
+        <p>La nube se orientó comparando su planta con la imagen satelital: su eje Y apunta al sur con un desvío de medio grado. Por eso en el visor el norte está arriba y la brújula indica hacia dónde se mira, y en el mapa la planta de la nube calza sobre el casco.</p>
+        <p class="mono muted">Copia reducida para trabajo en CAD/GIS: «Est Figueroa - nube reducida 12cm.ply», en la carpeta Posta de Figueroa.</p>
+      </div>
+    </div>
+    <h3 class="eyebrow" style="margin:2.6rem 0 1rem">Estaciones del escaneo láser</h3>
+    <div class="stations" id="stations"></div>
+    <div class="two" style="margin-top:2.6rem">
+      <figure><video src="media/patio.mp4" controls muted playsinline preload="metadata" poster="img/nube-8.jpg"></video><figcaption>Patio y bajo de la cañada, 23 ene 2021.</figcaption></figure>
+      <figure><video src="media/techumbre.mp4" controls muted playsinline preload="metadata"></video><figcaption>Techumbre: tirantería de madera, cañas y tejas francesas, 23 ene 2021.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DRON ============ -->
+<section id="dron" class="wrap">
+  <div class="wide">
+    <div class="sec-head">
+      <p class="eyebrow">4 de marzo de 2021 · 16:19 a 17:09</p>
+      <h2>El casco visto desde arriba</h2>
+      <p class="lede">Veintiséis vuelos en cincuenta minutos. Desde el aire la estancia es lo que siempre fue: una isla de árboles en la llanura cultivada, junto a la cañada.</p>
+    </div>
+    <div class="strip" id="strip1" tabindex="0" aria-label="Panorámica aérea 1, arrastrar para recorrer"><img src="img/dron-pano-01.jpg" alt="Panorámica aérea del casco de La Merced, la cañada y los campos sembrados" draggable="false"></div>
+    <p class="mono muted" style="margin:.5rem 0 1.6rem">Panorámica aérea 1 (21 tomas unidas) · arrastrá para recorrer · rueda para acercar</p>
+    <div class="strip" id="strip2" tabindex="0" aria-label="Panorámica aérea 2, arrastrar para recorrer"><img src="img/dron-pano-02.jpg" alt="Segunda panorámica aérea del casco, el monte y la llanura" draggable="false"></div>
+    <p class="mono muted" style="margin:.5rem 0 2.2rem">Panorámica aérea 2 · el casco, el monte y la llanura hasta el horizonte</p>
+    <div class="vids">
+      <figure><video src="media/dron-0097.mp4" poster="img/dron-0097.jpg" controls muted playsinline preload="none"></video><figcaption>DJI_0097 · el casco desde el noroeste: casa principal, dependencias, molino y galpón de techo rojo (18 s).</figcaption></figure>
+      <figure><video src="media/dron-0110.mp4" poster="img/dron-0110.jpg" controls muted playsinline preload="none"></video><figcaption>DJI_0110 · vuelo bajo sobre galpón y depósito, 4K (13 s).</figcaption></figure>
+      <figure><video src="media/dron-0098.mp4" poster="img/dron-0098.jpg" controls muted playsinline preload="none"></video><figcaption>DJI_0098 · la llanura hacia el norte (8 s).</figcaption></figure>
+      <figure><video src="media/dron-0099.mp4" poster="img/dron-0099.jpg" controls muted playsinline preload="none"></video><figcaption>DJI_0099 · a ras de la soja, con el monte del casco de fondo (12 s).</figcaption></figure>
+    </div>
+    <p class="note" style="margin-top:2rem;max-width:var(--measure)">Las trayectorias de los vuelos, tomadas del registro GPS de cada video, están en el mapa como capa. Una advertencia: el dron anota la posición con cuatro decimales, es decir con unos diez metros de error. Sirve para saber desde dónde se miró, no para medir.</p>
+  </div>
+</section>
+
+<!-- ============ TERRITORIO ============ -->
+<section id="territorio" class="wrap">
+  <div class="wide">
+    <div class="sec-head">
+      <p class="eyebrow">Atlas de Mensuras de Giles · 1826–1923</p>
+      <h2>El suelo medido</h2>
+      <p class="lede">Ciento noventa duplicados de mensura sobre la imagen satelital actual. Mové el año y mirá cómo la suerte de estancia de los Figueroa se fue partiendo y qué caminos anotaron los agrimensores.</p>
+    </div>
+    <div class="map-shell">
+      <div id="map" aria-label="Mapa de mensuras, caminos y postas del partido de San Andrés de Giles">
+        <div class="mapread" id="mapread">—</div>
+              </div>
+      <div class="map-side">
+        <div>
+          <div class="yr"><span class="eyebrow">Mensuras hasta</span><output id="yrOut">1923</output></div>
+          <label class="eyebrow" for="yr" style="display:block;margin-top:.4rem">Año de dominio</label>
+          <input type="range" id="yr" min="1826" max="1923" step="1" value="1923">
+        </div>
+        <fieldset class="layers"><legend class="eyebrow">Base</legend>
+          <label><input type="radio" name="base" value="local" checked> Satélite (embebido, 3 escalas)</label>
+          <label><input type="radio" name="base" value="online"> Satélite en línea (Esri)</label>
+          <label><input type="radio" name="base" value="none"> Sin base</label>
+        </fieldset>
+        <div class="layers"><span class="eyebrow">Capas</span>
+          <label><input type="checkbox" id="lyN" checked> <span class="sw" style="background:#7f8fb8"></span> Nube LiDAR 2021 (planta)</label>
+          <label><input type="checkbox" id="lyX" checked> <span class="sw" style="background:var(--glicina);border-color:#fff"></span> Casco declarado (Posta)</label>
+          <label><input type="checkbox" id="lyM" checked> <span class="sw" style="background:#e0a17a;opacity:.6"></span> Mensuras</label>
+          <label><input type="checkbox" id="lyF" checked> <span class="sw" style="background:#b39ddb"></span> Tierras Figueroa</label>
+          <label><input type="checkbox" id="lyC" checked> <span class="sw" style="height:3px;background:#e6d77a;border:0"></span> Caminos y vías</label>
+          <label><input type="checkbox" id="lyP" checked> <span class="sw" style="height:4px;background:#b39ddb;border:0"></span> Caminos de postas</label>
+          <label><input type="checkbox" id="lyE"> <span class="sw" style="border-radius:50%;width:10px;background:var(--cal-2)"></span> Casas, puestos, pulperías y postas (mensuras)</label>
+          <label><input type="checkbox" id="lyV" checked> <span class="sw" style="height:3px;background:#7fe3ff;border:0"></span> Vuelos de dron (4 mar 2021)</label>
+          <label><input type="checkbox" id="lyD" checked> <span class="sw" style="border-radius:50%;width:10px;background:var(--teja)"></span> Bienes declarados</label>
+          <label class="eyebrow" for="opac" style="display:block;margin-top:.5rem">Transparencia de mensuras</label>
+          <input type="range" id="opac" min="0" max="1" step=".05" value=".5">
+        </div>
+        <div class="map-btns">
+          <button class="btn primary" id="goPosta" type="button">Ir a la Posta</button>
+          <button class="btn" id="goAll" type="button">Partido</button>
+        </div>
+        <div class="info" id="info" aria-live="polite">
+          <h3>Tocá una parcela</h3>
+          <p class="muted">Cada polígono es un duplicado de mensura georreferenciado: titular, año, agrimensor y superficie.</p>
+        </div>
+      </div>
+    </div>
+    <div class="two" style="margin-top:2.6rem">
+      <div class="flow">
+        <p>El plano más antiguo de la propiedad es la mensura de <b>Manuel Eguía, 1840</b> (Mensura 10), hecha a la muerte de don Mauricio Figueroa: allí la estancia «La Merced» aparece a nombre de su viuda, Isabel Carrasco, sobre el «camino de la posta». El Registro Gráfico de 1864 vuelve a mostrar las tierras; hacia 1890 la titular es Trinidad Morales de Figueroa; la mensura de 1923 rotula el camino como «Posta Figueroa».</p>
+        <p>La lectura del atlas no es neutra. Una mensura fija un límite donde antes había un uso; convierte la cañada en lindero y el camino en servidumbre. Cada línea que el agrimensor traza es también una decisión sobre quién queda adentro.</p>
+      </div>
+      <figure class="plate"><button type="button" class="zoom" data-src="img/libro-17.jpg" data-cap="Duplicado de Mensura Nº 10 (Eguía, 1840) y Nº 175 (1897). Archivo Histórico de Geodesia, en «La Merced, Hacienda de Figueroa», 1989." style="all:unset;cursor:zoom-in;display:block"><img src="img/libro-17.jpg" alt="Lámina del libro con los duplicados de mensura 10 y 175" loading="lazy"></button><figcaption>Duplicados de mensura Nº 10 (1840) y Nº 175 (1897), Archivo Histórico de Geodesia.</figcaption></figure>
+    </div>
+    <h3 class="eyebrow" style="margin:2.6rem 0 1rem">Duplicados de mensura en el Archivo de Geodesia</h3>
+    <div class="cnm" id="mensPhotos"></div>
+  </div>
+</section>
+
+<!-- ============ POSTAS ============ -->
+<section id="postas" class="wrap">
+  <div class="wide">
+    <div class="sec-head">
+      <p class="eyebrow">Camino Real al Alto Perú · abierto en 1663</p>
+      <h2>Tres o cuatro leguas: la medida de un caballo</h2>
+      <p class="lede">Una posta existía porque un animal se cansaba. La distancia entre postas era la que un caballo podía correr sin recambio.</p>
+    </div>
+    <div class="route" aria-label="Diagrama del camino de postas entre Luján y Areco">
+      <svg viewBox="0 0 1000 215" role="img" aria-labelledby="routeT">
+        <title id="routeT">Secuencia de postas sobre el camino real entre la Villa de Luján y el río Areco, a escala en leguas</title>
+        <line x1="40" y1="80" x2="960" y2="80" stroke="var(--hierro)" stroke-width="2"/>
+        <line x1="40" y1="80" x2="960" y2="80" stroke="var(--cardo)" stroke-width="2" stroke-dasharray="2 7"/>
+        <g font-family="IBM Plex Mono, monospace" font-size="12" fill="var(--cal-2)">
+          <g transform="translate(40,80)"><circle r="7" fill="var(--noche)" stroke="var(--cal-2)" stroke-width="2"/><text y="-22" fill="var(--cal)" font-family="IM Fell English, Georgia, serif" font-size="20">Villa de Luján</text><text y="32">origen del camino</text></g>
+          <g transform="translate(423,80)"><circle r="7" fill="var(--noche)" stroke="var(--cardo)" stroke-width="2"/><text y="-22" text-anchor="middle" fill="var(--cal)" font-family="IM Fell English, Georgia, serif" font-size="20">Posta del Sauce</text><text y="32" text-anchor="middle">cañada del Sauce</text></g>
+          <g transform="translate(653,80)"><circle r="11" fill="var(--glicina)"/><text y="-24" text-anchor="middle" fill="var(--glicina)" font-family="IM Fell English, Georgia, serif" font-size="22">Posta de Figueroa</text><text y="34" text-anchor="middle">«de Giles» · «del arroyo de Giles»</text></g>
+          <g transform="translate(960,80)"><circle r="7" fill="var(--noche)" stroke="var(--cardo)" stroke-width="2"/><text y="-22" text-anchor="end" fill="var(--cal)" font-family="IM Fell English, Georgia, serif" font-size="20">Posta del Río Areco</text><text y="32" text-anchor="end">o de Morales</text></g>
+          <g stroke="var(--cardo)" fill="none"><path d="M423 140v8H653v-8"/><path d="M653 140v8H960v-8"/><path d="M40 180v8H653v-8"/></g>
+          <text x="538" y="166" text-anchor="middle" fill="var(--cardo)">3 leguas · ≈15,6 km</text>
+          <text x="806" y="166" text-anchor="middle" fill="var(--cardo)">4 leguas · ≈20,8 km</text>
+          <text x="346" y="206" text-anchor="middle" fill="var(--cardo)">8 leguas desde la Villa de Luján (inventario de 1759) · ≈41,6 km</text>
+        </g>
+      </svg>
+    </div>
+    <p class="mono muted" style="margin-top:.6rem">Distancias según el libro de 1989 sobre la Carta Postal de N. Grondona (c. 1863). 1 legua ≈ 5,2 km.</p>
+    <p class="note" style="margin-top:1rem;max-width:var(--measure)">Las fuentes no coinciden. El libro de 1989 ubica la posta a tres leguas de la del Sauce y a cuatro de la del Río Areco; el Decreto 616/2021, que cita la misma Carta Postal, dice lo contrario: cuatro y tres. La diferencia es de una legua, una hora de galope. Vale la pena volver al plano de Grondona antes de fijar cualquiera de las dos en una placa.</p>
+
+    <div class="stages" style="margin-top:2.4rem">
+      <div><p class="eyebrow">1769 — 1852</p><h3>Chasquis y postas</h3><p>Desde 1769, con Domingo de Basavilbaso, las postas pasan a ser servicio de la Corona: ranchos de adobe o quincha, corral de palo a pique, pozo y horno. La «Posta de Figueroa» no figura en el servicio oficial de las primeras décadas del XIX, lo que no impide que la estancia ofreciera recambio y descanso.</p></div>
+      <div><p class="eyebrow">1852 — 1880</p><h3>Mensajerías y galeras</h3><p>Tras Caseros se ordenan itinerarios y servicios. Diez a quince pasajeros en cupé, rotonda o pescante, junto al mayoral. El Anuario de 1859 nombra una «Posta del arroyo de Giles» en la carrera a Pergamino; Grondona, en 1863, una «Posta de Giles».</p></div>
+      <div><p class="eyebrow">1880 —</p><h3>El ferrocarril</h3><p>Con la estación Azcuénaga del F.C. Oeste y su estafeta de correos de 1880, la posta deja de operar. La memoria popular conserva que allí se recibía la correspondencia de la zona rural.</p></div>
+    </div>
+
+    <div class="two" style="margin-top:2.6rem">
+      <blockquote>«Por la tarde nuestro postillón, que según pudimos luego comprobar ignoraba la verdadera ruta, se detuvo ante una casa de agradable aspecto, diciéndonos que habíamos llegado a la posta. Los dueños de casa nos sacaron del error… pero al mismo tiempo nos invitaron bondadosamente a desmontar y a participar de un asado.»<cite>William Mac Cann, viaje al norte, 22 de noviembre de 1847</cite></blockquote>
+      <div class="flow">
+        <p>El fragmento de Mac Cann es probablemente la mejor definición de posta que tenemos: un lugar donde uno llega por error y lo reciben igual. La hospitalidad era infraestructura antes de que hubiera infraestructura.</p>
+        <p class="note">Las postas también eran puntos de control. Por el mismo camino por donde pasaba la carta pasaban las levas, las caballadas «donadas» al gobierno y los presos. En 1835, según la tradición local, el general José María Paz estuvo detenido en La Merced. La posta servía al que viajaba y al que vigilaba.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CRONOLOGÍA ============ -->
+<section id="cronologia" class="wrap">
+  <div class="col">
+    <div class="sec-head">
+      <p class="eyebrow">1663 — 2021</p>
+      <h2>Dos siglos y medio en una misma familia</h2>
+    </div>
+    <div class="filters" role="group" aria-label="Filtrar cronología">
+      <button class="btn" data-f="all" aria-pressed="true" type="button">Todo</button>
+      <button class="btn" data-f="tierra" aria-pressed="false" type="button">Tierra y familia</button>
+      <button class="btn" data-f="posta" aria-pressed="false" type="button">Postas</button>
+      <button class="btn" data-f="nacion" aria-pressed="false" type="button">Nación</button>
+      <button class="btn" data-f="patrimonio" aria-pressed="false" type="button">Patrimonio</button>
+    </div>
+    <ol class="tl" id="tl"></ol>
+  </div>
+</section>
+
+<!-- ============ CARTA ============ -->
+<section id="carta" class="wrap">
+  <div class="wide">
+    <div class="sec-head" style="max-width:var(--measure);margin-inline:auto">
+      <p class="eyebrow">Hacienda de Figueroa · 20 de diciembre de 1834</p>
+      <h2>La Carta de la Hacienda de Figueroa</h2>
+      <p class="lede">Rosas y Quiroga se separaron aquí al amanecer del 18 de diciembre. Dos días después Rosas terminó esta carta y un chasque la llevó hasta alcanzar a Facundo más allá de Córdoba. Viajaba con ella cuando lo mataron en Barranca Yaco.</p>
+    </div>
+    <div class="letter">
+      <div class="letter-scroll" tabindex="0" aria-label="Texto completo de la carta">
+        <div class="letter-text" id="letter"></div>
+      </div>
+      <aside class="letter-aside">
+        <figure class="plate"><button type="button" class="zoom" data-src="img/libro-26.jpg" data-cap="Facsímil de la carta, en «La Merced, Hacienda de Figueroa», 1989, p. 29." style="all:unset;cursor:zoom-in;display:block"><img src="img/libro-26.jpg" alt="Facsímil manuscrito de la carta" loading="lazy"></button><figcaption>Facsímil del manuscrito (libro de 1989, p. 29).</figcaption></figure>
+        <p class="blood"><b>Archivo General de la Nación.</b> El original se conserva manchado con la sangre de Quiroga: Colección Adolfo Saldías, folios 179 a 184, Sala VII Nº 229.</p>
+        <p class="muted">Los pasajes subrayados están vinculados a los cuatro principios de Francisco. Tocá uno para ir a su lectura.</p>
+        <p class="mono muted">Texto según R. Levene, p. 246. El encabezado de algunas ediciones dice «San Antonio de Areco»: la hacienda estaba en el antiguo pago de Areco, hoy partido de San Andrés de Giles.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FRANCISCO ============ -->
+<section id="francisco" class="wrap">
+  <div class="wide">
+    <div class="sec-head">
+      <p class="eyebrow">Evangelii gaudium 217–237 · Laudato si’</p>
+      <h2>Lo que una carta federal le dejó a un papa</h2>
+      <p class="lede">Juan Carlos Scannone SJ señala que los cuatro principios de Bergoglio fueron explicitados por el jesuita Ernesto López Rosas a partir de su puesta en práctica implícita en esta carta, «enviada desde la hacienda de Figueroa».</p>
+    </div>
+
+    <ol class="chain" aria-label="Genealogía de los cuatro principios">
+      <li><span class="y">1834</span><p>Rosas a Quiroga, desde La Merced.</p></li>
+      <li><span class="y">s. XX</span><p>Ernesto López Rosas SJ lee en la carta cuatro criterios de construcción de un pueblo.</p></li>
+      <li><span class="y">1974</span><p>Bergoglio, provincial, los usa ante la Congregación Provincial (18 feb).</p></li>
+      <li><span class="y">2010</span><p>«Nosotros como ciudadanos, nosotros como pueblo», hacia el Bicentenario.</p></li>
+      <li><span class="y">2013</span><p>Lumen fidei 55 y 57; Evangelii gaudium 217–237.</p></li>
+      <li><span class="y">2015</span><p>Laudato si’ 110, 141, 178, 198: la ecología integral.</p></li>
+    </ol>
+
+    <div class="principles" style="margin-top:2.6rem" id="principles">
+      <article class="pr" id="p-tiempo">
+        <span class="n">I · EG 222–225 · LS 178</span>
+        <h3>El tiempo es superior al espacio</h3>
+        <p>«Dar prioridad al tiempo es ocuparse de iniciar procesos más que de poseer espacios.»</p>
+        <p class="rosas">«Entre nosotros no hay otro arbitrio que el de dar tiempo a que se destruyan en los Pueblos los elementos de discordia… Esto es lento a la verdad.»</p>
+        <p class="q"><b>La pregunta.</b> En la carta, «dar tiempo» es también postergar una constitución que no llegó hasta 1853, con Rosas ya caído. ¿Cuándo la paciencia construye un pueblo y cuándo administra la espera de quien ya tiene el espacio?</p>
+      </article>
+      <article class="pr" id="p-unidad">
+        <span class="n">II · EG 226–230 · LS 198</span>
+        <h3>La unidad prevalece sobre el conflicto</h3>
+        <p>Aceptar sufrir el conflicto, resolverlo y transformarlo en el eslabón de un nuevo proceso: una «diversidad reconciliada».</p>
+        <p class="rosas">«La unión y tranquilidad crea el Gobierno general, la desunión lo destruye; él es la consecuencia, el efecto de la unión, no la causa.»</p>
+        <p class="q"><b>La pregunta.</b> La misma carta llama a los adversarios «bichos» y «pérfidos». La unidad que Francisco propone exige reconocer la verdad parcial del otro. ¿Puede un principio nacer de un texto que todavía no lo cumple?</p>
+      </article>
+      <article class="pr" id="p-realidad">
+        <span class="n">III · EG 231–233 · LS 110, 201</span>
+        <h3>La realidad es más importante que la idea</h3>
+        <p>Contra «los purismos angélicos, los nominalismos declaracionistas, los proyectos más formales que reales».</p>
+        <p class="rosas">«¿Habrá quien creerá que el remedio es precipitar la Constitución del Estado?… alborotando los Pueblos con el grito de “Constitución”.»</p>
+        <p class="q"><b>La pregunta.</b> Rosas opone la realidad de las provincias a la idea de la Constitución. Pero la Constitución también era una realidad deseada por muchos. ¿Quién decide qué es realidad y qué es idea?</p>
+      </article>
+      <article class="pr" id="p-todo">
+        <span class="n">IV · EG 234–237 · LS 141</span>
+        <h3>El todo es superior a la parte</h3>
+        <p>El modelo es el poliedro, que conserva la originalidad de cada parte; no la esfera, donde todo equidista del centro.</p>
+        <p class="rosas">«¿Quién para formar un todo ordenado y compacto no arregla primeramente… las partes que deben componerlo?»</p>
+        <p class="q"><b>La pregunta.</b> Aquí la carta y el papa parecen ir en sentidos opuestos: Rosas ordena primero las partes; Francisco pide ampliar la mirada sin desarraigo. Quizás coinciden en lo que más importa para este lugar: «hundir las raíces en la tierra fértil y en la historia del propio lugar» (EG 235).</p>
+      </article>
+    </div>
+
+    <div class="two" style="margin-top:2.8rem">
+      <div class="flow">
+        <h3 style="font-size:var(--step-1)">Por qué importa para el patrimonio</h3>
+        <p>En <i>Laudato si’</i> 143, Francisco escribe que junto con el patrimonio natural hay un patrimonio histórico, artístico y cultural igualmente amenazado, y que hay que incorporar la historia, la cultura y la arquitectura de un lugar para preservar su identidad original. La ecología, dice, también es cultural.</p>
+        <p>La Merced es un caso raro de esa ecología: una casa modesta, de muros de adobe y ladrillo asentado en barro, que no fue palacio, en la que se escribió un texto del cual, ciento ochenta años después, salió una manera de pensar el pueblo. El edificio no explica la idea. Pero la idea tampoco se entiende del todo sin el lugar: lenta, de a pie, a la distancia que un caballo puede correr sin recambio.</p>
+      </div>
+      <div class="flow">
+        <p class="note">Leer la carta desde Francisco no la absuelve, y leer a Francisco desde la carta no lo reduce. Rosas escribía para conservar un orden; Bergoglio extrajo de ese texto criterios para abrir procesos. Entre los dos está el trabajo de la memoria: ¿qué se hereda de un documento cuando se hereda su método y no su causa?</p>
+        <p class="mono muted">Fuente principal: J. C. Scannone SJ, «Cuatro principios para la construcción de un pueblo según el Papa Francisco», <i>Stromata</i> 71 (2015) 13–27, nota sobre E. López Rosas y E. Barba, <i>Correspondencia entre Rosas, Quiroga y López</i>, 1984, p. 94.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIBRO ============ -->
+<section id="libro" class="wrap">
+  <div class="wide">
+    <div class="sec-head">
+      <p class="eyebrow">CAPBA Distrito V · Mercedes, 1989</p>
+      <h2>«Pequeño testimonio de una gran historia»</h2>
+      <p class="lede">El relevamiento de 1989 dibujó la estancia a mano: el paisaje, las especies, la evolución del casco, la reja, la estructura de la cubierta.</p>
+    </div>
+    <div class="two" style="margin-bottom:2.2rem">
+      <div class="flow">
+        <p>El libro reconstruye tres momentos del conjunto. Hacia fines del siglo XVIII la población es un refugio frente a la pampa sin límites: rancho, horno de barro, jagüel con balde volcador de cuero, montículos defensivos y una zanja. Desde 1870 llegan el alambrado y, hacia 1880, el molino con tanque australiano; el casco se vuelve un oasis arbolado. En el siglo XX los galpones se apartan y una playa arbolada organiza el conjunto.</p>
+        <p>La casa principal muestra dos construcciones unidas, legibles en la fisura del muro, la cornisa discontinua y el cambio de espesores: ladrillo asentado en barro, revoques de cal, tejas francesas Pierre Sacoman sobre ladrillos cerámicos de 34 × 17.</p>
+      </div>
+      <div class="credits flow">
+        <p>Coordinación general: <b>Carlos Moreno</b>, arq. (Centro para la Conservación del Patrimonio Urbano-rural, FADU). Comisión coordinadora: Silvia Baccino, María Luisa Sorolla y Ana Leonor Chotti, arqs. (Colegio de Arquitectos, Distrito V).</p>
+        <p>Por San Andrés de Giles participaron <b>Hugo Addesso</b>, arq., coordinador local, y <b>Juan Patricio Addesso</b>, entonces estudiante de enseñanza media, junto con integrantes del Centro de Estudios Históricos (Héctor R. Terrén, Graciela León), José M. Sosa, María F. García y Rolando Silla, entre otros.</p>
+        <p class="muted">Treinta y dos años después, el relevamiento láser de 2021 vuelve sobre los mismos muros. El dibujo y la nube de puntos son dos maneras de prestar atención.</p>
+      </div>
+    </div>
+    <div class="book" id="book"></div>
+  </div>
+</section>
+
+<!-- ============ CONSERVACION ============ -->
+<section id="conservacion" class="wrap">
+  <div class="wide">
+    <div class="sec-head">
+      <p class="eyebrow">Comisión Nacional de Monumentos · 7 de junio de 2021 · Expte. EX-2018-35095348</p>
+      <h2>Estado de conservación: un patrimonio del trabajo vivo</h2>
+      <p class="lede">El informe que acompañó la declaratoria nacional comparó el relevamiento de 1989 con el video de dron, las fotografías y el escaneo de 2021. Su conclusión: forma bien conservada, materia con deterioro mediano por falta de mantenimiento.</p>
+    </div>
+    <div class="cond">
+      <div><p class="st" style="color:var(--cardo)">Fachadas N, S y O sin alteraciones</p><h3>Casa principal</h3><p>Muros de ladrillo de 39 × 19,5 × 5 asentados en barro, estructura de par y nudillo, tejas francesas Pierre Sacoman de la segunda mitad del XIX. Una cercha de «cuchillo» con huecos que sugieren un uso naval anterior. En la fachada este, un pequeño volumen adosado donde había una ventana. Faltan tejas en la esquina del alero norte.</p></div>
+      <div><p class="st" style="color:var(--cardo)">Cambios menores</p><h3>Dependencias</h3><p>Mampostería de 32 × 16 × 4,7 en barro, con huecos de mechinales. Una ventana del este convertida en puerta, un vano nuevo al oeste y nichos bajo el alero norte: operaciones del habitar que no alteran la forma.</p></div>
+      <div><p class="st" style="color:var(--teja)">Gallinero desaparecido</p><h3>Depósito</h3><p>Ladrillos de 30 × 15 × 5 en barro con restos de tejas «musleras». El volumen del gallinero ya no existe; al oeste una ventana se volvió portón y al norte se cerró un vano.</p></div>
+      <div><p class="st" style="color:var(--cardo)">Cuatro fachadas intactas</p><h3>Galpón</h3><p>Cerchas de pino tea, mampostería con pilastras en los apoyos. Al oeste se adosó una cubierta de chapa sobre estructura de madera, fácil de retirar.</p></div>
+    </div>
+    <div class="two" style="margin-top:2.4rem">
+      <blockquote>«Estamos hablando de un patrimonio del trabajo vivo, vigente, que al día de hoy conserva en su materia el mensaje de los primitivos asentamientos productivos agropecuarios.»<cite>CNMLBH, Informe del estado de conservación, 2021</cite></blockquote>
+      <div class="flow">
+        <p>La reja del aposento, de hierro forjado, remata en una flor de lis, el emblema de los Borbones: el poder de una corona en el detalle de una ventana rural. El informe destaca otra cosa que no se ve en los planos: la continuidad del uso, más de dos siglos de una misma familia trabajando el mismo campo.</p>
+        <p class="note">Si lo valioso es el trabajo vivo, ¿qué pasa con la declaratoria el día que ese trabajo se detenga? La ley protege la materia; el uso no se puede decretar. El riesgo de un monumento rural es quedar intacto y vacío.</p>
+      </div>
+    </div>
+    <h3 class="eyebrow" style="margin:2.6rem 0 1rem">Fachadas en 2021</h3>
+    <div class="vids" id="paredes"></div>
+    <h3 class="eyebrow" style="margin:2.6rem 0 1rem">Páginas del informe</h3>
+    <div class="cnm" id="cnmPages"></div>
+  </div>
+</section>
+
+<!-- ============ NORMATIVA ============ -->
+<section id="normativa" class="wrap">
+  <div class="wide">
+    <div class="sec-head">
+      <p class="eyebrow">Registro del Patrimonio Cultural de San Andrés de Giles · asiento 1</p>
+      <h2>Tres declaratorias, un mismo casco</h2>
+    </div>
+    <div class="norms">
+      <div><p class="lvl">Municipal · 7 jun 1988</p><h3>Ordenanza 49/88</h3><p>Declara Monumento Histórico a nivel municipal a la Estancia «La Merced» o Posta de Figueroa. Promulgada por decreto 182 del 9 de junio de 1988 (intendente Aldo Nascimbene).</p></div>
+      <div><p class="lvl">Provincial · 1990</p><h3>Ley 10.965</h3><p>Monumento Histórico Provincial de Buenos Aires.</p></div>
+      <div><p class="lvl">Nacional · 10 sep 2021</p><h3>Decreto PEN 616/2021</h3><p>Monumento Histórico Nacional: el único del partido. Declara el casco de la Estancia «La Merced» (Circ. VII, Polígono V, Parcela 709). Propuesto por la CNMLBH en el Acta Plenaria Nº 7 del 19 de agosto de 2015; publicado en el Boletín Oficial el 13 de septiembre de 2021.</p></div>
+    </div>
+    <div class="col" style="margin-top:2rem">
+      <details>
+        <summary>Texto de la Ordenanza 49/88</summary>
+        <ol class="arts">
+          <li>Declárese Monumento Histórico a nivel Municipal a la Estancia «La Merced» o «Posta de Figueroa».</li>
+          <li>El Departamento Ejecutivo tendrá a su cargo el mantenimiento de la misma, la cual consistirá en el blanqueo, limpieza, etc., cuando fuere necesario.</li>
+          <li>El Departamento Ejecutivo fijará una fecha (no mayor a los 90 días) para un acto de reconocimiento del significado histórico de «La Merced», inaugurándola como «Monumento Histórico de San Andrés de Giles».</li>
+          <li>Se dará amplia difusión a tal evento.</li>
+          <li>Se solicitará al C.I.E. local y al Centro de Estudios Históricos «Pbro. Vicente Piñeiro» un plan educativo conjunto para difundir el lugar y realizar visitas guiadas.</li>
+          <li>El Departamento Ejecutivo pondrá a disposición de las escuelas el ómnibus municipal para realizar lecciones-paseos a «La Merced».</li>
+          <li>Las lecciones-paseos serán extensibles a jubilados, instituciones, etc.</li>
+          <li>El Departamento Ejecutivo dará amplia difusión a la presente y atribuirá las medidas para su mejor organización.</li>
+          <li>De forma.</li>
+        </ol>
+      </details>
+      <details>
+        <summary>Plano de mensura y división 94-40-72</summary>
+        <figure class="plate" style="margin-top:.8rem"><button type="button" class="zoom" data-src="img/plano-1972.jpg" data-cap="Plano 94-40-72, mensura y división, próximo a Estación Azcuénaga (agrim. Luis R. Brandi, 1971–72)." style="all:unset;cursor:zoom-in;display:block"><img src="img/plano-1972.jpg" alt="Plano de mensura y división 94-40-72" loading="lazy"></button></figure>
+        <p style="margin-top:.7rem">Mensura y división «próximo a Estación Azcuénaga», Circunscripción VII, parcelas 709 a, b y c (escala 1:7500). Una restricción anotada al margen pesa hoy sobre el casco: no se puede levantar edificación estable en una franja de cien metros a ambos lados del borde superior del arroyo Suero.</p>
+      </details>
+      <details>
+        <summary>Situación en el Registro</summary>
+        <p style="margin-top:.7rem">Categoría 1 · Histórico-Simbólico. Registro Definitivo: anterior a la Ordenanza 2182/19, incorporada de pleno derecho por su art. 8, último párrafo. Circunscripción VII, partida 709b (a verificar registralmente). La declaratoria nacional vale en su propio ámbito.</p>
+      </details>
+      <p class="note" style="margin-top:1.4rem">La ordenanza de 1988 pedía blanqueo, visitas escolares y un ómnibus. Tres décadas después, la casa es Monumento Histórico Nacional y sigue siendo vivienda de los descendientes de Tomás de Figueroa. ¿Cómo se cuida un monumento que es también una casa habitada? La protección que vale es la que no convierte a la familia en guardiana de un museo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FUENTES ============ -->
+<section id="fuentes" class="wrap">
+  <div class="col">
+    <div class="sec-head"><p class="eyebrow">Archivo</p><h2>Fuentes</h2></div>
+    <ul class="sources">
+      <li>«La Merced, Hacienda de Figueroa. Pequeño testimonio de una gran historia». Patrimonio Rural, Colegio de Arquitectos de la Provincia de Buenos Aires, Distrito V, Mercedes, 1989. Archivo CMAPCSAG.</li>
+      <li>Carta de Juan Manuel de Rosas a Juan Facundo Quiroga, Hacienda de Figueroa, 20 dic 1834. AGN, Colección Saldías, Sala VII Nº 229, ff. 179–184. Texto según R. Levene, p. 246.</li>
+      <li>Inventario y partición de bienes quedados por muerte de Tomás de Figueroa, 1759. AGN, Sucesiones, legajo 5874.</li>
+      <li>Duplicados de mensura Nº 10 (Eguía, 1840), 43 (1867), 62 (1872), 161 (1857), 175 (1897), 189 (1923). Archivo Histórico de Geodesia; Atlas de Mensuras de Giles.</li>
+      <li>J. C. Scannone SJ, «Cuatro principios para la construcción de un pueblo según el Papa Francisco», <i>Stromata</i> 71 (2015) 13–27.</li>
+      <li>Francisco, <i>Evangelii gaudium</i> (2013), 217–237; <i>Laudato si’</i> (2015), 141, 143, 178.</li>
+      <li>W. Mac Cann, <i>Viaje a caballo por las provincias argentinas</i> (1853).</li>
+      <li>Ordenanza municipal 49/88; Ley provincial 10.965; <a href="https://www.argentina.gob.ar/normativa/nacional/decreto-616-2021-354041/texto" target="_blank" rel="noopener">Decreto PEN 616/2021</a>.</li>
+      <li><a href="https://www.argentina.gob.ar/capital-humano/cultura/monumentos/casco-de-la-estancia-la-merced-tambien-conocida-como-posta-de" target="_blank" rel="noopener">Comisión Nacional de Monumentos: Casco de la Estancia La Merced</a>.</li>
+      <li>Relevamiento láser de la Posta de Figueroa: «Est Figueroa Uni.e57», 103.756.173 puntos, enero–febrero 2021. Vuelos de dron DJI_0095 a DJI_0123, 4 de marzo de 2021. Comisión Municipal Asesora del Patrimonio Cultural de San Andrés de Giles.</li>
+      <li>Comisión Nacional de Monumentos, de Lugares y de Bienes Históricos, «Informe del estado de conservación del Casco de la Estancia La Merced», 7 de junio de 2021 (Expte. EX-2018-35095348-APN-CGD#MC).</li>
+      <li>Plano de mensura y división 94-40-72, San Andrés de Giles, Circunscripción VII.</li>
+      <li>Archivo General de la Nación, Programa de Descripción Normalizada: Sala VII, Documentación Donada y Adquirida, vol. 3, tomo I (2014), descripción de la colección Adolfo Saldías–Juan Ángel Farini; Salas X y III, vol. 2 (2012).</li>
+    </ul>
+    <p class="mono muted" style="margin-top:1.6rem">La nube 3D proviene de «Est Figueroa Uni.e57», reducida a vóxel de 12 cm y georreferenciada por correlación con la imagen satelital (error estimado de algunos metros). El panorama 360° se compuso con los cuadros de la grabación del visor de la nube (1 feb 2021). Imagen satelital: Esri World Imagery (Maxar, Earthstar Geographics), embebida en tres escalas.</p>
+  </div>
+</section>
+</main>
+
+<footer class="wrap">
+  <div class="wide">
+    <img src="img/logo.png" alt="Comisión Municipal de Patrimonio de San Andrés de Giles">
+    <span>Comisión Municipal Asesora del Patrimonio Cultural · San Andrés de Giles · 2026</span>
+  </div>
+</footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Imagen ampliada">
+  <button class="btn" id="lbClose" type="button">Cerrar</button>
+  <div><img id="lbImg" alt=""><p id="lbCap"></p></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script>
+/* ---------- tema ---------- */
+(function(){
+  const root=document.documentElement, btn=document.getElementById('themeBtn');
+  let t=null; try{t=localStorage.getItem('pf-theme')}catch(e){}
+  if(t) root.setAttribute('data-theme',t);
+  const cur=()=>root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+  const label=()=>btn.textContent=cur()==='dark'?'Tema: noche':'Tema: cal';
+  label();
+  btn.addEventListener('click',()=>{const n=cur()==='dark'?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('pf-theme',n)}catch(e){};label();window.dispatchEvent(new Event('themechange'))});
+})();
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+/* ---------- lightbox ---------- */
+const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),lbCap=document.getElementById('lbCap');
+function openLB(src,cap){lbImg.src=src;lbImg.alt=cap||'';lbCap.textContent=cap||'';lb.hidden=false;document.getElementById('lbClose').focus()}
+document.getElementById('lbClose').onclick=()=>lb.hidden=true;
+lb.addEventListener('click',e=>{if(e.target===lb)lb.hidden=true});
+addEventListener('keydown',e=>{if(e.key==='Escape')lb.hidden=true});
+document.addEventListener('click',e=>{const z=e.target.closest('.zoom');if(z){openLB(z.dataset.src,z.dataset.cap)}});
+
+/* ---------- estaciones ---------- */
+const ST=[
+ ['nube-1','Estación frente al galpón: muros de adobe y cubierta a dos aguas'],
+ ['nube-2','Galería de la casa principal, banco y reja'],
+ ['nube-3','Bajo el parral: mesa larga y horcones'],
+ ['nube-4','Corrales y tranqueras hacia la cañada'],
+ ['nube-5','Galpón con molino, muro norte'],
+ ['nube-6','Vista general del conjunto desde el aire de la nube'],
+ ['nube-7','Casco, molino y arboleda: vista oblicua'],
+ ['nube-8','Casa con tranquera y cerco, frente sur'],
+];
+document.getElementById('stations').innerHTML=ST.map(([f,c])=>`<button type="button" class="zoom" data-src="img/${f}.jpg" data-cap="${c}. Nube de puntos, 2021."><img src="img/${f}.jpg" alt="${c}" loading="lazy"><span>${c}</span></button>`).join('');
+
+/* ---------- libro ---------- */
+const BK=[
+ [1,'Tapa: la reja de La Merced'],[4,'Portada, Patrimonio Rural, Mercedes 1989'],[8,'El monte y la casa, dibujo a pluma'],[9,'El territorio: Pampa Ondulada'],[12,'El área: la cañada de Giles y el arroyo Suero'],
+ [14,'Las galeras de posta'],[15,'Significado de postas y mensajerías'],[18,'Plano catastral de San Andrés de Giles, c. 1890'],[19,'La testamentaría de Tomás de Figueroa, 1759'],
+ [20,'Los hombres que habitaron el lugar'],[22,'El negro Jerónimo'],[23,'Rosas y Quiroga: «El último encuentro»'],[27,'Rosas y Quiroga'],[34,'Las especies arbóreas: plano del casco'],[45,'«El lugar»: accesos desde el camino real'],
+ [46,'Paisaje de la cañada'],[51,'Casas del casco'],[53,'El galpón viejo'],[57,'La casa principal con molino'],[59,'Fines del siglo XVIII y hasta mediados del XIX'],[61,'La población a comienzos del siglo XX'],
+ [62,'Alambrado, molino y oasis'],[63,'La casa principal: axonometría'],[64,'Alzados y detalles constructivos'],[66,'Depósito y gallinero'],[68,'Galpón'],[69,'Los componentes: la reja'],[72,'Puerta principal'],[73,'Estructura de la cubierta'],[74,'A modo de reflexión'],
+];
+document.getElementById('book').innerHTML=BK.map(([p,c])=>`<figure><button type="button" class="zoom" data-src="img/libro-${String(p).padStart(2,'0')}.jpg" data-cap="${c}. «La Merced, Hacienda de Figueroa», CAPBA D5, 1989."><img src="img/libro-${String(p).padStart(2,'0')}.jpg" alt="${c}" loading="lazy"></button><figcaption>${c}</figcaption></figure>`).join('');
+
+/* ---------- informe CNM ---------- */
+const CNM=[['02','Vista aérea del conjunto (video de dron, 6/3/2021)'],['03','La casa principal: lámina de 1989'],['04','Fachadas de la casa principal'],['05','Dependencias: lámina de 1989'],['06','Fachadas de las dependencias'],['07','Depósito y gallinero'],['08','Depósito: cambios'],['09','Galpón'],['10','Galpón y conclusión'],['11','Cierre del informe']];
+document.getElementById('cnmPages').innerHTML=CNM.map(([p,c])=>`<figure><button type="button" class="zoom" data-src="img/cnm-${p}.jpg" data-cap="${c}. Informe del estado de conservación, CNMLBH, 2021."><img src="img/cnm-${p}.jpg" alt="${c}" loading="lazy"></button><figcaption>${c}</figcaption></figure>`).join('');
+const MP=[['mens-010-a','Mensura Nº 10: carátula del duplicado, Isabel Carrasco de Figueroa, agrimensor Manuel Eguía, 1840'],['mens-010-b','Mensura Nº 10: diligencia manuscrita'],['mens-010-c','Mensura Nº 10: anotaciones de aprobación'],['mens-056-a','Mensura Nº 56: Rosendo de Dios, 1870, el yerno de Mauricio Figueroa'],['mens-056-b','Mensura Nº 56: plano con las tierras de los herederos Figueroa'],['mens-189-a','Mensura Nº 189: Juan José y Elina Figueroa, 1923'],['mens-189-b','Mensura Nº 189: memoria del agrimensor'],['mens-189-c','Mensura Nº 189: plano con el camino de la Posta Figueroa']];
+document.getElementById('mensPhotos').innerHTML=MP.map(([f,c])=>`<figure><button type="button" class="zoom" data-src="img/${f}.jpg" data-cap="${c}. Archivo Histórico de Geodesia, Provincia de Buenos Aires."><img src="img/${f}.jpg" alt="${c}" loading="lazy" style="aspect-ratio:4/3;object-fit:cover"></button><figcaption>${c}</figcaption></figure>`).join('');
+const PW=[['pared-sur-dormitorios','Fachada sur, ala de dormitorios'],['pared-patio-dormitorios','Galería al patio, ala de dormitorios'],['pared-patio-cocina','Patio de la cocina bajo el parral'],['pared-norte-cocina','Muro norte de la cocina']];
+document.getElementById('paredes').innerHTML=PW.map(([f,c])=>`<figure><button type="button" class="zoom" data-src="img/${f}.jpg" data-cap="${c}. Relevamiento fotográfico de 2021." style="all:unset;cursor:zoom-in;display:block"><img src="img/${f}.jpg" alt="${c}" loading="lazy" style="display:block;width:100%;border:1px solid var(--hierro)"></button><figcaption>${c}. Relevamiento de 2021.</figcaption></figure>`).join('');
+/* ---------- panorámicas aéreas: arrastre y zoom ---------- */
+document.querySelectorAll('.strip').forEach(st=>{const img=st.querySelector('img');let d=null,h=null;
+  const base=()=>Math.min(innerHeight*.52,460);
+  st.addEventListener('pointerdown',e=>{d={x:e.clientX,s:st.scrollLeft};st.classList.add('drag');st.setPointerCapture(e.pointerId)});
+  st.addEventListener('pointermove',e=>{if(d)st.scrollLeft=d.s-(e.clientX-d.x)});
+  const end=()=>{d=null;st.classList.remove('drag')};st.addEventListener('pointerup',end);st.addEventListener('pointercancel',end);
+  st.addEventListener('wheel',e=>{if(!e.ctrlKey&&Math.abs(e.deltaY)<Math.abs(e.deltaX))return;e.preventDefault();const cur=img.getBoundingClientRect().height;const nh=Math.min(base()*3,Math.max(base(),cur*(1-e.deltaY*.0015)));const fx=(st.scrollLeft+e.clientX-st.getBoundingClientRect().left)/img.getBoundingClientRect().width;img.style.height=nh+'px';st.scrollLeft=fx*img.getBoundingClientRect().width-(e.clientX-st.getBoundingClientRect().left)},{passive:false});
+  st.addEventListener('keydown',e=>{if(e.key==='ArrowRight')st.scrollLeft+=120;if(e.key==='ArrowLeft')st.scrollLeft-=120});
+  const center=()=>{st.scrollLeft=(img.getBoundingClientRect().width-st.clientWidth)/2};img.complete?center():img.addEventListener('load',center);
+});
+/* ---------- cronología ---------- */
+const TL=[
+ [1663,'','nacion','Se abre el camino de Luján a Areco, el camino real al Alto Perú.'],
+ [1738,'y 1744','tierra','Los padrones registran a Tomás de Figueroa en el Pago de la Cañada de la Cruz.'],
+ [1755,'','tierra','El sargento mayor de milicias Tomás de Figueroa compra mil varas de tierra de estancia a orillas de la cañada de Giles a María Teodora de Suero, viuda del general José Ruiz de Arellano, y se radica allí con Rita Casco.',1],
+ [1759,'25 jun','tierra','Inventario y partición de bienes por muerte de Tomás de Figueroa (AGN, Sucesiones 5874): «casa estancia» en la cañada de Giles, a ocho leguas de la Villa de Luján.'],
+ [1769,'','posta','Las postas pasan a ser servicio de la Corona con Domingo de Basavilbaso.'],
+ [1789,'sep','tierra','Censo del Partido de Areco, levantado por el propio capitán Pascual Antonio de Figueroa: «con buena casa de texa propia» y 2750 varas.'],
+ [1831,'abr','nacion','Rosas en La Merced, invitado de Mauricio Figueroa, oficial de milicias y alcalde de hermandad, llamado «benemérito vecino».'],
+ [1834,'16–18 dic','nacion','Rosas acompaña a Quiroga desde San José de Flores. Hacen noche en Areco y se separan al amanecer del 18 en la Hacienda de Figueroa.'],
+ [1834,'20 dic','nacion','Rosas fecha en la hacienda la Carta de la Hacienda de Figueroa sobre congreso y constitución.',1],
+ [1835,'16 feb','nacion','Quiroga es asesinado en Barranca Yaco. La carta, manchada con su sangre, vuelve a Buenos Aires.'],
+ [1835,'','nacion','Según la tradición local, el general José María Paz estuvo detenido en La Merced.'],
+ [1840,'','tierra','Mensura de Manuel Eguía (Nº 10) a la muerte de Mauricio Figueroa: «La Merced», de Isabel Carrasco, sobre el «camino de la posta».'],
+ [1843,'','tierra','Juan Pío Figueroa hereda el casco; vive allí con Trinidad Morales. La posta habría funcionado bajo su cargo.'],
+ [1847,'22 nov','posta','William Mac Cann pasa por la zona camino al norte y describe la hospitalidad de una casa confundida con la posta.'],
+ [1852,'','posta','Tras Caseros nacen las mensajerías: itinerarios fijos, galeras, mayorales.'],
+ [1859,'','posta','El Anuario de Correos nombra una «Posta del arroyo de Giles» en la carrera de Buenos Aires a Pergamino.'],
+ [1863,'','posta','Carta Postal de Nicolás Grondona: «Posta de Giles», a cuatro leguas de la Posta del Río Areco.'],
+ [1864,'','tierra','Registro Gráfico del Departamento Topográfico: tierras de los Figueroa.'],
+ [1880,'','posta','Estación Azcuénaga del F.C. Oeste y estafeta de correos: la posta deja de operar.'],
+ [1890,'c.','tierra','Registro Gráfico de las Propiedades Rurales: «La Merced», de Trinidad Morales de Figueroa.'],
+ [1923,'','tierra','Mensura Nº 189 (Cagnoni): el camino figura como «Posta Figueroa».'],
+ [1984,'nov','patrimonio','Cabalgata del Centro Criollo «Martín Miguel de Güemes» a los 150 años del último encuentro entre Rosas y Quiroga.'],
+ [1985,'feb','patrimonio','Placas recordatorias en la estancia.'],
+ [1988,'7 jun','patrimonio','Ordenanza 49/88: Monumento Histórico Municipal.',1],
+ [1989,'27 may','patrimonio','Trabajo de campo y publicación de «La Merced, Hacienda de Figueroa» (CAPBA Distrito V).'],
+ [1990,'','patrimonio','Ley 10.965: Monumento Histórico Provincial.'],
+ [1972,'','tierra','Plano 94-40-72 de mensura y división: parcelas 709 a, b y c, con restricción de cien metros al arroyo Suero.'],
+ [2015,'19 ago','patrimonio','La Comisión Nacional de Monumentos propone la declaratoria (Acta Plenaria Nº 7).'],
+ [2021,'ene–feb','patrimonio','Relevamiento láser: 103,7 millones de puntos del casco.'],
+ [2021,'4 mar','patrimonio','Veintiséis vuelos de dron sobre el casco y la cañada.'],
+ [2021,'7 jun','patrimonio','Informe del estado de conservación de la Comisión Nacional de Monumentos.'],
+ [2021,'10 sep','patrimonio','Decreto PEN 616/2021: Monumento Histórico Nacional (BO 13 sep).',1],
+];
+const tl=document.getElementById('tl');
+function drawTL(f){tl.innerHTML=TL.filter(r=>f==='all'||r[2]===f).map(([y,d,t,txt,k])=>`<li class="${k?'key':''}"><div class="y">${y}<small>${d||'&nbsp;'}</small></div><div><span class="tag">${{tierra:'Tierra y familia',posta:'Postas',nacion:'Nación',patrimonio:'Patrimonio'}[t]}</span><p>${txt}</p></div></li>`).join('')}
+drawTL('all');
+document.querySelectorAll('.filters button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.filters button').forEach(x=>x.setAttribute('aria-pressed',x===b));drawTL(b.dataset.f)});
+
+/* ---------- carta ---------- */
+const CARTA=`<p class="mono muted">Hacienda de Figueroa, diciembre 20 de 1834</p><p class="salut">Mi querido compañero. Señor D. Juan Facundo Quiroga</p><p>Consecuente en nuestro acuerdo, doy principio por manifestarle haber llegado a creer que las disensiones de Tucumán y Salta, y los disgustos entre ambos Gobiernos, pueden haber sido causados por el Ex Gobernador P. Pablo Alemán, y sus manipulantes... Considerando excusado extenderme sobre algunos otros puntos, porque según el relato que me hizo el Señor Gobernador de ellos están bien explicados en las instrucciones, pasaré al de la Constitución.</p><p>Me parece que al buscar V. la Paz y orden desgraciadamente alterados, el argumento más fuerte y la razón más poderosa que debe V. manifestar a esos Señores Gobernadores y demás personas influyentes, en las oportunidades que se le presentasen aparentes, es el paso retrógrado que ha dado la Nación, alejando tristemente el suspirado día de la grande obra de la Constitución Nacional. ¿Ni que otra cosa importa, el estado que hoy se encuentra toda la República? Usted y yo diferimos a que los pueblos se ocupasen de sus constituciones particulares, para que después de promulgadas, entrásemos a trabajar los cimientos de la Gran Carta Nacional. En este sentido ejercitamos nuestro patriotismo e influencias no porque nos asistiere un positivo convencimiento de haber llegado la verdadera ocasión, sino porque estando en paz la República, y habiéndose generalizado la necesidad de la Constitución, creímos que debimos proceder como lo hicimos para evitar mayores males. Los resultados los dicen elocuentemente los hechos, los escándalos que se han sucedido y el estado verdaderamente peligroso en que hoy se encuentra la República, cuyo cuadro lúgubre nos aleja toda esperanza de remedio.</p><p>Y después de todo esto, y de lo que enseña y aconseja la experiencia, tocándose hasta la luz de la evidencia, <mark data-go="p-realidad" data-p="III" tabindex="0">¿habrá quien creerá que el remedio es precipitar la Constitución del Estado?</mark> Permítame V. hacer algunas observaciones a este respecto pues aunque hemos estado siempre acordes en tan elevado asunto quiero depositar en su poder con sobrada anticipación, por lo que pueda servir, una pequeña parte de lo mucho que se me ocurre y que hay que decir.</p><p>Nadie, pues, más que V. y yo podrá estar persuadido de la necesidad de la organización de un Gobierno General, y de que es el único medio de darle ser y respetabilidad a nuestra República ¿Pero quién duda que este debe ser el resultado feliz de todos los medios proporcionados a su asecución? ¿Quién aspira a un término marchando en contraria dirección? <mark data-go="p-todo" data-p="IV" tabindex="0">¿Quién para formar un todo ordenado, y compacto, no arregla y solicita, primeramente bajo una forma regular y permanente las partes que deben componerlo?</mark> ¿Quién forma un Ejército ordenado con grupos de hombres, sin jefes, sin oficiales, sin disciplina, sin subordinación, y que no cesan un momento de acecharse y combatirse entre si, envolviendo a los demás, en sus desórdenes? ¿Quién forma un ser viviente y robusto, con miembros muertos o dilacerados, y enfermos de la más corruptora gangrena, siendo así que la vida y robustez de este nuevo ser en complejo no puede ser sino la que reciba de los propios miembros que se haya de componer? Obsérvese que una muy clara y dolorosa experiencia nos ha hecho ver prácticamente que es absolutamente necesario entre nosotros el sistema federal, porque entre otras razones de sólido poder, carecemos totalmente de elementos para un Gobierno de unidad. Obsérvese que al haber predominado en el País una fracción que se hacía sorda al grito de esta necesidad ha destruido y aniquilado los medios y recursos que teníamos para proveer a ellas porque ha irritado los ánimos, descarriado las opiniones, puesto en choque los intereses particulares, propagado la inmoralidad y la intriga, y fraccionado en bandas de tal modo la Sociedad que no ha dejado casi reliquias de ningún vínculo, extendiéndose su furor a romper hasta el más sagrado de todos, y el único que podía servir para restablecer los demás, cual es el de la religión; y que en este lastimoso estado <mark data-go="p-todo" data-p="IV" tabindex="0">es preciso crearlo todo de nuevo, trabajando primero en pequeño y por fracciones para entablar después un sistema General que lo abrace todo</mark>. Obsérvese que una República Federativa es lo más quimérico y desastroso que pueda imaginarse, toda vez que no se componga de Estados bien organizados en sí mismos, porque conservando cada uno su soberanía e independencia, la fuerza del poder General con respecto al interior de la República, es casi ninguna, y su principal y casi toda su investidura, es de pura representación para llevar la voz a nombre de todos los Estados confederados en sus relaciones con las Naciones Extranjeras; por consiguiente si dentro de cada Estado en particular, no hay elementos de poder para mantener el orden respectivo, la creación de un Gobierno General representativo no sirve más que para poner en agitación a toda la República a cada desorden nacional que suceda, y hacer que el incendio de cualquier Estado se derrame por todos los demás. Así es que la República de Norte América no ha admitido en la confederación los nuevos pueblos y Provincias que se han formado después de la Independencia, sino cuando se han puesto en estado de regirse por sí solos, y entre tanto los ha mantenido sin representación en clase de Estados considerándolos como adyacencias de la República.</p><p>Después de esto, en el estado de agitación que están los Pueblos, contaminados todos de unitarios, de logistas, aspirantes, agentes secretos de otras Naciones y de las grandes logias que tienen en conmoción a toda la Europa ¿Qué esperanza puede haber de tranquilidad y calma al celebrar los pactos de la Federación, primer paso que debe dar el Congreso Federativo? En el estado de pobreza en que las agitaciones políticas han puesto a todos los Pueblos, ¿quiénes, ni con que fondos podrán costear la reunión y permanencia de ese Congreso, ni menos de la Administración General? ¿Con qué fondos van a contar para el pago de la deuda exterior nacional invertida en atenciones de toda la República, y cuyo cobro será lo primero que tendrá encima luego que se erija dicha administración? Fuera de que si en la actualidad apenas se encuentran hombres, para el Gobierno particular de cada Provincia, ¿de dónde sacarán los que hayan de dirigir toda la República? ¿Habremos de integrar la Administración General a ignorantes, aspirantes, unitarios y toda clase de bichos? ¿No vimos que la constelación de sabios no encontró más hombre para el gobierno General que a D. Bernardino Rivadavia, y que este no pudo organizar su Ministerio sino quitándole el Cura a la Catedral y haciendo venir de San Juan al Dr. Lingotes para el Ministerio de Hacienda, que entendía de este ramo lo mismo que un ciego de nacimiento entiende de Astronomía? Finalmente a vista del lastimoso cuadro que presenta la República, ¿cuál de los héroes de la federación se atreverá a encargarse del Gobierno General? ¿Cuál de ellos podrá hacerse de un cuerpo de representantes, y de Ministros, federales todos, de quienes se prometa las luces y cooperación necesaria para presentarse con la debida dignidad, salir airoso del puesto, y no perder en él todo su crédito, y reputación? Hay tanto que decir sobre este punto que para solo lo principal y más importante sería necesario un tomo que apenas se podría escribir en un mes.</p><p>Lo primero que debe tratarse en el Congreso no es, como algunos creen, de la erección del Gobierno General, ni del nombramiento del jefe Supremo de la República. Esto es lo último de todo. Lo primero es donde ha de continuar sus sesiones el Congreso, si allí donde está o en otra parte. Lo segundo es la Constitución General principiando por la organización que habrá de tener el Gobierno General, que explicará de cuantas personas se ha de componer ya en clase de jefe Supremo, ya en clase de Ministros, y cuales han de ser sus atribuciones dejando salva la Soberanía y Independencia de cada uno de los Estados Federados. Como se ha de hacer la elección, y que cualidades han de concurrir en los elegibles; en donde ha de residir este Gobierno, y que fuerza de mar y de tierra permanente en tiempo de Paz es la que debe tener, para el orden, seguridad, y respetabilidad de la República.</p><p>El punto sobre el lugar de residencia del Gobierno suele ser de mucha gravedad, y trascendencia por los celos y emulaciones que esto excita en los demás Pueblos, y la complicación de funciones que sobreviven en la Corte o Capital de la República con las autoridades del Estado particular a que ella corresponde. Son estos inconvenientes de tanta gravedad que obligaron a los Norte-Americanos a fundar la ciudad de Washington, hoy capital de aquella República que no pertenece a ninguno de los Estados Confederados...</p><p>Después de establecidos estos puntos, y el modo como pueda cada estado federado crearse sus rentas particulares sin perjudicar los intereses generales de la República, después de todo esto, es cuando recién se procederá al nombramiento del jefe de la República, y erección del Gobierno general. ¿Y puede nadie concebir que en el estado triste y lamentable en que se halla nuestro País pueda allanarse tanta dificultad, ni llegarse al fin de una empresa tan grande, tan ardua, y que en tiempos los más tranquilos y felices, contando con los hombres de más capacidad, prudencia y patriotismo, apenas podría realizarse en dos años de asiduo trabajo? ¿Puede nadie que sepa lo que es el sistema federativo, persuadirse que la creación de un gobierno general bajo esta forma atajará las disensiones domésticas de los Pueblos? Esta persuasión o triste creencia en algunos hombres de buena fe es la que da ansia a otros pérfidos y alevosos que no la tienen o que <mark data-go="p-realidad" data-p="III" tabindex="0">están alborotando los Pueblos con el grito de “Constitución” para que jamás haya Paz</mark>, ni tranquilidad, porque en el desorden es en lo que únicamente encuentran el modo de vivir. El Gobierno general en una República Federativa no une los Pueblos Federados, los Representa unidos: no es para unirlos, es para representarlos en unión ante las demás Naciones: él no se ocupa de lo que pasa interiormente en ninguno de los Estados, ni decide las contiendas que se suscitan entre sí. En el primer caso solo entienden las autoridades particulares del Estado, y en el segundo la misma constitución tiene previsto el modo como se ha de formar el tribunal que debe decidir. En una palabra, <mark data-go="p-unidad" data-p="II" tabindex="0">la unión y tranquilidad crea el Gobierno general, la desunión lo destruye, él es la consecuencia, el efecto de la unión, no la causa</mark>, y si es sensible su falta, es mucho mayor su caída, porque nunca sucede esta sino convirtiendo en escombros toda la República.</p><p>No habiendo pues hasta ahora entre nosotros, como no hay, unión y tranquilidad, menos mal que no exista que sufrir los estragos de su disolución. ¿No vemos todas las dificultades invencibles que toca cada Provincia en particular para darse Constitución? Y si no es posible vencer estas sólidas dificultades, ¿será posible vencer no solo estas sino las que presenta la discordia de unas Provincias con otras, discordia que se mantiene como acallada y dormida mientras cada una se ocupa de sí sola, pero que aparece al instante como una tormenta general que resuena por todas partes con rayos y centellas, desde que se llama a congreso general?</p><p>Es necesario que ciertos hombres se convenzan del error en que viven, porque si logran llevarlo a efecto, envolverán la República en la más espantosa catástrofe, y yo desde ahora pienso que si no queremos menoscabar nuestra reputación ni mancillar nuestras glorias, no debemos prestarnos por ninguna razón a tal delirio, hasta que dejando de serlo por haber llegado la verdadera oportunidad veamos indudablemente que los resultados han de ser la felicidad de la Nación. Si no pudiésemos evitar que lo pongan en planta, dejemos que ellos lo hagan enhorabuena pero procurando hacer ver al Público que no tenemos la menor parte en tamaños disparates, y que si no lo impedimos es porque no nos es posible.</p><p>La máxima de que es preciso ponerse a la cabeza de los Pueblos cuando no se les puede hacer variar de resolución es muy cierta; mas es para dirigirlos en su marcha, cuando esta es a buen rumbo, pero con precipitación o mal dirigida; o para hacerles variar de rumbo sin violencia o por un convencimiento práctico de la imposibilidad de llegar al punto de sus deseos. En esta parte llenamos nuestro deber, pero los sucesos posteriores han demostrado a la clara luz que <mark data-go="p-tiempo" data-p="I" tabindex="0">entre nosotros no hay otro arbitrio que el de dar tiempo a que se destruyan en los Pueblos los elementos de discordia</mark>, promoviendo y fomentando cada Gobierno por sí el espíritu de Paz y tranquilidad. Cuando este se haga visible por todas partes, entonces los cimientos empezarán por valernos de <mark data-go="p-unidad" data-p="II" tabindex="0">misiones pacíficas y amistosas por medio de las cuales sin bullas, ni alboroto, se negocia amigablemente entre los Gobiernos, hoy esta base, mañana la otra</mark> hasta colocar las cosas en tal estado que cuando se forme el Congreso lo encuentre hecho casi todo, y que no tenga más que marchar llanamente por el camino que se le haya designado. <mark data-go="p-tiempo" data-p="I" tabindex="0">Esto es lento a la verdad</mark>, pero es preciso que así sea, y es lo único que creo posible entre nosotros después de haberlo destruido todo, y tener que formarnos del seno de la nada.</p><p>Adiós, compañero. El Cielo tenga piedad de nosotros, y dé a V. salud, acierto y felicidad en el desempeño de su comisión; y a los dos, y demás amigos, iguales goces, para defendernos, precavernos y salvar a nuestros compatriotas de tantos peligros como nos amenazan.</p><p class="salut">Juan Manuel de Rosas.</p>`;
+document.getElementById('letter').innerHTML=CARTA;
+document.querySelectorAll('#letter mark').forEach(m=>{m.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();m.click()}});m.addEventListener('click',()=>{const el=document.getElementById(m.dataset.go);el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});el.animate([{outline:'2px solid var(--glicina)'},{outline:'2px solid transparent'}],{duration:1800})})});
+
+/* ---------- nav activo ---------- */
+const links=[...document.querySelectorAll('.nav a[href^="#"]')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main section').forEach(s=>io.observe(s));
+
+/* ---------- mapa sobre satélite ---------- */
+(async function(){
+  const el=document.getElementById('map');
+  if(!window.L){el.insertAdjacentHTML('beforeend','<p style="padding:1rem">No se pudo cargar el mapa.</p>');return}
+  let T,S,V; try{[T,S,V]=await Promise.all([fetch('data/territorio.json').then(r=>r.json()),fetch('data/sat-meta.json').then(r=>r.json()),fetch('data/dron-vuelos.json').then(r=>r.json()).catch(()=>[])])}catch(e){el.insertAdjacentHTML('beforeend','<p style="padding:1rem">No se pudo cargar la cartografía.</p>');return}
+  const POSTA=[[-34.3296827,-59.4070343],[-34.3295347,-59.4052513],[-34.3290837,-59.4042473],[-34.3278537,-59.4053833],[-34.3283287,-59.4075713]];
+  const map=L.map(el,{zoomControl:true,preferCanvas:false,attributionControl:true,minZoom:10,maxZoom:19,maxBounds:L.latLngBounds(S.partido.bounds).pad(.15)});
+  map.attributionControl.setPrefix(false); window.__map=map;
+  // base satelital embebida (tres escalas) + base en línea
+  const satLocal=L.layerGroup([
+    L.imageOverlay('img/sat-partido.jpg',S.partido.bounds,{interactive:false,pane:'tilePane'}),
+    L.imageOverlay('img/sat-cuartel.jpg',S.cuartel.bounds,{interactive:false,pane:'tilePane'}),
+    L.imageOverlay('img/sat-casco.jpg',S.casco.bounds,{interactive:false,pane:'tilePane'})
+  ]);
+  const satOnline=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Esri World Imagery'});
+  map.attributionControl.addAttribution('Imagen satelital: Esri, Maxar, Earthstar Geographics · Mensuras: Atlas de Mensuras de Giles (AHG)');
+  map.fitBounds(S.cuartel.bounds); satLocal.addTo(map);
+  const C=()=>({te:css('--teja'),gl:css('--glicina'),ca:css('--cardo'),c2:css('--cal-2'),fg:css('--cal')});
+  const isFig=m=>/FIGUER/i.test(m.t), isPost=c=>/POSTA/i.test(c.n);
+  const yr=document.getElementById('yr');
+  const cap=s=>s?s.charAt(0)+s.slice(1).toLowerCase():'';
+  const fmt=n=>n.toLocaleString('es-AR');
+  const info=document.getElementById('info');
+  const mens=T.mensuras.map(m=>{const lyr=L.polygon(m.g.map(r=>r.map(p=>[p[1],p[0]])),{weight:1});lyr.m=m;
+    lyr.on('click',()=>{info.innerHTML=`<p class="eyebrow">Mensura Nº ${m.n||'s/n'} · ${m.a||'s/f'}</p><h3>${m.t}</h3><p class="mono">${fmt(m.ha)} ha${m.ag?` · agrimensor ${m.ag}`:''}${m.ed?` · edificado: ${m.ed.toLowerCase()}`:''}</p>${isFig(m)?'<p class="muted" style="margin-top:.4rem">Tierras de la familia Figueroa o de sus herederos.</p>':''}`});
+    lyr.bindTooltip(`Mensura ${m.n||''} · ${m.a||''}`,{sticky:true});return lyr});
+  const gMens=L.layerGroup(mens);
+  const cam=T.caminos.map(c=>{const l=L.polyline(c.g.map(r=>r.map(p=>[p[1],p[0]])),{weight:isPost(c)?3.2:1.6});l.c=c;
+    l.on('click',()=>{info.innerHTML=`<p class="eyebrow">${c.tp||'Camino'} · ${c.y||''}</p><h3>${cap(c.n)}</h3><p class="mono">Registrado en ${c.o?c.o.toLowerCase():'—'}</p>`});
+    l.bindTooltip(cap(c.n),{sticky:true});return l});
+  const gCam=L.layerGroup(cam.filter(l=>!isPost(l.c))), gPost=L.layerGroup(cam.filter(l=>isPost(l.c)));
+  const gPts=L.layerGroup(T.puntos.map(d=>{const k=/POSTA|PULPER/.test(d.tp);return L.circleMarker([d.g[1],d.g[0]],{radius:k?5:3,weight:1}).bindTooltip(`${cap(d.tp)} · ${cap(d.d)}`).on('click',()=>{info.innerHTML=`<p class="eyebrow">${d.tp}</p><h3>${cap(d.d)}</h3><p class="mono">Según duplicados de mensura</p>`})}));
+  const gDec=L.layerGroup(T.declarados.map(d=>L.circleMarker([d.g[1],d.g[0]],{radius:5,weight:1.5}).bindTooltip(d.l).on('click',()=>{info.innerHTML=`<p class="eyebrow">Bien declarado${d.o?` · Ord. ${d.o}`:''}</p><h3>${d.l}</h3>`})));
+  const posta=L.polygon(POSTA,{weight:2,fillOpacity:.15}).bindTooltip('Estancia La Merced · Posta de Figueroa',{permanent:true,direction:'top',className:'ptip'});
+  const showPosta=()=>{info.innerHTML=`<p class="eyebrow">Asiento 1 · Monumento Histórico Nacional</p><h3>Estancia La Merced · Posta de Figueroa</h3><p>Casco de origen colonial sobre el Camino Real. Ord. 49/88, Ley 10.965, Dec. PEN 616/21.</p><p class="mono" style="margin-top:.4rem">34°19′43″ S · 59°24′22″ O</p>`};
+  posta.on('click',showPosta);
+  const gV=L.layerGroup(V.filter(v=>v.pts.length>1).map(v=>L.polyline(v.pts,{color:'#7fe3ff',weight:2,opacity:.85,dashArray:'4 3'}).bindTooltip(`${v.id} · ${v.t.slice(11,16)} · ${v.dur} s`,{sticky:true}).on('click',()=>{info.innerHTML=`<p class="eyebrow">Vuelo de dron · ${v.t.replace(/\./g,'/')}</p><h3>${v.id}</h3><p class="mono">${v.dur} s de video · posición GPS con unos 10 m de precisión</p>`})));
+  const nubeOv=L.imageOverlay('img/nube-planta.png',S.nube.bounds,{interactive:false,pane:'overlayPane',opacity:.95});
+  const layers={lyV:gV,lyN:nubeOv,lyM:gMens,lyC:gCam,lyP:gPost,lyE:gPts,lyD:gDec,lyX:posta};
+  function style(){const c=C(),Y=+yr.value,showF=document.getElementById('lyF').checked,op=+document.getElementById('opac').value;
+    mens.forEach(l=>{const vis=!l.m.a||l.m.a<=Y, f=showF&&isFig(l.m);
+      l.setStyle({color:f?'#d9c6f5':'#f3d3b8',fillColor:f?'#b39ddb':'#e0a17a',opacity:vis?.9:0,fillOpacity:vis?(f?.3:.08)*op*2:0,weight:f?1.8:1});
+      if(l._path)l._path.style.pointerEvents=vis?'':'none'});
+    cam.forEach(l=>{const vis=!l.c.y||l.c.y<=Y;const rail=/FERRO|F\.C|TRAN/.test(l.c.n),tel=/TELEG/.test(l.c.n);
+      l.setStyle({color:isPost(l.c)?'#d9c6f5':rail?'#d8d4c8':'#f4e9a8',opacity:vis?.95:0,dashArray:tel?'2 4':rail?'7 3':null})});
+    gPts.eachLayer(m=>m.setStyle({color:'#111',fillColor:'#f1ede2',fillOpacity:.9}));
+    gDec.eachLayer(m=>m.setStyle({color:'#111',fillColor:'#e8935f',fillOpacity:1}));
+    posta.setStyle({color:'#ffffff',fillColor:c.gl});
+    for(const [id,g] of Object.entries(layers)){const on=document.getElementById(id).checked;if(on&&!map.hasLayer(g))g.addTo(map);if(!on&&map.hasLayer(g))map.removeLayer(g)}
+    document.getElementById('yrOut').textContent=Y;
+  }
+  ['yr','lyV','lyN','lyM','lyF','lyC','lyP','lyE','lyD','lyX','opac'].forEach(id=>document.getElementById(id).addEventListener('input',style));
+  document.querySelectorAll('input[name=base]').forEach(r=>r.addEventListener('change',()=>{
+    [satLocal,satOnline].forEach(l=>map.hasLayer(l)&&map.removeLayer(l));
+    el.classList.toggle('nobase',r.value==='none');
+    if(r.value==='local')satLocal.addTo(map);if(r.value==='online')satOnline.addTo(map);
+    Object.values(layers).forEach(g=>{if(map.hasLayer(g)){g.eachLayer?g.eachLayer(x=>x.bringToFront&&x.bringToFront()):g.bringToFront()}})}));
+  document.getElementById('goPosta').onclick=()=>{map.flyToBounds(posta.getBounds(),{maxZoom:17,duration:matchMedia('(prefers-reduced-motion: reduce)').matches?0:1.4});showPosta()};
+  document.getElementById('goAll').onclick=()=>map.flyToBounds(S.partido.bounds,{duration:1});
+  map.on('mousemove',e=>{const f=v=>{v=Math.abs(v);const d=Math.floor(v),m=Math.floor((v-d)*60),s=Math.round(((v-d)*60-m)*60);return `${d}°${String(m).padStart(2,'0')}′${String(s).padStart(2,'0')}″`};document.getElementById('mapread').textContent=`${f(e.latlng.lat)} S · ${f(e.latlng.lng)} O`});
+  L.control.scale({imperial:false,position:'bottomleft'}).addTo(map);
+  addEventListener('themechange',style);
+  map.fitBounds(S.cuartel.bounds);
+  style();
+  new ResizeObserver(()=>map.invalidateSize()).observe(el);
+})();
+
+/* ---------- visor: nube LiDAR 3D + panorama 360 ---------- */
+(function(){
+  const cv=document.getElementById('pano'), bar=document.getElementById('loadbar'), vw=document.getElementById('viewer'), comp=document.getElementById('compass'), lbl=document.getElementById('vlbl'), stat=document.getElementById('vstat');
+  if(!window.THREE){vw.insertAdjacentHTML('beforeend','<div class="vfail">El visor 3D no pudo cargarse. Las estaciones del escaneo están más abajo.</div>');return}
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const renderer=new THREE.WebGLRenderer({canvas:cv,antialias:false,powerPreference:'high-performance'});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.setClearColor(0x050606);
+  /* escena nube */
+  const sc=new THREE.Scene(); sc.fog=new THREE.Fog(0x050606,120,260);
+  const cam=new THREE.PerspectiveCamera(60,1,.1,2000);
+  const spr=document.createElement('canvas');spr.width=spr.height=32;const sx=spr.getContext('2d');sx.beginPath();sx.arc(16,16,15,0,7);sx.fillStyle='#fff';sx.fill();
+  const mat=new THREE.PointsMaterial({size:.16,vertexColors:true,sizeAttenuation:true,map:new THREE.CanvasTexture(spr),alphaTest:.5});
+  const group=new THREE.Group();sc.add(group);
+  const geos=[];
+  /* escena panorama */
+  const sp=new THREE.Scene(), pcam=new THREE.PerspectiveCamera(66,1,.1,1000);
+  const sg=new THREE.SphereGeometry(500,96,48);sg.scale(-1,1,1);const pm=new THREE.MeshBasicMaterial({color:0x111111});sp.add(new THREE.Mesh(sg,pm));
+  let panoLoaded=false;
+  function loadPano(){if(panoLoaded)return;panoLoaded=true;new THREE.TextureLoader().load('img/lidar-patio-360.jpg',t=>{t.minFilter=THREE.LinearFilter;t.generateMipmaps=false;pm.map=t;pm.color.set(0xffffff);pm.needsUpdate=true})}
+  /* estado */
+  let mode='orbit', view='nube', auto=true;
+  const target=new THREE.Vector3(0,3,0); let theta=2.4, phi=1.05, dist=70;
+  const walk={p:new THREE.Vector3(2,1.6,14),yaw:Math.PI,pitch:0};
+  let plon=250,plat=6,pfov=66;
+  const keys={};
+  function resize(){const w=cv.clientWidth,h=cv.clientHeight;renderer.setSize(w,h,false);cam.aspect=pcam.aspect=w/h;cam.updateProjectionMatrix();pcam.updateProjectionMatrix()}
+  addEventListener('resize',resize);resize();
+  /* carga de la nube en bloques PNG */
+  (async()=>{
+    let meta;try{meta=await (await fetch('data/nube.json')).json()}catch(e){stat.textContent='No se pudo cargar la nube.';return}
+    const mn=meta.min,mx=meta.max,total=meta.chunks.reduce((a,c)=>a+c.n,0);let got=0;
+    const cvs=document.createElement('canvas'),cx=cvs.getContext('2d',{willReadFrequently:true});
+    for(const ch of meta.chunks){
+      try{
+        const blob=await (await fetch('data/'+ch.f)).blob();
+        const bmp=await createImageBitmap(blob,{colorSpaceConversion:'none',premultiplyAlpha:'none'});
+        cvs.width=bmp.width;cvs.height=bmp.height;cx.drawImage(bmp,0,0);
+        const d=cx.getImageData(0,0,bmp.width,bmp.height).data, n=ch.n, plane=ch.rows*ch.w*4;
+        const pos=new Float32Array(n*3),col=new Float32Array(n*3);
+        const sxr=(mx[0]-mn[0])/65535,syr=(mx[1]-mn[1])/65535,szr=(mx[2]-mn[2])/65535;
+        for(let i=0;i<n;i++){const a=i*4,b=plane+i*4,c=2*plane+i*4;
+          pos[i*3]=mn[0]+((d[a]<<8)|d[a+1])*sxr; pos[i*3+1]=mn[1]+((d[a+2]<<8)|d[b])*syr; pos[i*3+2]=mn[2]+((d[b+1]<<8)|d[b+2])*szr;
+          col[i*3]=d[c]/255;col[i*3+1]=d[c+1]/255;col[i*3+2]=d[c+2]/255}
+        const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(pos,3));g.setAttribute('color',new THREE.BufferAttribute(col,3));
+        g.userData.rgb=col.slice(0);geos.push(g);group.add(new THREE.Points(g,mat));
+        got+=n;bar.style.width=(100*got/total)+'%';stat.textContent=`${(got/1e6).toFixed(1).replace('.',',')} de ${(total/1e6).toFixed(1).replace('.',',')} millones de puntos`;
+        applyColor();
+      }catch(e){stat.textContent='Parte de la nube no se pudo cargar.'}
+    }
+    setTimeout(()=>bar.style.opacity=0,500);stat.textContent=`${(got/1e6).toFixed(1).replace('.',',')} millones de puntos · voxel 12 cm · relevamiento LiDAR 2021`;
+  })();
+  /* color */
+  let cmode=0;const cnames=['real','cal','altura'];
+  function applyColor(){for(const g of geos){const c=g.attributes.color.array,r=g.userData.rgb,p=g.attributes.position.array;
+    for(let i=0;i<c.length;i+=3){if(cmode===0){c[i]=r[i];c[i+1]=r[i+1];c[i+2]=r[i+2]}
+      else if(cmode===1){const l=.2+.8*(.3*r[i]+.59*r[i+1]+.11*r[i+2]);c[i]=l*.98;c[i+1]=l*.95;c[i+2]=l*.86}
+      else{const t=Math.min(1,Math.max(0,p[i+1]/14));c[i]=.25+.7*t;c[i+1]=.35+.25*(1-Math.abs(t-.5)*2)+.1;c[i+2]=.75-.55*t}}
+    g.attributes.color.needsUpdate=true}}
+  document.getElementById('colBtn').onclick=e=>{cmode=(cmode+1)%3;applyColor();e.currentTarget.textContent='Color: '+cnames[cmode]};
+  const ps=document.getElementById('ptSize');ps.oninput=()=>mat.size=.16*ps.value;
+  /* modos */
+  const autoBtn=document.getElementById('autoBtn');const setAuto=v=>{auto=v;autoBtn.setAttribute('aria-pressed',v)};autoBtn.onclick=()=>setAuto(!auto);
+  const hints={orbit:'Arrastrá para girar · rueda o pellizco para acercar · clic derecho o dos dedos para desplazar',walk:'Arrastrá para mirar · flechas, WASD o los botones para caminar',pano:'Panorama desde una estación del escáner · arrastrá para mirar alrededor'};
+  const walkPad=document.getElementById('walkPad');
+  document.querySelectorAll('[data-vmode]').forEach(b=>b.onclick=()=>{
+    const m=b.dataset.vmode;document.querySelectorAll('[data-vmode]').forEach(x=>x.setAttribute('aria-pressed',x===b));
+    view=m==='pano'?'pano':'nube';mode=m;lbl.textContent=hints[m];walkPad.hidden=m!=='walk';
+    if(m==='pano')loadPano();
+    if(m==='walk'){walk.p.set(2,1.6,14);walk.yaw=Math.PI;walk.pitch=0;setAuto(false)}
+    document.querySelectorAll('.cloudonly').forEach(x=>x.hidden=m==='pano');
+  });
+  walkPad.querySelectorAll('button').forEach(b=>{const k=b.dataset.k;const on=e=>{e.preventDefault();keys[k]=1},off=()=>keys[k]=0;b.addEventListener('pointerdown',on);b.addEventListener('pointerup',off);b.addEventListener('pointerleave',off);b.addEventListener('pointercancel',off)});
+  /* interacción */
+  let drag=null,pinch=null;
+  cv.addEventListener('contextmenu',e=>e.preventDefault());
+  cv.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,b:e.button};setAuto(false);cv.setPointerCapture(e.pointerId)});
+  cv.addEventListener('pointermove',e=>{if(!drag||pinch)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag.x=e.clientX;drag.y=e.clientY;
+    if(view==='pano'){const k=pfov/cv.clientHeight;plon-=dx*k;plat+=dy*k;return}
+    if(mode==='orbit'){if(drag.b===2||e.shiftKey){const s=dist/cv.clientHeight;const r=new THREE.Vector3(Math.cos(theta),0,-Math.sin(theta)),f=new THREE.Vector3(Math.sin(theta),0,Math.cos(theta));target.addScaledVector(r,-dx*s).addScaledVector(f,-dy*s)}else{theta-=dx*.006;phi=Math.min(1.52,Math.max(.12,phi-dy*.005))}}
+    else{walk.yaw-=dx*.004;walk.pitch=Math.max(-1.3,Math.min(1.3,walk.pitch-dy*.004))}});
+  cv.addEventListener('pointerup',()=>drag=null);cv.addEventListener('pointercancel',()=>drag=null);
+  cv.addEventListener('wheel',e=>{e.preventDefault();setAuto(false);
+    if(view==='pano'){pfov=Math.min(72,Math.max(25,pfov+e.deltaY*.04));return}
+    if(mode==='orbit')dist=Math.min(220,Math.max(3,dist*(1+e.deltaY*.0012)));else{const f=new THREE.Vector3(-Math.sin(walk.yaw),0,-Math.cos(walk.yaw));walk.p.addScaledVector(f,-e.deltaY*.01)}},{passive:false});
+  let pmid=null;
+  cv.addEventListener('touchmove',e=>{if(e.touches.length===2){const t0=e.touches[0],t1=e.touches[1];const d=Math.hypot(t0.clientX-t1.clientX,t0.clientY-t1.clientY),mid={x:(t0.clientX+t1.clientX)/2,y:(t0.clientY+t1.clientY)/2};
+    if(pinch){if(view==='pano')pfov=Math.min(72,Math.max(25,pfov*pinch/d));else if(mode==='orbit'){dist=Math.min(220,Math.max(3,dist*pinch/d));const s=dist/cv.clientHeight;const r=new THREE.Vector3(Math.cos(theta),0,-Math.sin(theta)),f=new THREE.Vector3(Math.sin(theta),0,Math.cos(theta));target.addScaledVector(r,-(mid.x-pmid.x)*s).addScaledVector(f,-(mid.y-pmid.y)*s)}}
+    pinch=d;pmid=mid;e.preventDefault()}},{passive:false});
+  cv.addEventListener('touchend',()=>{pinch=null;pmid=null});
+  const kmap={ArrowUp:'f',w:'f',W:'f',ArrowDown:'b',s:'b',S:'b',ArrowLeft:'l',a:'l',A:'l',ArrowRight:'r',d:'r',D:'r'};
+  addEventListener('keydown',e=>{const k=kmap[e.key];if(!k||view==='pano'||mode!=='walk'||cv.getBoundingClientRect().bottom<60)return;if(/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))return;keys[k]=1;e.preventDefault()});
+  addEventListener('keyup',e=>{const k=kmap[e.key];if(k)keys[k]=0});
+  document.getElementById('fsBtn').onclick=()=>{try{(document.fullscreenElement?document.exitFullscreen():vw.requestFullscreen()).catch(()=>{})}catch(e){}};
+  let visible=true;new IntersectionObserver(es=>visible=es[0].isIntersecting).observe(cv);
+  const card=['N','NE','E','SE','S','SO','O','NO'];
+  let t0=performance.now();
+  (function frame(now){requestAnimationFrame(frame);if(!visible)return;const dt=Math.min(.05,(now-t0)/1000);t0=now;let head;
+    if(view==='pano'){if(auto&&!reduce)plon+=dt*3.2;plat=Math.max(-27+pfov/2,Math.min(42-pfov/2,plat));pcam.fov=pfov;pcam.updateProjectionMatrix();
+      const ph=THREE.MathUtils.degToRad(90-plat),th=THREE.MathUtils.degToRad(plon);pcam.lookAt(Math.sin(ph)*Math.cos(th),Math.cos(ph),Math.sin(ph)*Math.sin(th));renderer.render(sp,pcam);
+      comp.textContent='Giro '+String(Math.round(((plon%360)+360)%360)).padStart(3,'0')+'°';return}
+    if(mode==='orbit'){if(auto&&!reduce)theta+=dt*.07;cam.position.set(target.x+dist*Math.sin(phi)*Math.sin(theta),target.y+dist*Math.cos(phi),target.z+dist*Math.sin(phi)*Math.cos(theta));cam.lookAt(target)}
+    else{const f=new THREE.Vector3(-Math.sin(walk.yaw),0,-Math.cos(walk.yaw)),r=new THREE.Vector3(Math.cos(walk.yaw),0,-Math.sin(walk.yaw)),s=2.2*dt;
+      if(keys.f)walk.p.addScaledVector(f,s);if(keys.b)walk.p.addScaledVector(f,-s);if(keys.l)walk.p.addScaledVector(r,-s);if(keys.r)walk.p.addScaledVector(r,s);
+      cam.position.copy(walk.p);cam.lookAt(walk.p.clone().add(new THREE.Vector3(-Math.sin(walk.yaw)*Math.cos(walk.pitch),Math.sin(walk.pitch),-Math.cos(walk.yaw)*Math.cos(walk.pitch))))}
+    const dir=new THREE.Vector3();cam.getWorldDirection(dir);head=(Math.atan2(dir.x,-dir.z)*180/Math.PI+360)%360;
+    comp.innerHTML=`<span style="display:inline-block;transform:rotate(${-head}deg)">↑</span> N · mirando al ${card[Math.round(head/45)%8]}`;
+    renderer.render(sc,cam)})(t0);
+})();
+</script>
+
+</body>
+</html>
