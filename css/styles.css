@@ -708,3 +708,5 @@ body.map-on .foot{display:none}
 .pf-q{font:italic 400 1.25rem/1.45 var(--serif);color:var(--ink-2);max-width:60ch;margin:2.4rem auto 1rem;text-align:center}
 @media (max-width:760px){.pf-ladder{grid-template-columns:1fr}.pf-ladder li{border-right:0;border-bottom:1px solid var(--line)}.pf-split{grid-template-columns:1fr}.posta-banner{grid-template-columns:1fr;width:calc(100% - 32px)}.posta-banner img{max-height:150px}}
 .top .brand{flex:none}
+
+.pf-cred{margin:14px 2px 0;padding:12px 16px;border-left:3px solid var(--accent);background:var(--surface);color:var(--ink-2);font-size:.88rem;border-radius:0 8px 8px 0}

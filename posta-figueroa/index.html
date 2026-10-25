@@ -736,8 +736,10 @@ p{margin:0}
 .nav-in::-webkit-scrollbar{display:none}
 .nav .back{flex:none;font-family:var(--f-mono,monospace);font-size:.74rem;letter-spacing:.04em;text-transform:none;color:var(--noche);background:var(--glicina);border:1px solid var(--glicina);padding:.3rem .7rem;border-radius:2px;text-decoration:none;white-space:nowrap}
 .nav .back:hover{filter:brightness(1.1)}
+.nav .back{position:sticky;left:0;z-index:2;box-shadow:-24px 0 0 0 var(--noche),8px 0 10px -4px var(--noche)}
 .nav a{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cal-2);text-decoration:none;white-space:nowrap}
 .nav a:hover,.nav a.on{color:var(--cal)}
+.nav a.on:not(.brand){box-shadow:inset 0 -2px 0 var(--glicina)}
 .nav .brand{font-family:var(--f-sc);font-size:1rem;letter-spacing:.02em;text-transform:none;color:var(--cal);margin-right:.4rem}
 .theme-btn{margin-left:auto;background:none;border:1px solid var(--hierro);color:var(--cal-2);font-family:var(--f-mono);font-size:.7rem;padding:.25rem .55rem;border-radius:2px;cursor:pointer;white-space:nowrap}
 
@@ -904,6 +906,46 @@ footer img{height:54px;width:auto;opacity:.9}
 .lb img{max-height:86vh;max-width:100%;width:auto;border:1px solid #333}
 .lb p{color:#cfcabb;font-family:var(--f-mono);font-size:.74rem;margin-top:.6rem;text-align:center;max-width:70ch}
 .lb button{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px))}
+
+/* páginas internas */
+.page{display:none}.page.on{display:block}
+section+section{border-top:0}
+.pg-nube{padding-top:0}.pg-nube>.wrap{padding-top:clamp(2.5rem,6vw,4.5rem)}
+.vcred{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;color:var(--cal-2);margin:.7rem auto 0;max-width:1240px}
+.home{padding:0}
+.hhero{position:relative;height:calc(100vh - 46px);height:calc(100dvh - 46px - env(safe-area-inset-top,0px));min-height:460px;max-height:1000px;overflow:hidden;background:#0b0a08;color:#f3ecdf;display:flex;align-items:flex-end}
+.hbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.8}
+.hhero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,6,.2) 0%,rgba(8,8,6,.25) 40%,rgba(8,8,6,.9) 100%);pointer-events:none}
+.hin{position:relative;z-index:1;width:100%;padding-bottom:clamp(2rem,6vh,3.6rem)}
+.hin .eyebrow{color:#e9c46a}
+.hin h1{font-size:var(--step-3);color:#fbf6ea;letter-spacing:-.01em;line-height:1.02}
+.hin h1 em{font-style:italic;color:#c9b3f0}
+.hin .sub{font-family:var(--f-display);font-style:italic;font-size:var(--step-1);max-width:40ch;color:#e6dccb;margin-top:.6rem}
+.hcta{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.4rem}
+.hbtn{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:#f3ecdf;border:1px solid rgba(243,236,223,.5);padding:.65rem 1rem;background:rgba(0,0,0,.25)}
+.hbtn.pri{background:#c9b3f0;border-color:#c9b3f0;color:#15121c}
+.hbtn:hover{filter:brightness(1.1)}
+.hcred{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.06em;color:rgba(243,236,223,.7);margin-top:1.2rem}
+.home .intro{border-top:0}
+.hh{margin:clamp(2.4rem,6vw,4rem) 0 1.2rem;font-size:var(--step-2)}
+.pcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.pcard{display:flex;flex-direction:column;text-decoration:none;color:var(--cal);background:var(--noche-2);border:1px solid var(--hierro);overflow:hidden;transition:transform .15s,border-color .15s}
+.pcard:hover{transform:translateY(-2px);border-color:var(--glicina)}
+.pcard img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
+.pcard span{padding:.8rem .95rem 1rem;color:var(--cal-2);font-size:.9rem;display:flex;flex-direction:column;gap:.2rem;line-height:1.45}
+.pcard small{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--glicina)}
+.pcard b{font-family:var(--f-display);font-size:1.15rem;font-weight:600;color:var(--cal)}
+.credits{margin:clamp(2.4rem,6vw,4rem) 0 clamp(2rem,5vw,3rem);padding:1.4rem 1.5rem;border:1px solid var(--hierro);border-left:3px solid var(--glicina);background:var(--noche-2)}
+.credits h3{font-size:var(--step-1);margin-bottom:.6rem}
+.credits ul{margin:0;padding-left:1.1rem;display:grid;gap:.35rem}
+.thanks{margin-top:.7rem;font-style:italic;color:var(--cal-2)}
+.pager{border-top:1px solid var(--hierro);padding-block:1.4rem 2.2rem}
+.pager .wide{display:flex;justify-content:space-between;gap:1rem}
+.pager a{display:flex;flex-direction:column;text-decoration:none;color:var(--cal);font-family:var(--f-display);font-size:var(--step-1);gap:.15rem}
+.pager a small{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--glicina)}
+.pager a.nx{text-align:right;margin-left:auto}
+.pager a:hover{color:var(--glicina)}
+@media (max-width:560px){.viewer .compass{top:calc(3.2rem + env(safe-area-inset-top,0px))}}
 </style>
 
 </head>
@@ -927,7 +969,46 @@ footer img{height:54px;width:auto;opacity:.9}
   </div>
 </nav>
 
-<header id="inicio">
+<section id="inicio" class="page home">
+  <div class="hhero">
+    <video class="hbg" src="media/hero-posta.mp4" poster="img/hero-posta.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+    <div class="hin wrap"><div class="wide">
+      <p class="eyebrow">Monumento Histórico Nacional · San Andrés de Giles</p>
+      <h1>La Merced, <em>Posta de Figueroa</em></h1>
+      <p class="sub">Una casa de adobe sobre el Camino Real, donde en 1834 se escribió una carta que todavía se lee.</p>
+      <div class="hcta"><a class="hbtn pri" href="#nube">Recorrer la nube 3D</a><a class="hbtn" href="#territorio">Ver el territorio</a><a class="hbtn" href="#carta">Leer la carta</a></div>
+      <p class="hcred">Vuelo de dron: Arq. Santiago Amulet · marzo de 2021</p>
+    </div></div>
+  </div>
+  <div class="intro wrap">
+    <div class="wide">
+      <div>
+        <p class="eyebrow">Monumento Histórico Nacional · San Andrés de Giles</p>
+        <h1>La Merced, <em>Posta de Figueroa</em></h1>
+        <p class="sub">Una casa de adobe sobre el Camino Real, donde en 1834 se escribió una carta que todavía se lee.</p>
+      </div>
+      <div class="coords">34°19′43″ S · 59°24′22″ O<br>Cuartel VII · Partida 709b<br>Cañada de Giles · Arroyo Suero<br>8 leguas de la Villa de Luján</div>
+    </div>
+  </div>
+
+  <div class="wrap"><div class="wide">
+    <h2 class="hh">Recorrido</h2>
+    <div class="pcards"><a class="pcard" href="#nube"><img src="img/th-nube-altimetria.jpg" alt="" loading="lazy"><span><small>Relevamiento LiDAR 2021</small><b>Nube de puntos</b>Cinco millones de puntos del escaneo láser: girá, caminá el patio, entrá a la galería.</span></a><a class="pcard" href="#dron"><img src="img/th-dron-pano-02.jpg" alt="" loading="lazy"><span><small>4 de marzo de 2021</small><b>Vuelos de dron</b>Panorámicas aéreas, clips en 4K y las trayectorias GPS sobre el satélite.</span></a><a class="pcard" href="#territorio"><img src="img/th-mens-189-c.jpg" alt="" loading="lazy"><span><small>Atlas de mensuras · 1826–1923</small><b>Territorio</b>Cómo se partió la estancia de los Figueroa y qué caminos anotaron los agrimensores.</span></a><a class="pcard" href="#postas"><img src="img/th-sat-cuartel.jpg" alt="" loading="lazy"><span><small>Abierto en 1663</small><b>Camino de postas</b>Tres o cuatro leguas: la medida de un caballo entre el Sauce y el Río Areco.</span></a><a class="pcard" href="#cronologia"><img src="img/th-plano-1972.jpg" alt="" loading="lazy"><span><small>1711–2021</small><b>Cronología</b>De Tomás Figueroa a la declaratoria nacional, año por año.</span></a><a class="pcard" href="#carta"><img src="img/th-libro-26.jpg" alt="" loading="lazy"><span><small>20 de diciembre de 1834</small><b>La Carta</b>Rosas a Quiroga, sobre la Constitución y el tiempo de la Nación.</span></a><a class="pcard" href="#francisco"><img src="img/th-pared-patio-dormitorios.jpg" alt="" loading="lazy"><span><small>Lectura contemporánea</small><b>Francisco</b>Los cuatro principios de Bergoglio y su raíz en esta carta.</span></a><a class="pcard" href="#libro"><img src="img/th-libro-01.jpg" alt="" loading="lazy"><span><small>CAPBA Distrito V · 1989</small><b>Libro 1989</b>«Pequeño testimonio de una gran historia», página por página.</span></a><a class="pcard" href="#conservacion"><img src="img/th-pared-sur-dormitorios.jpg" alt="" loading="lazy"><span><small>Informe CNMLBH 2021</small><b>Conservación</b>Forma bien conservada, materia con deterioro mediano: qué cuidar primero.</span></a><a class="pcard" href="#normativa"><img src="img/th-cnm-2021-08.jpg" alt="" loading="lazy"><span><small>1988 · 1990 · 2021</small><b>Normativa</b>Tres declaratorias, un mismo casco.</span></a><a class="pcard" href="#fuentes"><img src="img/th-mens-010-a.jpg" alt="" loading="lazy"><span><small>Archivo</small><b>Fuentes y créditos</b>Documentos, planos, bibliografía y quienes hicieron posible este registro.</span></a></div>
+    <div class="credits">
+      <h3>Créditos y agradecimientos</h3>
+      <ul>
+        <li><b>Relevamiento con escáner láser (LiDAR), enero de 2021:</b> Arq. Juan Stinchi, en colaboración con la Arq. Victoria Lorenzo.</li>
+        <li><b>Vuelos de dron, 4 de marzo de 2021:</b> Arq. Santiago Amulet.</li>
+        <li><b>Agradecimiento</b> a la Arq. Micaela Hernández por su ayuda en la declaratoria de Monumento Histórico Nacional.</li>
+        <li><b>Realización:</b> Comisión Municipal Asesora del Patrimonio Cultural de San Andrés de Giles.</li>
+      </ul>
+    </div>
+  </div></div>
+</section>
+
+<main>
+<!-- ============ NUBE ============ -->
+<section id="nube" class="page pg-nube">
   <div class="viewer" id="viewer">
     <canvas id="pano" aria-label="Nube de puntos LiDAR navegable del casco de La Merced"></canvas>
     <div class="loadbar" id="loadbar"></div>
@@ -949,30 +1030,17 @@ footer img{height:54px;width:auto;opacity:.9}
       <button class="chip" id="fsBtn" type="button">Pantalla completa</button>
     </div>
   </div>
-  <div class="intro wrap">
-    <div class="wide">
-      <div>
-        <p class="eyebrow">Monumento Histórico Nacional · San Andrés de Giles</p>
-        <h1>La Merced, <em>Posta de Figueroa</em></h1>
-        <p class="sub">Una casa de adobe sobre el Camino Real, donde en 1834 se escribió una carta que todavía se lee.</p>
-      </div>
-      <div class="coords">34°19′43″ S · 59°24′22″ O<br>Cuartel VII · Partida 709b<br>Cañada de Giles · Arroyo Suero<br>8 leguas de la Villa de Luján</div>
-    </div>
-  </div>
-</header>
-
-<main>
-<!-- ============ NUBE ============ -->
-<section id="nube" class="wrap">
+  <p class="vcred wrap">Relevamiento láser: Arq. Juan Stinchi, en colaboración con la Arq. Victoria Lorenzo · enero de 2021</p>
+<div class="wrap">
   <div class="wide">
     <div class="sec-head">
       <p class="eyebrow">Relevamiento 2021</p>
       <h2>Una nube de puntos para un lugar que se deshace despacio</h2>
-      <p class="lede">En enero de 2021 la Comisión registró el casco con escáner láser: unas cuarenta y cinco estaciones unificadas en una nube de 103,7 millones de puntos. Arriba se recorre esa misma nube, reducida a 5 millones (un punto cada 12 cm), orientada al norte y ubicada sobre la imagen satelital.</p>
+      <p class="lede">En enero de 2021 el Arq. Juan Stinchi, en colaboración con la Arq. Victoria Lorenzo, relevó el casco con escáner láser: unas cuarenta y cinco estaciones unificadas en una nube de 103,7 millones de puntos. Arriba se recorre esa misma nube, reducida a 5 millones (un punto cada 12 cm), orientada al norte y ubicada sobre la imagen satelital.</p>
     </div>
     <div class="two">
       <div class="flow">
-        <video src="media/recorrido-nube.mp4" poster="img/poster-nube.jpg" controls muted playsinline preload="metadata"></video>
+        <video src="media/recorrido-nube.mp4" data-poster="img/poster-nube.jpg" controls muted playsinline preload="none"></video>
         <p class="mono muted">Recorrido por la nube registrada (captura del visor, 1 feb 2021, 51 s).</p>
       </div>
       <div class="flow">
@@ -993,36 +1061,37 @@ footer img{height:54px;width:auto;opacity:.9}
     <h3 class="eyebrow" style="margin:2.6rem 0 1rem">Estaciones del escaneo láser</h3>
     <div class="stations" id="stations"></div>
     <div class="two" style="margin-top:2.6rem">
-      <figure><video src="media/patio.mp4" controls muted playsinline preload="metadata" poster="img/nube-8.jpg"></video><figcaption>Patio y bajo de la cañada, 23 ene 2021.</figcaption></figure>
-      <figure><video src="media/techumbre.mp4" controls muted playsinline preload="metadata"></video><figcaption>Techumbre: tirantería de madera, cañas y tejas francesas, 23 ene 2021.</figcaption></figure>
+      <figure><video src="media/patio.mp4" controls muted playsinline preload="none" data-poster="img/nube-8.jpg"></video><figcaption>Patio y bajo de la cañada, 23 ene 2021.</figcaption></figure>
+      <figure><video src="media/techumbre.mp4" data-poster="img/techumbre.jpg" controls muted playsinline preload="none"></video><figcaption>Techumbre: tirantería de madera, cañas y tejas francesas, 23 ene 2021.</figcaption></figure>
     </div>
   </div>
+</div>
 </section>
 
 <!-- ============ DRON ============ -->
-<section id="dron" class="wrap">
+<section id="dron" class="page wrap">
   <div class="wide">
     <div class="sec-head">
       <p class="eyebrow">4 de marzo de 2021 · 16:19 a 17:09</p>
       <h2>El casco visto desde arriba</h2>
-      <p class="lede">Veintiséis vuelos en cincuenta minutos. Desde el aire la estancia es lo que siempre fue: una isla de árboles en la llanura cultivada, junto a la cañada.</p>
+      <p class="lede">Veintiséis vuelos en cincuenta minutos, realizados por el Arq. Santiago Amulet. Desde el aire la estancia es lo que siempre fue: una isla de árboles en la llanura cultivada, junto a la cañada.</p>
     </div>
-    <div class="strip" id="strip1" tabindex="0" aria-label="Panorámica aérea 1, arrastrar para recorrer"><img src="img/dron-pano-01.jpg" alt="Panorámica aérea del casco de La Merced, la cañada y los campos sembrados" draggable="false"></div>
+    <div class="strip" id="strip1" tabindex="0" aria-label="Panorámica aérea 1, arrastrar para recorrer"><img src="img/dron-pano-01.jpg" alt="Panorámica aérea del casco de La Merced, la cañada y los campos sembrados" draggable="false" loading="lazy"></div>
     <p class="mono muted" style="margin:.5rem 0 1.6rem">Panorámica aérea 1 (21 tomas unidas) · arrastrá para recorrer · rueda para acercar</p>
-    <div class="strip" id="strip2" tabindex="0" aria-label="Panorámica aérea 2, arrastrar para recorrer"><img src="img/dron-pano-02.jpg" alt="Segunda panorámica aérea del casco, el monte y la llanura" draggable="false"></div>
+    <div class="strip" id="strip2" tabindex="0" aria-label="Panorámica aérea 2, arrastrar para recorrer"><img src="img/dron-pano-02.jpg" alt="Segunda panorámica aérea del casco, el monte y la llanura" draggable="false" loading="lazy"></div>
     <p class="mono muted" style="margin:.5rem 0 2.2rem">Panorámica aérea 2 · el casco, el monte y la llanura hasta el horizonte</p>
     <div class="vids">
-      <figure><video src="media/dron-0097.mp4" poster="img/dron-0097.jpg" controls muted playsinline preload="none"></video><figcaption>DJI_0097 · el casco desde el noroeste: casa principal, dependencias, molino y galpón de techo rojo (18 s).</figcaption></figure>
-      <figure><video src="media/dron-0110.mp4" poster="img/dron-0110.jpg" controls muted playsinline preload="none"></video><figcaption>DJI_0110 · vuelo bajo sobre galpón y depósito, 4K (13 s).</figcaption></figure>
-      <figure><video src="media/dron-0098.mp4" poster="img/dron-0098.jpg" controls muted playsinline preload="none"></video><figcaption>DJI_0098 · la llanura hacia el norte (8 s).</figcaption></figure>
-      <figure><video src="media/dron-0099.mp4" poster="img/dron-0099.jpg" controls muted playsinline preload="none"></video><figcaption>DJI_0099 · a ras de la soja, con el monte del casco de fondo (12 s).</figcaption></figure>
+      <figure><video src="media/dron-0097.mp4" data-poster="img/dron-0097.jpg" controls muted playsinline preload="none"></video><figcaption>DJI_0097 · el casco desde el noroeste: casa principal, dependencias, molino y galpón de techo rojo (18 s).</figcaption></figure>
+      <figure><video src="media/dron-0110.mp4" data-poster="img/dron-0110.jpg" controls muted playsinline preload="none"></video><figcaption>DJI_0110 · vuelo bajo sobre galpón y depósito, 4K (13 s).</figcaption></figure>
+      <figure><video src="media/dron-0098.mp4" data-poster="img/dron-0098.jpg" controls muted playsinline preload="none"></video><figcaption>DJI_0098 · la llanura hacia el norte (8 s).</figcaption></figure>
+      <figure><video src="media/dron-0099.mp4" data-poster="img/dron-0099.jpg" controls muted playsinline preload="none"></video><figcaption>DJI_0099 · a ras de la soja, con el monte del casco de fondo (12 s).</figcaption></figure>
     </div>
     <p class="note" style="margin-top:2rem;max-width:var(--measure)">Las trayectorias de los vuelos, tomadas del registro GPS de cada video, están en el mapa como capa. Una advertencia: el dron anota la posición con cuatro decimales, es decir con unos diez metros de error. Sirve para saber desde dónde se miró, no para medir.</p>
   </div>
 </section>
 
 <!-- ============ TERRITORIO ============ -->
-<section id="territorio" class="wrap">
+<section id="territorio" class="page wrap">
   <div class="wide">
     <div class="sec-head">
       <p class="eyebrow">Atlas de Mensuras de Giles · 1826–1923</p>
@@ -1080,7 +1149,7 @@ footer img{height:54px;width:auto;opacity:.9}
 </section>
 
 <!-- ============ POSTAS ============ -->
-<section id="postas" class="wrap">
+<section id="postas" class="page wrap">
   <div class="wide">
     <div class="sec-head">
       <p class="eyebrow">Camino Real al Alto Perú · abierto en 1663</p>
@@ -1124,7 +1193,7 @@ footer img{height:54px;width:auto;opacity:.9}
 </section>
 
 <!-- ============ CRONOLOGÍA ============ -->
-<section id="cronologia" class="wrap">
+<section id="cronologia" class="page wrap">
   <div class="col">
     <div class="sec-head">
       <p class="eyebrow">1663 — 2021</p>
@@ -1142,7 +1211,7 @@ footer img{height:54px;width:auto;opacity:.9}
 </section>
 
 <!-- ============ CARTA ============ -->
-<section id="carta" class="wrap">
+<section id="carta" class="page wrap">
   <div class="wide">
     <div class="sec-head" style="max-width:var(--measure);margin-inline:auto">
       <p class="eyebrow">Hacienda de Figueroa · 20 de diciembre de 1834</p>
@@ -1164,7 +1233,7 @@ footer img{height:54px;width:auto;opacity:.9}
 </section>
 
 <!-- ============ FRANCISCO ============ -->
-<section id="francisco" class="wrap">
+<section id="francisco" class="page wrap">
   <div class="wide">
     <div class="sec-head">
       <p class="eyebrow">Evangelii gaudium 217–237 · Laudato si’</p>
@@ -1227,7 +1296,7 @@ footer img{height:54px;width:auto;opacity:.9}
 </section>
 
 <!-- ============ LIBRO ============ -->
-<section id="libro" class="wrap">
+<section id="libro" class="page wrap">
   <div class="wide">
     <div class="sec-head">
       <p class="eyebrow">CAPBA Distrito V · Mercedes, 1989</p>
@@ -1250,7 +1319,7 @@ footer img{height:54px;width:auto;opacity:.9}
 </section>
 
 <!-- ============ CONSERVACION ============ -->
-<section id="conservacion" class="wrap">
+<section id="conservacion" class="page wrap">
   <div class="wide">
     <div class="sec-head">
       <p class="eyebrow">Comisión Nacional de Monumentos · 7 de junio de 2021 · Expte. EX-2018-35095348</p>
@@ -1278,7 +1347,7 @@ footer img{height:54px;width:auto;opacity:.9}
 </section>
 
 <!-- ============ NORMATIVA ============ -->
-<section id="normativa" class="wrap">
+<section id="normativa" class="page wrap">
   <div class="wide">
     <div class="sec-head">
       <p class="eyebrow">Registro del Patrimonio Cultural de San Andrés de Giles · asiento 1</p>
@@ -1287,7 +1356,7 @@ footer img{height:54px;width:auto;opacity:.9}
     <div class="norms">
       <div><p class="lvl">Municipal · 7 jun 1988</p><h3>Ordenanza 49/88</h3><p>Declara Monumento Histórico a nivel municipal a la Estancia «La Merced» o Posta de Figueroa. Promulgada por decreto 182 del 9 de junio de 1988 (intendente Aldo Nascimbene).</p></div>
       <div><p class="lvl">Provincial · 1990</p><h3>Ley 10.965</h3><p>Monumento Histórico Provincial de Buenos Aires.</p></div>
-      <div><p class="lvl">Nacional · 10 sep 2021</p><h3>Decreto PEN 616/2021</h3><p>Monumento Histórico Nacional; con el sepulcro de Enrique José de Larrañaga (Sepulcro Histórico Nacional, Dec. 633/2017), uno de los dos bienes del partido con declaratoria nacional, y el único edificio. Declara el casco de la Estancia «La Merced» (Circ. VII, Polígono V, Parcela 709). Propuesto por la CNMLBH en el Acta Plenaria Nº 7 del 19 de agosto de 2015; publicado en el Boletín Oficial el 13 de septiembre de 2021.</p></div>
+      <div><p class="lvl">Nacional · 10 sep 2021</p><h3>Decreto PEN 616/2021</h3><p>Monumento Histórico Nacional; con el sepulcro de Enrique José de Larrañaga (Sepulcro Histórico Nacional, Dec. 633/2017), uno de los dos bienes del partido con declaratoria nacional, y el único edificio. Declara el casco de la Estancia «La Merced» (Circ. VII, Polígono V, Parcela 709). Propuesto por la CNMLBH en el Acta Plenaria Nº 7 del 19 de agosto de 2015; publicado en el Boletín Oficial el 13 de septiembre de 2021.</p><p class="thanks">Agradecemos a la Arq. Micaela Hernández por su ayuda en la gestión de esta declaratoria.</p></div>
     </div>
     <div class="col" style="margin-top:2rem">
       <details>
@@ -1319,7 +1388,7 @@ footer img{height:54px;width:auto;opacity:.9}
 </section>
 
 <!-- ============ FUENTES ============ -->
-<section id="fuentes" class="wrap">
+<section id="fuentes" class="page wrap">
   <div class="col">
     <div class="sec-head"><p class="eyebrow">Archivo</p><h2>Fuentes</h2></div>
     <ul class="sources">
@@ -1337,7 +1406,16 @@ footer img{height:54px;width:auto;opacity:.9}
       <li>Plano de mensura y división 94-40-72, San Andrés de Giles, Circunscripción VII.</li>
       <li>Archivo General de la Nación, Programa de Descripción Normalizada: Sala VII, Documentación Donada y Adquirida, vol. 3, tomo I (2014), descripción de la colección Adolfo Saldías–Juan Ángel Farini; Salas X y III, vol. 2 (2012).</li>
     </ul>
-    <p class="mono muted" style="margin-top:1.6rem">La nube 3D proviene de «Est Figueroa Uni.e57», reducida a vóxel de 12 cm y georreferenciada por correlación con la imagen satelital (error estimado de algunos metros). El panorama 360° se compuso con los cuadros de la grabación del visor de la nube (1 feb 2021). Imagen satelital: Esri World Imagery (Maxar, Earthstar Geographics), embebida en tres escalas.</p>
+    <div class="credits">
+      <h3>Créditos y agradecimientos</h3>
+      <ul>
+        <li><b>Relevamiento con escáner láser (LiDAR), enero de 2021:</b> Arq. Juan Stinchi, en colaboración con la Arq. Victoria Lorenzo.</li>
+        <li><b>Vuelos de dron, 4 de marzo de 2021:</b> Arq. Santiago Amulet.</li>
+        <li><b>Agradecimiento</b> a la Arq. Micaela Hernández por su ayuda en la declaratoria de Monumento Histórico Nacional.</li>
+        <li><b>Realización:</b> Comisión Municipal Asesora del Patrimonio Cultural de San Andrés de Giles.</li>
+      </ul>
+    </div>
+    <p class="mono muted" style="margin-top:1.6rem">El relevamiento láser fue realizado por el Arq. Juan Stinchi en colaboración con la Arq. Victoria Lorenzo; los vuelos de dron, por el Arq. Santiago Amulet. La nube 3D proviene de «Est Figueroa Uni.e57», reducida a vóxel de 12 cm y georreferenciada por correlación con la imagen satelital (error estimado de algunos metros). El panorama 360° se compuso con los cuadros de la grabación del visor de la nube (1 feb 2021). Imagen satelital: Esri World Imagery (Maxar, Earthstar Geographics), embebida en tres escalas.</p>
   </div>
 </section>
 </main>
@@ -1354,8 +1432,6 @@ footer img{height:54px;width:auto;opacity:.9}
   <div><img id="lbImg" alt=""><p id="lbCap"></p></div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
 <script>
 /* ---------- tema ---------- */
 (function(){
@@ -1460,15 +1536,11 @@ document.querySelectorAll('.filters button').forEach(b=>b.onclick=()=>{document.
 /* ---------- carta ---------- */
 const CARTA=`<p class="mono muted">Hacienda de Figueroa, diciembre 20 de 1834</p><p class="salut">Mi querido compañero. Señor D. Juan Facundo Quiroga</p><p>Consecuente en nuestro acuerdo, doy principio por manifestarle haber llegado a creer que las disensiones de Tucumán y Salta, y los disgustos entre ambos Gobiernos, pueden haber sido causados por el Ex Gobernador P. Pablo Alemán, y sus manipulantes... Considerando excusado extenderme sobre algunos otros puntos, porque según el relato que me hizo el Señor Gobernador de ellos están bien explicados en las instrucciones, pasaré al de la Constitución.</p><p>Me parece que al buscar V. la Paz y orden desgraciadamente alterados, el argumento más fuerte y la razón más poderosa que debe V. manifestar a esos Señores Gobernadores y demás personas influyentes, en las oportunidades que se le presentasen aparentes, es el paso retrógrado que ha dado la Nación, alejando tristemente el suspirado día de la grande obra de la Constitución Nacional. ¿Ni que otra cosa importa, el estado que hoy se encuentra toda la República? Usted y yo diferimos a que los pueblos se ocupasen de sus constituciones particulares, para que después de promulgadas, entrásemos a trabajar los cimientos de la Gran Carta Nacional. En este sentido ejercitamos nuestro patriotismo e influencias no porque nos asistiere un positivo convencimiento de haber llegado la verdadera ocasión, sino porque estando en paz la República, y habiéndose generalizado la necesidad de la Constitución, creímos que debimos proceder como lo hicimos para evitar mayores males. Los resultados los dicen elocuentemente los hechos, los escándalos que se han sucedido y el estado verdaderamente peligroso en que hoy se encuentra la República, cuyo cuadro lúgubre nos aleja toda esperanza de remedio.</p><p>Y después de todo esto, y de lo que enseña y aconseja la experiencia, tocándose hasta la luz de la evidencia, <mark data-go="p-realidad" data-p="III" tabindex="0">¿habrá quien creerá que el remedio es precipitar la Constitución del Estado?</mark> Permítame V. hacer algunas observaciones a este respecto pues aunque hemos estado siempre acordes en tan elevado asunto quiero depositar en su poder con sobrada anticipación, por lo que pueda servir, una pequeña parte de lo mucho que se me ocurre y que hay que decir.</p><p>Nadie, pues, más que V. y yo podrá estar persuadido de la necesidad de la organización de un Gobierno General, y de que es el único medio de darle ser y respetabilidad a nuestra República ¿Pero quién duda que este debe ser el resultado feliz de todos los medios proporcionados a su asecución? ¿Quién aspira a un término marchando en contraria dirección? <mark data-go="p-todo" data-p="IV" tabindex="0">¿Quién para formar un todo ordenado, y compacto, no arregla y solicita, primeramente bajo una forma regular y permanente las partes que deben componerlo?</mark> ¿Quién forma un Ejército ordenado con grupos de hombres, sin jefes, sin oficiales, sin disciplina, sin subordinación, y que no cesan un momento de acecharse y combatirse entre si, envolviendo a los demás, en sus desórdenes? ¿Quién forma un ser viviente y robusto, con miembros muertos o dilacerados, y enfermos de la más corruptora gangrena, siendo así que la vida y robustez de este nuevo ser en complejo no puede ser sino la que reciba de los propios miembros que se haya de componer? Obsérvese que una muy clara y dolorosa experiencia nos ha hecho ver prácticamente que es absolutamente necesario entre nosotros el sistema federal, porque entre otras razones de sólido poder, carecemos totalmente de elementos para un Gobierno de unidad. Obsérvese que al haber predominado en el País una fracción que se hacía sorda al grito de esta necesidad ha destruido y aniquilado los medios y recursos que teníamos para proveer a ellas porque ha irritado los ánimos, descarriado las opiniones, puesto en choque los intereses particulares, propagado la inmoralidad y la intriga, y fraccionado en bandas de tal modo la Sociedad que no ha dejado casi reliquias de ningún vínculo, extendiéndose su furor a romper hasta el más sagrado de todos, y el único que podía servir para restablecer los demás, cual es el de la religión; y que en este lastimoso estado <mark data-go="p-todo" data-p="IV" tabindex="0">es preciso crearlo todo de nuevo, trabajando primero en pequeño y por fracciones para entablar después un sistema General que lo abrace todo</mark>. Obsérvese que una República Federativa es lo más quimérico y desastroso que pueda imaginarse, toda vez que no se componga de Estados bien organizados en sí mismos, porque conservando cada uno su soberanía e independencia, la fuerza del poder General con respecto al interior de la República, es casi ninguna, y su principal y casi toda su investidura, es de pura representación para llevar la voz a nombre de todos los Estados confederados en sus relaciones con las Naciones Extranjeras; por consiguiente si dentro de cada Estado en particular, no hay elementos de poder para mantener el orden respectivo, la creación de un Gobierno General representativo no sirve más que para poner en agitación a toda la República a cada desorden nacional que suceda, y hacer que el incendio de cualquier Estado se derrame por todos los demás. Así es que la República de Norte América no ha admitido en la confederación los nuevos pueblos y Provincias que se han formado después de la Independencia, sino cuando se han puesto en estado de regirse por sí solos, y entre tanto los ha mantenido sin representación en clase de Estados considerándolos como adyacencias de la República.</p><p>Después de esto, en el estado de agitación que están los Pueblos, contaminados todos de unitarios, de logistas, aspirantes, agentes secretos de otras Naciones y de las grandes logias que tienen en conmoción a toda la Europa ¿Qué esperanza puede haber de tranquilidad y calma al celebrar los pactos de la Federación, primer paso que debe dar el Congreso Federativo? En el estado de pobreza en que las agitaciones políticas han puesto a todos los Pueblos, ¿quiénes, ni con que fondos podrán costear la reunión y permanencia de ese Congreso, ni menos de la Administración General? ¿Con qué fondos van a contar para el pago de la deuda exterior nacional invertida en atenciones de toda la República, y cuyo cobro será lo primero que tendrá encima luego que se erija dicha administración? Fuera de que si en la actualidad apenas se encuentran hombres, para el Gobierno particular de cada Provincia, ¿de dónde sacarán los que hayan de dirigir toda la República? ¿Habremos de integrar la Administración General a ignorantes, aspirantes, unitarios y toda clase de bichos? ¿No vimos que la constelación de sabios no encontró más hombre para el gobierno General que a D. Bernardino Rivadavia, y que este no pudo organizar su Ministerio sino quitándole el Cura a la Catedral y haciendo venir de San Juan al Dr. Lingotes para el Ministerio de Hacienda, que entendía de este ramo lo mismo que un ciego de nacimiento entiende de Astronomía? Finalmente a vista del lastimoso cuadro que presenta la República, ¿cuál de los héroes de la federación se atreverá a encargarse del Gobierno General? ¿Cuál de ellos podrá hacerse de un cuerpo de representantes, y de Ministros, federales todos, de quienes se prometa las luces y cooperación necesaria para presentarse con la debida dignidad, salir airoso del puesto, y no perder en él todo su crédito, y reputación? Hay tanto que decir sobre este punto que para solo lo principal y más importante sería necesario un tomo que apenas se podría escribir en un mes.</p><p>Lo primero que debe tratarse en el Congreso no es, como algunos creen, de la erección del Gobierno General, ni del nombramiento del jefe Supremo de la República. Esto es lo último de todo. Lo primero es donde ha de continuar sus sesiones el Congreso, si allí donde está o en otra parte. Lo segundo es la Constitución General principiando por la organización que habrá de tener el Gobierno General, que explicará de cuantas personas se ha de componer ya en clase de jefe Supremo, ya en clase de Ministros, y cuales han de ser sus atribuciones dejando salva la Soberanía y Independencia de cada uno de los Estados Federados. Como se ha de hacer la elección, y que cualidades han de concurrir en los elegibles; en donde ha de residir este Gobierno, y que fuerza de mar y de tierra permanente en tiempo de Paz es la que debe tener, para el orden, seguridad, y respetabilidad de la República.</p><p>El punto sobre el lugar de residencia del Gobierno suele ser de mucha gravedad, y trascendencia por los celos y emulaciones que esto excita en los demás Pueblos, y la complicación de funciones que sobreviven en la Corte o Capital de la República con las autoridades del Estado particular a que ella corresponde. Son estos inconvenientes de tanta gravedad que obligaron a los Norte-Americanos a fundar la ciudad de Washington, hoy capital de aquella República que no pertenece a ninguno de los Estados Confederados...</p><p>Después de establecidos estos puntos, y el modo como pueda cada estado federado crearse sus rentas particulares sin perjudicar los intereses generales de la República, después de todo esto, es cuando recién se procederá al nombramiento del jefe de la República, y erección del Gobierno general. ¿Y puede nadie concebir que en el estado triste y lamentable en que se halla nuestro País pueda allanarse tanta dificultad, ni llegarse al fin de una empresa tan grande, tan ardua, y que en tiempos los más tranquilos y felices, contando con los hombres de más capacidad, prudencia y patriotismo, apenas podría realizarse en dos años de asiduo trabajo? ¿Puede nadie que sepa lo que es el sistema federativo, persuadirse que la creación de un gobierno general bajo esta forma atajará las disensiones domésticas de los Pueblos? Esta persuasión o triste creencia en algunos hombres de buena fe es la que da ansia a otros pérfidos y alevosos que no la tienen o que <mark data-go="p-realidad" data-p="III" tabindex="0">están alborotando los Pueblos con el grito de “Constitución” para que jamás haya Paz</mark>, ni tranquilidad, porque en el desorden es en lo que únicamente encuentran el modo de vivir. El Gobierno general en una República Federativa no une los Pueblos Federados, los Representa unidos: no es para unirlos, es para representarlos en unión ante las demás Naciones: él no se ocupa de lo que pasa interiormente en ninguno de los Estados, ni decide las contiendas que se suscitan entre sí. En el primer caso solo entienden las autoridades particulares del Estado, y en el segundo la misma constitución tiene previsto el modo como se ha de formar el tribunal que debe decidir. En una palabra, <mark data-go="p-unidad" data-p="II" tabindex="0">la unión y tranquilidad crea el Gobierno general, la desunión lo destruye, él es la consecuencia, el efecto de la unión, no la causa</mark>, y si es sensible su falta, es mucho mayor su caída, porque nunca sucede esta sino convirtiendo en escombros toda la República.</p><p>No habiendo pues hasta ahora entre nosotros, como no hay, unión y tranquilidad, menos mal que no exista que sufrir los estragos de su disolución. ¿No vemos todas las dificultades invencibles que toca cada Provincia en particular para darse Constitución? Y si no es posible vencer estas sólidas dificultades, ¿será posible vencer no solo estas sino las que presenta la discordia de unas Provincias con otras, discordia que se mantiene como acallada y dormida mientras cada una se ocupa de sí sola, pero que aparece al instante como una tormenta general que resuena por todas partes con rayos y centellas, desde que se llama a congreso general?</p><p>Es necesario que ciertos hombres se convenzan del error en que viven, porque si logran llevarlo a efecto, envolverán la República en la más espantosa catástrofe, y yo desde ahora pienso que si no queremos menoscabar nuestra reputación ni mancillar nuestras glorias, no debemos prestarnos por ninguna razón a tal delirio, hasta que dejando de serlo por haber llegado la verdadera oportunidad veamos indudablemente que los resultados han de ser la felicidad de la Nación. Si no pudiésemos evitar que lo pongan en planta, dejemos que ellos lo hagan enhorabuena pero procurando hacer ver al Público que no tenemos la menor parte en tamaños disparates, y que si no lo impedimos es porque no nos es posible.</p><p>La máxima de que es preciso ponerse a la cabeza de los Pueblos cuando no se les puede hacer variar de resolución es muy cierta; mas es para dirigirlos en su marcha, cuando esta es a buen rumbo, pero con precipitación o mal dirigida; o para hacerles variar de rumbo sin violencia o por un convencimiento práctico de la imposibilidad de llegar al punto de sus deseos. En esta parte llenamos nuestro deber, pero los sucesos posteriores han demostrado a la clara luz que <mark data-go="p-tiempo" data-p="I" tabindex="0">entre nosotros no hay otro arbitrio que el de dar tiempo a que se destruyan en los Pueblos los elementos de discordia</mark>, promoviendo y fomentando cada Gobierno por sí el espíritu de Paz y tranquilidad. Cuando este se haga visible por todas partes, entonces los cimientos empezarán por valernos de <mark data-go="p-unidad" data-p="II" tabindex="0">misiones pacíficas y amistosas por medio de las cuales sin bullas, ni alboroto, se negocia amigablemente entre los Gobiernos, hoy esta base, mañana la otra</mark> hasta colocar las cosas en tal estado que cuando se forme el Congreso lo encuentre hecho casi todo, y que no tenga más que marchar llanamente por el camino que se le haya designado. <mark data-go="p-tiempo" data-p="I" tabindex="0">Esto es lento a la verdad</mark>, pero es preciso que así sea, y es lo único que creo posible entre nosotros después de haberlo destruido todo, y tener que formarnos del seno de la nada.</p><p>Adiós, compañero. El Cielo tenga piedad de nosotros, y dé a V. salud, acierto y felicidad en el desempeño de su comisión; y a los dos, y demás amigos, iguales goces, para defendernos, precavernos y salvar a nuestros compatriotas de tantos peligros como nos amenazan.</p><p class="salut">Juan Manuel de Rosas.</p>`;
 document.getElementById('letter').innerHTML=CARTA;
-document.querySelectorAll('#letter mark').forEach(m=>{m.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();m.click()}});m.addEventListener('click',()=>{const el=document.getElementById(m.dataset.go);el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});el.animate([{outline:'2px solid var(--glicina)'},{outline:'2px solid transparent'}],{duration:1800})})});
+document.querySelectorAll('#letter mark').forEach(m=>{m.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();m.click()}});m.addEventListener('click',()=>{const el=document.getElementById(m.dataset.go);showPageOf(el);el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});el.animate([{outline:'2px solid var(--glicina)'},{outline:'2px solid transparent'}],{duration:1800})})});
 
-/* ---------- nav activo ---------- */
-const links=[...document.querySelectorAll('.nav a[href^="#"]')];
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-45% 0px -50% 0px'});
-document.querySelectorAll('main section').forEach(s=>io.observe(s));
-
+/* ---------- nav: ver router al final ---------- */
 /* ---------- mapa sobre satélite ---------- */
-(async function(){
+window.initMap=async function(){
   const el=document.getElementById('map');
   if(!window.L){el.insertAdjacentHTML('beforeend','<p style="padding:1rem">No se pudo cargar el mapa.</p>');return}
   let T,S,V; try{[T,S,V]=await Promise.all([fetch('data/territorio.json').then(r=>r.json()),fetch('data/sat-meta.json').then(r=>r.json()),fetch('data/dron-vuelos.json').then(r=>r.json()).catch(()=>[])])}catch(e){el.insertAdjacentHTML('beforeend','<p style="padding:1rem">No se pudo cargar la cartografía.</p>');return}
@@ -1482,7 +1554,7 @@ document.querySelectorAll('main section').forEach(s=>io.observe(s));
     L.imageOverlay('img/sat-casco.jpg',S.casco.bounds,{interactive:false,pane:'tilePane'})
   ]);
   const satOnline=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Esri World Imagery'});
-  map.attributionControl.addAttribution('Imagen satelital: Esri, Maxar, Earthstar Geographics · Mensuras: Atlas de Mensuras de Giles (AHG)');
+  map.attributionControl.addAttribution('Imagen satelital: Esri, Maxar, Earthstar Geographics · Mensuras: Atlas de Mensuras de Giles (AHG) · Nube LiDAR: Arq. J. Stinchi y Arq. V. Lorenzo · Vuelos de dron: Arq. S. Amulet');
   map.fitBounds(S.cuartel.bounds); satLocal.addTo(map);
   const C=()=>({te:css('--teja'),gl:css('--glicina'),ca:css('--cardo'),c2:css('--cal-2'),fg:css('--cal')});
   const isFig=m=>/FIGUER/i.test(m.t), isPost=c=>/POSTA/i.test(c.n);
@@ -1532,10 +1604,10 @@ document.querySelectorAll('main section').forEach(s=>io.observe(s));
   map.fitBounds(S.cuartel.bounds);
   style();
   new ResizeObserver(()=>map.invalidateSize()).observe(el);
-})();
+};
 
 /* ---------- visor: nube LiDAR 3D + panorama 360 ---------- */
-(function(){
+window.initViewer=function(){
   const cv=document.getElementById('pano'), bar=document.getElementById('loadbar'), vw=document.getElementById('viewer'), comp=document.getElementById('compass'), lbl=document.getElementById('vlbl'), stat=document.getElementById('vstat');
   if(!window.THREE){vw.insertAdjacentHTML('beforeend','<div class="vfail">El visor 3D no pudo cargarse. Las estaciones del escaneo están más abajo.</div>');return}
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1641,7 +1713,40 @@ document.querySelectorAll('main section').forEach(s=>io.observe(s));
     const dir=new THREE.Vector3();cam.getWorldDirection(dir);head=(Math.atan2(dir.x,-dir.z)*180/Math.PI+360)%360;
     comp.innerHTML=`<span style="display:inline-block;transform:rotate(${-head}deg)">↑</span> N · mirando al ${card[Math.round(head/45)%8]}`;
     renderer.render(sc,cam)})(t0);
-})();
+};
+
+/* ---------- páginas internas ---------- */
+function loadScript(src){return new Promise((ok,ko)=>{const t=document.createElement('script');t.src=src;t.onload=ok;t.onerror=ko;document.head.appendChild(t)})}
+const LIBS={three:'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',leaflet:'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js'};
+const PAGES=[...document.querySelectorAll('.page')].map(p=>p.id);
+const TITLES=Object.fromEntries([...document.querySelectorAll('.nav a[href^="#"]')].map(a=>[a.getAttribute('href').slice(1),a.textContent.trim()]));TITLES.inicio='Inicio';
+const done={};let cur=null;
+async function enter(id){
+  if(id==='nube'&&!done.nube){done.nube=1;try{if(!window.THREE)await loadScript(LIBS.three)}catch(e){};initViewer()}
+  if(id==='territorio'&&!done.map){done.map=1;try{if(!window.L)await loadScript(LIBS.leaflet)}catch(e){};await initMap()}
+  if(id==='territorio'&&window.__map)setTimeout(()=>window.__map.invalidateSize(),60);
+}
+function show(id){
+  if(!PAGES.includes(id))id='inicio';
+  if(cur!==id){
+    document.querySelectorAll('.page').forEach(p=>p.classList.toggle('on',p.id===id));
+    document.querySelectorAll('.nav a[href^="#"]').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+id));
+    const hv=document.querySelector('#inicio .hbg');if(hv){id==='inicio'?hv.play().catch(()=>{}):hv.pause()}
+    document.querySelectorAll('.page:not(.on) video').forEach(v=>{if(!v.paused&&!v.classList.contains('hbg'))v.pause()});
+    document.title=(id==='inicio'?'':TITLES[id]+' · ')+'Posta de Figueroa';
+    const on=document.querySelector('.nav a.on:not(.brand)'),nv=document.querySelector('.nav-in');if(on&&nv){nv.scrollTo({left:on.offsetLeft-nv.clientWidth/2+on.offsetWidth/2,behavior:'smooth'})}else if(nv)nv.scrollTo({left:0});
+    document.querySelectorAll('#'+id+' video[data-poster]').forEach(v=>{v.poster=v.dataset.poster;v.removeAttribute('data-poster')});
+    cur=id;enter(id);
+  }
+}
+function showPageOf(el){const p=el&&el.closest('.page');if(p)show(p.id)}
+// paginación anterior/siguiente
+PAGES.forEach((id,i)=>{const p=document.getElementById(id);const prev=PAGES[i-1],next=PAGES[i+1];
+  p.insertAdjacentHTML('beforeend',`<nav class="pager wrap" aria-label="Páginas"><div class="wide">${prev?`<a href="#${prev}"><small>← Anterior</small>${TITLES[prev]}</a>`:'<span></span>'}${next?`<a class="nx" href="#${next}"><small>Siguiente →</small>${TITLES[next]}</a>`:`<a class="nx" href="../#/posta"><small>Volver →</small>Patrimonio de Giles</a>`}</div></nav>`)});
+function route(){const h=decodeURIComponent(location.hash.slice(1));
+  if(!h||PAGES.includes(h)){show(h||'inicio');window.scrollTo(0,0);return}
+  const el=document.getElementById(h);if(el){showPageOf(el);requestAnimationFrame(()=>el.scrollIntoView())}else{show('inicio');window.scrollTo(0,0)}}
+addEventListener('hashchange',route);route();
 </script>
 
 </body>
