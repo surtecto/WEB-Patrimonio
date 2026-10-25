@@ -734,6 +734,8 @@ p{margin:0}
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--noche) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--hierro)}
 .nav-in{display:flex;gap:1.2rem;align-items:center;padding-block:.55rem;overflow-x:auto;scrollbar-width:none}
 .nav-in::-webkit-scrollbar{display:none}
+.nav .back{flex:none;font-family:var(--f-mono,monospace);font-size:.74rem;letter-spacing:.04em;text-transform:none;color:var(--noche);background:var(--glicina);border:1px solid var(--glicina);padding:.3rem .7rem;border-radius:2px;text-decoration:none;white-space:nowrap}
+.nav .back:hover{filter:brightness(1.1)}
 .nav a{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cal-2);text-decoration:none;white-space:nowrap}
 .nav a:hover,.nav a.on{color:var(--cal)}
 .nav .brand{font-family:var(--f-sc);font-size:1rem;letter-spacing:.02em;text-transform:none;color:var(--cal);margin-right:.4rem}
@@ -908,6 +910,7 @@ footer img{height:54px;width:auto;opacity:.9}
 <body>
 <nav class="nav" aria-label="Secciones">
   <div class="nav-in wrap">
+    <a class="back" href="../#/posta" title="Volver al Registro del Patrimonio Cultural de San Andrés de Giles">← Patrimonio de Giles</a>
     <a class="brand" href="#inicio">La Merced</a>
     <a href="#nube">Nube de puntos</a>
     <a href="#dron">Dron</a>
@@ -1284,7 +1287,7 @@ footer img{height:54px;width:auto;opacity:.9}
     <div class="norms">
       <div><p class="lvl">Municipal · 7 jun 1988</p><h3>Ordenanza 49/88</h3><p>Declara Monumento Histórico a nivel municipal a la Estancia «La Merced» o Posta de Figueroa. Promulgada por decreto 182 del 9 de junio de 1988 (intendente Aldo Nascimbene).</p></div>
       <div><p class="lvl">Provincial · 1990</p><h3>Ley 10.965</h3><p>Monumento Histórico Provincial de Buenos Aires.</p></div>
-      <div><p class="lvl">Nacional · 10 sep 2021</p><h3>Decreto PEN 616/2021</h3><p>Monumento Histórico Nacional: el único del partido. Declara el casco de la Estancia «La Merced» (Circ. VII, Polígono V, Parcela 709). Propuesto por la CNMLBH en el Acta Plenaria Nº 7 del 19 de agosto de 2015; publicado en el Boletín Oficial el 13 de septiembre de 2021.</p></div>
+      <div><p class="lvl">Nacional · 10 sep 2021</p><h3>Decreto PEN 616/2021</h3><p>Monumento Histórico Nacional; con el sepulcro de Enrique José de Larrañaga (Sepulcro Histórico Nacional, Dec. 633/2017), uno de los dos bienes del partido con declaratoria nacional, y el único edificio. Declara el casco de la Estancia «La Merced» (Circ. VII, Polígono V, Parcela 709). Propuesto por la CNMLBH en el Acta Plenaria Nº 7 del 19 de agosto de 2015; publicado en el Boletín Oficial el 13 de septiembre de 2021.</p></div>
     </div>
     <div class="col" style="margin-top:2rem">
       <details>
@@ -1344,7 +1347,7 @@ footer img{height:54px;width:auto;opacity:.9}
     <img src="img/logo.png" alt="Comisión Municipal de Patrimonio de San Andrés de Giles">
     <span>Comisión Municipal Asesora del Patrimonio Cultural · San Andrés de Giles · 2026</span>
   </div>
-</footer>
+<p style="margin-top:1rem"><a href="../#/posta">← Volver al Registro del Patrimonio Cultural de San Andrés de Giles</a></p></footer>
 
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Imagen ampliada">
   <button class="btn" id="lbClose" type="button">Cerrar</button>

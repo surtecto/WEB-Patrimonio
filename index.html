@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
-<link rel="stylesheet" href="css/styles.css?v=2.2">
+<link rel="stylesheet" href="css/styles.css?v=2.3">
 <script>
   // Limpieza inmediata de Service Worker y caché antigua
   if ('serviceWorker' in navigator) {
@@ -39,6 +39,7 @@
   <nav class="tabs" aria-label="Secciones">
     <a href="#/" data-r="inicio">Inicio</a>
     <a href="#/mapa" data-r="mapa">Mapa</a>
+    <a href="#/posta" data-r="posta" class="tab-posta">★ Posta de Figueroa</a>
     <a href="#/fichas" data-r="fichas">Fichas</a>
     <a href="#/itinerarios" data-r="itinerarios">Itinerarios</a>
     <a href="#/calendario" data-r="calendario">Calendario</a>
@@ -67,6 +68,10 @@
       </div>
       <dl class="stats" id="stats"></dl>
     </div>
+    <a class="posta-banner" href="#/posta">
+      <img src="posta-figueroa/img/dron-pano-01.jpg" alt="" loading="lazy">
+      <span class="pb-txt"><small>Monumento Histórico Nacional · Decreto 616/2021</small><b>La Merced · Posta de Figueroa</b><em>Nube LiDAR, vuelos de dron, mensuras desde 1826 y la carta de Rosas a Quiroga →</em></span>
+    </a>
     <div class="wrap">
       <div class="grid2">
         <article class="panel">
@@ -311,6 +316,50 @@
   <section class="view" id="v-acerca">
     <div class="wrap prose" id="acerca"></div>
   </section>
+  <!-- POSTA DE FIGUEROA -->
+  <section class="view" id="v-posta">
+    <div class="pf-hero">
+      <video class="pf-bg" src="posta-figueroa/media/hero-posta.mp4" poster="posta-figueroa/img/hero-posta.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+      <div class="pf-in">
+        <p class="kicker">Asiento Nº 1 del Registro · Cuartel VII · Camino Real al Alto Perú</p>
+        <h1>La Merced<br><em>Posta de Figueroa</em></h1>
+        <p class="pf-lede">El bien más importante del patrimonio gilense: casco de estancia colonial, posta del Camino Real, escenario de la carta que Rosas escribió a Quiroga el 20 de diciembre de 1834. Declarado en los tres niveles del Estado.</p>
+        <div class="hero-cta">
+          <a class="btn primary" href="posta-figueroa/">Entrar a la web de la Posta</a>
+          <a class="btn" href="posta-figueroa/#nube">Recorrer la nube 3D</a>
+          <a class="btn" href="#/ficha/1">Ficha del Registro</a>
+          <a class="btn" href="#/mapa/1">Ver en el mapa</a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <ol class="pf-ladder" aria-label="Declaratorias">
+        <li><small>Municipal · 1988</small><b>Ordenanza 49/88</b><span>Monumento Histórico de San Andrés de Giles</span></li>
+        <li><small>Provincial · 1990</small><b>Ley 10.965</b><span>Monumento Histórico Provincial</span></li>
+        <li><small>Nacional · 2021</small><b>Decreto PEN 616/2021</b><span>Monumento Histórico Nacional</span></li>
+      </ol>
+      <p class="pf-note">Con el <a href="#/ficha/19">sepulcro de Enrique José de Larrañaga</a> (Sepulcro Histórico Nacional, Decreto 633/2017), es uno de los dos bienes del partido con declaratoria nacional, y el único edificio.</p>
+
+      <h2 class="pf-h">Una web propia para un monumento propio</h2>
+      <div class="pf-cards">
+        <a class="pf-card" href="posta-figueroa/#nube"><img src="posta-figueroa/img/nube-altimetria.jpg" alt="" loading="lazy"><span><small>Relevamiento 2021</small><b>Nube de puntos LiDAR</b>Cinco millones de puntos del escaneo láser: girá, caminá el patio, entrá a la galería.</span></a>
+        <a class="pf-card" href="posta-figueroa/#dron"><img src="posta-figueroa/img/dron-pano-02.jpg" alt="" loading="lazy"><span><small>4 de marzo de 2021</small><b>Vuelos de dron</b>Panorámicas aéreas, clips en 4K y las trayectorias GPS sobre el satélite.</span></a>
+        <a class="pf-card" href="posta-figueroa/#territorio"><img src="posta-figueroa/img/mens-189-c.jpg" alt="" loading="lazy"><span><small>Atlas de mensuras · 1826–1923</small><b>El suelo medido</b>Cómo se partió la estancia de los Figueroa y qué caminos anotaron los agrimensores.</span></a>
+        <a class="pf-card" href="posta-figueroa/#postas"><img src="posta-figueroa/img/sat-cuartel.jpg" alt="" loading="lazy"><span><small>Abierto en 1663</small><b>Camino de postas</b>Tres o cuatro leguas: la medida de un caballo entre el Sauce y el Río Areco.</span></a>
+        <a class="pf-card" href="posta-figueroa/#carta"><img src="posta-figueroa/img/libro-26.jpg" alt="" loading="lazy"><span><small>20 de diciembre de 1834</small><b>La Carta de la Hacienda de Figueroa</b>Rosas a Quiroga, sobre la Constitución y el tiempo de la Nación.</span></a>
+        <a class="pf-card" href="posta-figueroa/#francisco"><img src="posta-figueroa/img/pared-patio-dormitorios.jpg" alt="" loading="lazy"><span><small>Lectura contemporánea</small><b>Francisco y la carta</b>«El todo es superior a la parte»: la pregunta por el pueblo antes que por la forma.</span></a>
+        <a class="pf-card" href="posta-figueroa/#conservacion"><img src="posta-figueroa/img/pared-sur-dormitorios.jpg" alt="" loading="lazy"><span><small>Informe CNMLBH 2021</small><b>Estado de conservación</b>Forma bien conservada, materia con deterioro mediano: qué cuidar primero.</span></a>
+        <a class="pf-card" href="posta-figueroa/#cronologia"><img src="posta-figueroa/img/plano-1972.jpg" alt="" loading="lazy"><span><small>1711–2021</small><b>Cronología</b>De Tomás Figueroa a la declaratoria nacional, año por año.</span></a>
+      </div>
+
+      <div class="pf-split">
+        <figure><video src="posta-figueroa/media/dron-0097.mp4" poster="posta-figueroa/img/dron-0097.jpg" controls muted playsinline preload="none"></video><figcaption>Vuelo de dron sobre el casco, 4 de marzo de 2021.</figcaption></figure>
+        <figure><video src="posta-figueroa/media/nube-orbita.mp4" poster="posta-figueroa/img/nube-orbita.jpg" controls muted playsinline preload="none"></video><figcaption>El casco en la nube de puntos del escaneo láser de 2021.</figcaption></figure>
+      </div>
+      <p class="pf-q">¿Qué hace que un lugar sea monumento: lo que pasó en él, o lo que todavía somos capaces de leer en sus muros, sus caminos y sus papeles?</p>
+    </div>
+  </section>
+
 </main>
 
 <footer class="foot">
@@ -324,6 +373,10 @@
   <a href="#/mapa" data-r="mapa">
     <svg viewBox="0 0 24 24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>
     <span>Mapa</span>
+  </a>
+  <a href="#/posta" data-r="posta">
+    <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>
+    <span>Posta</span>
   </a>
   <a href="#/fichas" data-r="fichas">
     <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
@@ -343,6 +396,6 @@
 
 
 <script src="vendor/leaflet/leaflet.js"></script>
-<script src="js/app.js?v=2.2"></script>
+<script src="js/app.js?v=2.3"></script>
 </body>
 </html>

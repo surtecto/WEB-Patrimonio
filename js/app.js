@@ -306,7 +306,7 @@ function parseHash() {
 }
 function route() {
   const { r, a, q } = parseHash();
-  const view = { inicio: 'inicio', mapa: 'mapa', fichas: 'fichas', ficha: 'ficha', itinerarios: 'itinerarios', calendario: 'calendario', normativa: 'normativa', acerca: 'acerca' }[r] || 'inicio';
+  const view = { inicio: 'inicio', mapa: 'mapa', fichas: 'fichas', ficha: 'ficha', itinerarios: 'itinerarios', calendario: 'calendario', normativa: 'normativa', acerca: 'acerca', posta: 'posta' }[r] || 'inicio';
   $$('.view').forEach(v => v.classList.toggle('on', v.id === 'v-' + view));
   $$('.tabs a, .bottom-nav a').forEach(t => t.classList.toggle('on', t.dataset.r === (view === 'ficha' ? 'fichas' : view)));
   document.body.classList.toggle('map-on', view === 'mapa');
@@ -320,6 +320,7 @@ function route() {
   if (view === 'ficha') renderFicha(a);
   if (view === 'itinerarios') renderItinerarios();
   if (view === 'calendario') renderCalendario();
+  const pv = $('#v-posta .pf-bg'); if (pv) { if (view === 'posta') pv.play().catch(() => {}); else pv.pause(); }
   if (view !== 'ficha' || !a) window.scrollTo(0, 0);
 }
 
@@ -448,6 +449,7 @@ function renderFicha(id) {
   </div><aside>
     <h3>Localización</h3>
     ${G.g ? `<div class="minimap" id="mini"></div><p class="lsrc"><b>${LST[G.st] || ''}</b>${G.src ? ' — ' + esc(G.src) : ''}</p>
+    ${b.id === '1' ? `<p class="no-print"><a class="btn primary" href="posta-figueroa/">★ Abrir la web especial de la Posta de Figueroa</a></p>` : ''}
     <p class="no-print"><a class="btn small primary" href="#/mapa/${b.id}">Ver en el mapa</a> <a class="btn small" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${(ptOf(b) || [0,0])[0]},${(ptOf(b) || [0,0])[1]}">Cómo llegar (GPS)</a></p>`
     : `<div class="box">Bien de alcance general territorial en todo el Partido.</div>`}
     <h3>Identificación</h3>
@@ -546,7 +548,7 @@ function popupBien(b) {
   ${b.fotos[0] ? `<img src="${b.fotos[0].src}" alt="" onerror="this.style.display='none'" style="border-radius:8px;margin-bottom:8px;aspect-ratio:16/9;object-fit:cover">` : ''}
   <div>${esc((b.res || b.fund || '').slice(0, 220))}${(b.res || b.fund || '').length > 220 ? '…' : ''}</div>
   <div class="meta" style="margin-top:6px">${LST[G.st] || ''}</div>
-  <a class="btn small primary" href="#/ficha/${b.id}">Ver ficha</a> <a class="btn small" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${(ptOf(b) || [0,0])[0]},${(ptOf(b) || [0,0])[1]}">Cómo llegar</a></div>`;
+  ${b.id === '1' ? `<a class="btn small primary" href="#/posta">★ Web de la Posta</a> ` : ''}  <a class="btn small primary" href="#/ficha/${b.id}">Ver ficha</a> <a class="btn small" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${(ptOf(b) || [0,0])[0]},${(ptOf(b) || [0,0])[1]}">Cómo llegar</a></div>`;
 }
 function renderMapList() {
   const q = $('#mapSearch').value;
