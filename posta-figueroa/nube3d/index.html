@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<title>Posta de Figueroa · nube LiDAR completa</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="La Merced, Posta de Figueroa (San Andrés de Giles): nube LiDAR completa de 65,6 millones de puntos sobre relieve y ortofoto.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Visor de campo: la nube ocupa toda la pantalla; una libreta de relevamiento flota a la izquierda */
+:root{
+  --bg:#e9ecea; --panel:rgba(248,246,240,.94); --ink:#1f2622; --ink-2:#55605a; --line:#c9cfca;
+  --accent:#6a4f97; --accent-ink:#fbf8ff; --sky:#c9d6dc; --meas:#d2452f;
+  --f-display:'Spectral',Georgia,'Times New Roman',serif; --f-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121614; --panel:rgba(20,24,22,.92); --ink:#ece8dc; --ink-2:#a9b0aa; --line:#38403b; --accent:#b9a3e6; --accent-ink:#15121c; --sky:#27313a; --meas:#ff8a6b; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121614; --panel:rgba(20,24,22,.92); --ink:#ece8dc; --ink-2:#a9b0aa; --line:#38403b; --accent:#b9a3e6; --accent-ink:#15121c; --sky:#27313a; --meas:#ff8a6b; color-scheme:dark}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-display);overflow:hidden}
+#c{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;background:var(--sky)}
+.panel{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));left:max(12px,env(safe-area-inset-left,0px));width:min(340px,calc(100% - 24px));max-height:calc(100% - 24px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));overflow:auto;background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(8px);padding:14px 16px 14px;display:flex;flex-direction:column;gap:12px;box-sizing:border-box}
+.eyebrow{font:500 .66rem/1.3 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
+h1{font:600 1.35rem/1.15 var(--f-display);margin:0;text-wrap:balance}
+h1 em{font-style:italic;font-weight:400;color:var(--accent)}
+.sub{font:.72rem/1.45 var(--f-mono);color:var(--ink-2);margin:0}
+.grp{display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line);padding-top:10px}
+.grp>b{font:500 .64rem/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+label.tg{display:flex;gap:8px;align-items:center;font-size:.95rem;cursor:pointer}
+label.tg input{accent-color:var(--accent);width:16px;height:16px}
+.row{display:flex;gap:6px;flex-wrap:wrap}
+button{font:500 .7rem/1 var(--f-mono);letter-spacing:.05em;text-transform:uppercase;background:transparent;color:var(--ink);border:1px solid var(--line);padding:.55rem .7rem;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.ex{display:flex;justify-content:space-between;font:.72rem var(--f-mono);color:var(--ink-2)}
+.ex output{color:var(--ink);font-variant-numeric:tabular-nums}
+.read{font:.74rem/1.55 var(--f-mono);font-variant-numeric:tabular-nums;color:var(--ink);white-space:pre;overflow-x:auto;min-height:4.6em}
+.read.empty{color:var(--ink-2);white-space:normal}
+.meter{font:.7rem/1.4 var(--f-mono);color:var(--ink-2);font-variant-numeric:tabular-nums}
+.bar{height:3px;background:var(--line);position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;background:var(--accent);width:0;transition:width .3s}
+.cred{font:.66rem/1.5 var(--f-mono);color:var(--ink-2);margin:0}
+.hide{align-self:flex-start}
+.status{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);font:.72rem var(--f-mono);background:var(--panel);border:1px solid var(--line);padding:.5rem .8rem;color:var(--ink);white-space:nowrap}
+.status[hidden]{display:none}
+.north{position:fixed;right:max(14px,env(safe-area-inset-right,0px));top:calc(14px + env(safe-area-inset-top,0px));width:46px;height:46px;border-radius:50%;background:var(--panel);border:1px solid var(--line);display:grid;place-items:center}
+.north span{display:block;font:600 .7rem/1.1 var(--f-mono);color:var(--accent);text-align:center;transform-origin:50% 50%}
+.panel.min>*:not(.head){display:none}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.back{font:500 .66rem/1.3 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);text-decoration:none}
+.back:hover{text-decoration:underline}
+.embed .back{display:none}
+.embed .panel{top:calc(62px + env(safe-area-inset-top,0px))}
+.embed .north{top:calc(62px + env(safe-area-inset-top,0px))}
+@media (max-width:520px){.panel{top:auto;bottom:calc(10px + env(safe-area-inset-bottom,0px));max-height:52%}}
+</style>
+
+<canvas id="c" aria-label="Nube de puntos LiDAR del casco de La Merced sobre el terreno"></canvas>
+<div class="north" aria-hidden="true"><span id="nArrow">▲<br>N</span></div>
+
+<aside class="panel" id="panel">
+  <div class="head">
+    <div>
+      <a class="back" href="../#nube">← Volver a la Posta</a>
+      <p class="eyebrow">Monumento Histórico Nacional · San Andrés de Giles</p>
+      <h1>La Merced, <em>Posta de Figueroa</em></h1>
+    </div>
+    <button class="hide" id="minBtn" type="button" aria-expanded="true">Ocultar</button>
+  </div>
+  <p class="sub">La nube LiDAR tal como la registró el escáner: 65,6 millones de puntos con su color, a 1–2 cm en muros, molino y suelo, sobre relieve y ortofoto. UTM 21S (EPSG:32721), cotas en m s.n.m.</p>
+
+  <div class="grp"><b>Detalle</b>
+    <div class="meter" id="meter">Cargando…</div>
+    <div class="bar" aria-hidden="true"><i id="barI"></i></div>
+    <div class="ex"><span>Puntos en memoria (máx.)</span><output id="budOut"></output></div>
+    <input type="range" id="bud" min="4" max="60" step="2" aria-label="Máximo de puntos en memoria, en millones">
+    <div class="ex"><span>Tamaño del punto</span><output id="psOut">×1</output></div>
+    <input type="range" id="ps" min="0.5" max="2.5" step="0.1" value="1" aria-label="Tamaño del punto">
+  </div>
+
+  <div class="grp"><b>Capas</b>
+    <label class="tg"><input type="checkbox" id="lyNube" checked> Nube LiDAR</label>
+    <label class="tg"><input type="checkbox" id="lyTerr" checked> Terreno con ortofoto</label>
+  </div>
+
+  <div class="grp"><b>Relieve</b>
+    <div class="ex"><span>Exageración vertical del terreno</span><output id="exOut">×1</output></div>
+    <input type="range" id="ex" min="1" max="8" step="0.5" value="1" aria-label="Exageración vertical del terreno">
+  </div>
+
+  <div class="grp"><b>Vistas</b>
+    <div class="row">
+      <button type="button" data-v="casco" class="on">Casco</button>
+      <button type="button" data-v="patio">Patio</button>
+      <button type="button" data-v="molino">Molino</button>
+      <button type="button" data-v="aerea">Aérea</button>
+      <button type="button" data-v="entorno">Entorno</button>
+    </div>
+  </div>
+
+  <div class="grp"><b>Herramientas</b>
+    <div class="row">
+      <button type="button" id="tPick" class="on">Coordenadas</button>
+      <button type="button" id="tMeas">Medir distancia</button>
+    </div>
+    <div class="read empty" id="read">Tocá o hacé clic sobre la nube o el terreno para leer su posición.</div>
+  </div>
+
+  <p class="cred">Relevamiento láser escáner (Leica BLK360, 50 estaciones): Arq. Juan Stinchi, en colaboración con la Arq. Victoria Lorenzo (2021). Relieve: SRTM 1″ con suelo LiDAR en el casco. Imagen: Esri World Imagery. Comisión Municipal Asesora del Patrimonio Cultural de San Andrés de Giles.</p>
+</aside>
+<div class="status" id="status">Cargando…</div>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
+
+const META={off:[278560,6198780],lat:[-2.1358933438257872e-07,9.010455004093124e-06,-34.32864117236356],lon:[1.0861046393119084e-05,2.574568668840127e-07,-59.40694071904819],zref:34.985};
+const $=id=>document.getElementById(id);let dirty=true;
+const EMBED=new URLSearchParams(location.search).has('embed');if(EMBED)document.documentElement.classList.add('embed');
+const cv=$('c'),st=$('status'),read=$('read');
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const mobile=matchMedia('(pointer:coarse)').matches||Math.min(screen.width,screen.height)<700;
+const renderer=new THREE.WebGLRenderer({canvas:cv,antialias:false,logarithmicDepthBuffer:true,powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio,mobile?1.5:2));
+const scene=new THREE.Scene();
+const sky=()=>{const c=new THREE.Color(css('--sky')||'#c9d6dc');scene.background=c;scene.fog=new THREE.Fog(c,900,2600);dirty=true};sky();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',sky);
+new MutationObserver(sky).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+const cam=new THREE.PerspectiveCamera(50,1,0.05,8000);
+const ctl=new OrbitControls(cam,cv);ctl.enableDamping=true;ctl.dampingFactor=.08;ctl.maxPolarAngle=Math.PI*0.495;ctl.minDistance=0.6;ctl.maxDistance=2600;ctl.screenSpacePanning=false;
+const terrG=new THREE.Group(),measG=new THREE.Group();
+const cloud=new THREE.Group();cloud.rotation.x=-Math.PI/2;   // modelo Z arriba (E, N, cota) → escena Y arriba
+scene.add(terrG,cloud,measG);
+function resize(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();U.uScale.value=h*renderer.getPixelRatio()/(2*Math.tan(cam.fov*Math.PI/360))}
+
+// ---------- material de puntos: discos con tamaño en metros reales ----------
+const U={uScale:{value:1},uSize:{value:1},uSpacing:{value:0.03}};
+const vs=`uniform float uScale,uSize,uSpacing;varying vec3 vC;
+#include <common>
+#include <logdepthbuf_pars_vertex>
+attribute vec3 col;
+void main(){vC=col;vec4 mv=modelViewMatrix*vec4(position,1.);gl_Position=projectionMatrix*mv;
+gl_PointSize=clamp(uSize*uSpacing*uScale/max(-mv.z,0.05),1.5,64.);
+#include <logdepthbuf_vertex>
+}`;
+const fs=`varying vec3 vC;
+#include <logdepthbuf_pars_fragment>
+void main(){vec2 d=gl_PointCoord-.5;if(dot(d,d)>.25)discard;
+#include <logdepthbuf_fragment>
+gl_FragColor=vec4(vC,1.);}`;
+const SP=[0.16,0.05,0.016];   // separación típica por nivel: A 15 cm · M 4,5 cm · F 1–2 cm
+function mat(){return new THREE.ShaderMaterial({uniforms:{uScale:U.uScale,uSize:U.uSize,uSpacing:{value:SP[0]}},vertexShader:vs,fragmentShader:fs})}
+
+// ---------- decodificación: Morton (12 bits por eje) en varint + zlib; color de 6 bits por canal ----------
+async function inflate(buf){const s=new Blob([buf]).stream().pipeThrough(new DecompressionStream('deflate'));return new Uint8Array(await new Response(s).arrayBuffer())}
+const LUT=new Uint16Array(1<<15);    // des-entrelazado de 5 tríos de bits
+for(let v=0;v<1<<15;v++){let x=0,y=0,z=0;for(let i=0;i<5;i++){x|=((v>>(3*i))&1)<<i;y|=((v>>(3*i+1))&1)<<i;z|=((v>>(3*i+2))&1)<<i}LUT[v]=x|(y<<5)|(z<<10)}
+async function decode(buf,e){
+  const pv=await inflate(new Uint8Array(buf,e.o,e.pl)),cc=await inflate(new Uint8Array(buf,e.o+e.pl,e.cl));
+  const n=e.n,pos=new Uint16Array(n*3),col=new Uint8Array(n*3);
+  let code=0,j=0;
+  for(let i=0;i<n;i++){let d=0,mul=1,b;do{b=pv[j++];d+=(b&127)*mul;mul*=128}while(b&128);code+=d;
+    // 36 bits: bajo (30 bits) y alto (6 bits)
+    const lo=code%1073741824,hi=Math.floor(code/1073741824);
+    const a=LUT[lo&32767],c2=LUT[(lo>>>15)&32767],h=LUT[hi&63];
+    pos[3*i]=(a&31)|((c2&31)<<5)|((h&3)<<10);
+    pos[3*i+1]=((a>>5)&31)|(((c2>>5)&31)<<5)|(((h>>5)&3)<<10);
+    pos[3*i+2]=((a>>10)&31)|(((c2>>10)&31)<<5)|(((h>>10)&3)<<10)}
+  for(let i=0;i<n*3;i++){const v=cc[i];col[i]=(v<<2)|(v>>4)}
+  return {pos,col}
+}
+function makePoints(e,pos,col,level){
+  const g=new THREE.BufferGeometry();
+  g.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  g.setAttribute('col',new THREE.BufferAttribute(col,3,true));
+  g.computeBoundingSphere();
+  const p=new THREE.Points(g,mat());const k=e.S/4096;
+  p.scale.set(k,k,k);p.position.set(e.lo[0]+k/2,e.lo[1]+k/2,e.lo[2]+k/2);p.userData={level,n:e.n};
+  return p
+}
+
+// ---------- teselas y planificador de carga ----------
+let MAN=null,ready=false;const tiles=new Map();   // clave "X_Y" → {A,M,F objetos; eM,eF entradas; centro}
+const files=new Map();
+const getFile=f=>{if(!files.has(f))files.set(f,fetch(f+'.bin').then(r=>{if(!r.ok)throw new Error(f);return r.arrayBuffer()}));return files.get(f)};
+const mem=navigator.deviceMemory||8;let budget=(mobile?(mem<=4?6:10):(mem<=4?16:36))*1e6,loaded=0,inflight=0,total=0;
+$('bud').value=budget/1e6;$('budOut').textContent=(budget/1e6)+' M';
+$('bud').oninput=e=>{budget=+e.target.value*1e6;$('budOut').textContent=e.target.value+' M';kick()};
+$('ps').oninput=e=>{U.uSize.value=+e.target.value;dirty=true;$('psOut').textContent='×'+(+e.target.value).toFixed(1)};
+function tileSpacing(t){return t.F?SP[2]:t.M?SP[1]:SP[0]}
+function refreshSpacing(t){const s=tileSpacing(t);for(const o of [t.A,t.M,t.F])if(o)o.material.uniforms.uSpacing.value=s}
+async function loadLevel(t,lv){
+  const e=lv===1?t.eM:t.eF;if(!e||t['busy'+lv]||t[lv===1?'M':'F'])return;
+  t['busy'+lv]=true;inflight++;
+  try{const buf=await getFile(e.f);const {pos,col}=await decode(buf,e);files.delete(e.f);
+    const p=makePoints(e,pos,col,lv);t[lv===1?'M':'F']=p;cloud.add(p);loaded+=e.n;refreshSpacing(t);dirty=true}
+  catch(err){console.error(err)}
+  t['busy'+lv]=false;inflight--;meter();kick()}
+function unload(t,lv){const k=lv===1?'M':'F',o=t[k];if(!o)return;cloud.remove(o);o.geometry.dispose();o.material.dispose();t[k]=null;loaded-=o.userData.n;refreshSpacing(t)}
+const tmpV=new THREE.Vector3();
+function camModel(){tmpV.copy(cam.position);return [tmpV.x,-tmpV.z,tmpV.y]}   // escena → modelo
+function dist(t,c){const dx=Math.max(t.x0-c[0],0,c[0]-t.x1),dy=Math.max(t.y0-c[1],0,c[1]-t.y1),dz=Math.max(t.z0-c[2],0,c[2]-t.z1);return Math.hypot(dx,dy,dz)}
+const frus=new THREE.Frustum(),pm=new THREE.Matrix4(),box=new THREE.Box3();
+function visible(t){box.min.set(t.x0,t.z0,-t.y1);box.max.set(t.x1,t.z1,-t.y0);return frus.intersectsBox(box)}
+let pending=false;function kick(){pending=true;dirty=true}
+function schedule(){
+  if(!ready)return;pending=false;
+  pm.multiplyMatrices(cam.projectionMatrix,cam.matrixWorldInverse);frus.setFromProjectionMatrix(pm);
+  const c=camModel(),cand=[];
+  for(const t of tiles.values()){const d=dist(t,c),v=visible(t);t.d=d;
+    const wantM=d<140&&(v||d<20),wantF=d<45&&(v||d<12);
+    if(t.eM)cand.push({t,lv:1,pr:d*(v?1:3),want:wantM});
+    if(t.eF)cand.push({t,lv:2,pr:d*1.6*(v?1:3),want:wantF})}
+  cand.sort((a,b)=>a.pr-b.pr);
+  // presupuesto: lo más cercano primero; lo que no entra o no se quiere, se descarga
+  let acc=MAN.nA;const keepSet=new Set();
+  for(const q of cand){if(!q.want)continue;const n=(q.lv===1?q.t.eM:q.t.eF).n;if(acc+n>budget)continue;acc+=n;keepSet.add(q)}
+  for(const q of cand){const has=q.t[q.lv===1?'M':'F'];if(has&&!keepSet.has(q)&&!(q.lv===1&&q.t.F))unload(q.t,q.lv)}
+  for(const q of cand){if(inflight>=4)break;if(keepSet.has(q)&&!q.t[q.lv===1?'M':'F']&&!q.t['busy'+q.lv]){if(q.lv===2&&!q.t.M&&q.t.eM)continue;loadLevel(q.t,q.lv)}}
+  for(const q of cand){if(inflight>=4)break;if(q.lv===2&&keepSet.has(q)&&!q.t.F&&!q.t.busy2&&(q.t.M||!q.t.eM))loadLevel(q.t,2)}
+  meter()}
+function meter(){const f=(loaded/1e6).toLocaleString('es-AR',{maximumFractionDigits:1});
+  $('meter').textContent=`${f} M de ${(total/1e6).toLocaleString('es-AR',{maximumFractionDigits:1})} M puntos cargados${inflight?' · cargando…':''}`;
+  $('barI').style.width=(100*loaded/total)+'%'}
+
+// ---------- terreno ----------
+const gl=new GLTFLoader();gl.setMeshoptDecoder(MeshoptDecoder);
+const loadGlb=u=>new Promise((ok,ko)=>{const fl=new THREE.FileLoader();fl.setResponseType('arraybuffer');fl.load(u,b=>gl.parse(b,'',ok,ko),undefined,ko)});
+
+// ---------- vistas ----------
+const C0=[7.19,5.82,36.4],MOL=[-5.0,-7.0,41.5];
+const VIEWS={casco:[0.75,0.42,85,C0],patio:[2.25,0.3,40,[C0[0],C0[1],C0[2]-2]],molino:[-2.2,0.12,18,MOL],aerea:[0.2,1.32,220,C0],entorno:[2.3,0.33,900,[C0[0],C0[1],C0[2]-6]]};
+let anim=null;
+function goView(k,instant){const [az,el,d,m]=VIEWS[k];const t=new THREE.Vector3(m[0],m[2],-m[1]);
+  const p=new THREE.Vector3(t.x+d*Math.cos(el)*Math.sin(az),t.y+d*Math.sin(el),t.z+d*Math.cos(el)*Math.cos(az));
+  if(instant||matchMedia('(prefers-reduced-motion: reduce)').matches){cam.position.copy(p);ctl.target.copy(t);kick();return}
+  anim={p0:cam.position.clone(),t0:ctl.target.clone(),p1:p,t1:t,s:performance.now()}}
+window.goView=goView;window.VIEWS=VIEWS;
+document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-v]').forEach(x=>x.classList.toggle('on',x===b));goView(b.dataset.v)});
+
+addEventListener('resize',()=>{resize();kick()});resize();goView('casco',true);
+
+(async()=>{
+  try{
+    st.textContent='Cargando índice de la nube…';
+    MAN=await (await fetch('nube.json')).json();
+    MAN.nA=MAN.A.reduce((s,e)=>s+e.n,0);total=MAN.nA+MAN.M.reduce((s,e)=>s+e.n,0)+MAN.F.reduce((s,e)=>s+e.n,0);
+    const key=e=>e.t[0]+'_'+e.t[1];
+    for(const e of MAN.A){tiles.set(key(e),{eA:e,x0:e.lo[0],y0:e.lo[1],z0:e.lo[2],x1:e.lo[0]+10,y1:e.lo[1]+10,z1:e.lo[2]+e.S,A:null,M:null,F:null})}
+    for(const e of MAN.M){const t=tiles.get(key(e));if(t)t.eM=e}
+    for(const e of MAN.F){const t=tiles.get(key(e));if(t)t.eF=e}
+    // nivel A completo: toda la nube a 8 cm
+    const fA=[...new Set(MAN.A.map(e=>e.f))];let done=0;
+    for(const f of fA){st.textContent=`Cargando la nube completa (vista general) ${done+1}/${fA.length}…`;const buf=await getFile(f);
+      for(const e of MAN.A.filter(x=>x.f===f)){const {pos,col}=await decode(buf,e);const p=makePoints(e,pos,col,0);const t=tiles.get(key(e));t.A=p;cloud.add(p);loaded+=e.n;dirty=true}
+      files.delete(f);done++;meter()}
+    st.hidden=true;ready=true;kick();
+    loadGlb('terreno.glb').then(g=>{g.scene.traverse(o=>{if(o.isMesh){const m=o.material.map;if(m)m.colorSpace=THREE.SRGBColorSpace;o.material=new THREE.MeshBasicMaterial({map:m,side:THREE.DoubleSide,polygonOffset:true,polygonOffsetFactor:2,polygonOffsetUnits:2})}});terrG.add(g.scene);dirty=true}).catch(console.error);
+  }catch(e){st.hidden=false;st.textContent='No se pudo cargar la nube. Recargá la página.';console.error(e)}
+})();
+
+// ---------- capas y relieve ----------
+$('lyNube').onchange=e=>{cloud.visible=e.target.checked;dirty=true};
+$('lyTerr').onchange=e=>{terrG.visible=e.target.checked;dirty=true};
+let K=1;const ex=$('ex'),exOut=$('exOut');
+ex.oninput=()=>{K=+ex.value;exOut.textContent='×'+K;terrG.scale.y=K;terrG.position.y=META.zref*(1-K);dirty=true};
+
+// ---------- herramientas ----------
+let tool='pick',mp=[];
+const setTool=t=>{tool=t;$('tPick').classList.toggle('on',t==='pick');$('tMeas').classList.toggle('on',t==='meas');clearMeas();
+  read.classList.add('empty');read.textContent=t==='pick'?'Tocá o hacé clic sobre la nube o el terreno para leer su posición.':'Tocá dos puntos para medir distancia real, horizontal y desnivel.'};
+$('tPick').onclick=()=>setTool('pick');$('tMeas').onclick=()=>setTool('meas');
+function clearMeas(){dirty=true;mp=[];while(measG.children.length){const o=measG.children.pop();o.geometry&&o.geometry.dispose()}}
+const fmt=(v,d)=>v.toLocaleString('es-AR',{minimumFractionDigits:d,maximumFractionDigits:d});
+const rc=new THREE.Raycaster(),mv=new THREE.Vector2();let down=null;
+cv.addEventListener('pointerdown',e=>down=[e.clientX,e.clientY]);
+cv.addEventListener('pointerup',e=>{if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>5)return;
+  mv.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);rc.setFromCamera(mv,cam);
+  let hit=null,onT=false;
+  if(cloud.visible){
+    // umbral en metros proporcional a la distancia al objetivo (≈ 6 px en pantalla)
+    rc.params.Points.threshold=Math.max(0.01,cam.position.distanceTo(ctl.target)*0.004);
+    const objs=[];for(const t of tiles.values()){const o=t.F||t.M||t.A;if(o)objs.push(o);if(t.F&&t.M)objs.push(t.M)}
+    const hs=rc.intersectObjects(objs,false);if(hs.length){hs.sort((a,b)=>a.distance-b.distance);hit=hs[0]}}
+  if(!hit&&terrG.visible){const h=rc.intersectObject(terrG,true)[0];if(h){hit=h;onT=true}}
+  if(!hit)return;
+  const x=hit.point.x,yN=-hit.point.z,z=onT?META.zref+(hit.point.y-META.zref)/K:hit.point.y;
+  if(tool==='pick'){
+    const E=x+META.off[0],N=yN+META.off[1];
+    const lat=META.lat[0]*x+META.lat[1]*yN+META.lat[2],lon=META.lon[0]*x+META.lon[1]*yN+META.lon[2];
+    read.classList.remove('empty');
+    read.textContent=`${onT?'Terreno':'Nube LiDAR'}\nE  ${fmt(E,2)} m\nN  ${fmt(N,2)} m\nCota ${fmt(z,2)} m s.n.m.\n${fmt(lat,6)}°  ${fmt(lon,6)}°`;
+  }else{
+    if(mp.length===2)clearMeas();
+    mp.push(new THREE.Vector3(x,z,-yN));
+    const col=new THREE.Color(css('--meas')||'#d2452f');
+    const dot=new THREE.Mesh(new THREE.SphereGeometry(Math.max(.02,cam.position.distanceTo(hit.point)*.006),12,8),new THREE.MeshBasicMaterial({color:col,depthTest:false}));
+    dot.position.copy(hit.point);dot.renderOrder=9;measG.add(dot);dirty=true;
+    if(mp.length===2){
+      const pts=measG.children.map(o=>o.position.clone());
+      const ln=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:col,depthTest:false}));ln.renderOrder=9;measG.add(ln);
+      const d=mp[0].distanceTo(mp[1]),dh=Math.hypot(mp[1].x-mp[0].x,mp[1].z-mp[0].z),dz=mp[1].y-mp[0].y;
+      read.classList.remove('empty');read.textContent=`Distancia  ${fmt(d,2)} m\nHorizontal ${fmt(dh,2)} m\nDesnivel   ${dz>=0?'+':''}${fmt(dz,2)} m`;
+    }else{read.classList.remove('empty');read.textContent='Primer punto marcado.\nTocá el segundo.'}
+  }});
+
+// ---------- panel y bucle ----------
+const panel=$('panel'),minBtn=$('minBtn');
+if(EMBED&&innerWidth<900){panel.classList.add('min');minBtn.textContent='Mostrar';minBtn.setAttribute('aria-expanded',false)}
+minBtn.onclick=()=>{const m=panel.classList.toggle('min');minBtn.textContent=m?'Mostrar':'Ocultar';minBtn.setAttribute('aria-expanded',!m)};
+ctl.addEventListener('change',kick);
+const nA=$('nArrow');let last=0;
+renderer.setAnimationLoop(t=>{
+  if(anim){const k=Math.min(1,(t-anim.s)/1200),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;cam.position.lerpVectors(anim.p0,anim.p1,e);ctl.target.lerpVectors(anim.t0,anim.t1,e);if(k>=1){anim=null;kick()}}
+  const moved=ctl.update()||anim;
+  if(pending&&t-last>250){last=t;schedule()}
+  if(!(moved||dirty))return;dirty=false;
+  const d=new THREE.Vector3();cam.getWorldDirection(d);nA.style.transform=`rotate(${-Math.atan2(d.x,-d.z)}rad)`;
+  renderer.render(scene,cam)});
+window.__state=()=>({loaded,total,inflight,tiles:tiles.size,ready});window.__budget=v=>{budget=v;kick()};
+</script>

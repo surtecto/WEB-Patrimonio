@@ -747,6 +747,10 @@ p{margin:0}
 .viewer{position:relative;height:calc(100vh - 46px - env(safe-area-inset-top,0px));height:calc(100dvh - 46px - env(safe-area-inset-top,0px));min-height:420px;max-height:1100px;background:#050606;overflow:hidden;border-bottom:1px solid var(--hierro)}
 .viewer canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
 .viewer canvas:active{cursor:grabbing}
+.page,.page [id]{scroll-margin-top:50px}
+.viewer iframe.fullcloud{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:2;background:#050606;display:block}
+.viewer.is-full .vbar,.viewer.is-full .compass,.viewer.is-full .walkpad,.viewer.is-full .loadbar{display:none}
+.chip-full{border-color:var(--ocre,#b98a3e)}
 .vbar{position:absolute;left:0;right:0;bottom:0;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;padding:.7rem max(12px,env(safe-area-inset-right,0px)) calc(.7rem + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:linear-gradient(to top,rgba(5,6,6,.85),rgba(5,6,6,0));z-index:3}
 .vbar .lbl{font-family:var(--f-mono);font-size:.68rem;color:#bdb8a8;letter-spacing:.06em;margin-right:auto;min-width:0}
 .vbar .lbl b{color:#ece8dc;font-weight:500}
@@ -1015,6 +1019,8 @@ section+section{border-top:0}
       <button class="chip" data-vmode="orbit" aria-pressed="true" type="button">Nube 3D</button>
       <button class="chip" data-vmode="walk" aria-pressed="false" type="button">Caminar</button>
       <button class="chip" data-vmode="pano" aria-pressed="false" type="button">Panorama 360°</button>
+      <button class="chip chip-full" data-full aria-pressed="false" type="button" title="Abre la nube completa (65,6 millones de puntos); carga por sectores según te acercás">Nube completa · 1–2 cm</button>
+      <a class="chip" id="fullOut" href="nube3d/" target="_blank" rel="noopener" hidden>Abrir aparte ↗</a>
     </div>
     <div class="compass" id="compass">N</div>
     <div class="walkpad" id="walkPad" hidden>
@@ -1035,7 +1041,7 @@ section+section{border-top:0}
     <div class="sec-head">
       <p class="eyebrow">Relevamiento 2021</p>
       <h2>Una nube de puntos para un lugar que se deshace despacio</h2>
-      <p class="lede">En enero de 2021 el Arq. Juan Stinchi, en colaboración con la Arq. Victoria Lorenzo, relevó el casco con escáner láser: unas cuarenta y cinco estaciones unificadas en una nube de 103,7 millones de puntos. Arriba se recorre esa misma nube, reducida a 5 millones (un punto cada 12 cm), orientada al norte y ubicada sobre la imagen satelital.</p>
+      <p class="lede">En enero de 2021 el Arq. Juan Stinchi, en colaboración con la Arq. Victoria Lorenzo, relevó el casco con escáner láser: cincuenta estaciones unificadas en una nube de 103,7 millones de puntos. Arriba se recorre esa misma nube reducida a 5 millones (un punto cada 12 cm), liviana y rápida. Con «Nube completa» se abre la versión de 65,6 millones de puntos: muros, molino y suelo a 1–2 cm, sobre el relieve y la ortofoto, con coordenadas y medición. Esa versión carga por sectores a medida que te acercás; conviene usarla en computadora o en un celular con buena conexión.</p>
     </div>
     <div class="two">
       <div class="flow">
@@ -1701,7 +1707,7 @@ window.initViewer=function(){
   let visible=true;new IntersectionObserver(es=>visible=es[0].isIntersecting).observe(cv);
   const card=['N','NE','E','SE','S','SO','O','NO'];
   let t0=performance.now();
-  (function frame(now){requestAnimationFrame(frame);if(!visible)return;const dt=Math.min(.05,(now-t0)/1000);t0=now;let head;
+  (function frame(now){requestAnimationFrame(frame);if(!visible||window.__pfFull)return;const dt=Math.min(.05,(now-t0)/1000);t0=now;let head;
     if(view==='pano'){if(auto&&!reduce)plon+=dt*3.2;plat=Math.max(-27+pfov/2,Math.min(42-pfov/2,plat));pcam.fov=pfov;pcam.updateProjectionMatrix();
       const ph=THREE.MathUtils.degToRad(90-plat),th=THREE.MathUtils.degToRad(plon);pcam.lookAt(Math.sin(ph)*Math.cos(th),Math.cos(ph),Math.sin(ph)*Math.sin(th));renderer.render(sp,pcam);
       comp.textContent='Giro '+String(Math.round(((plon%360)+360)%360)).padStart(3,'0')+'°';return}
@@ -1713,6 +1719,17 @@ window.initViewer=function(){
     comp.innerHTML=`<span style="display:inline-block;transform:rotate(${-head}deg)">↑</span> N · mirando al ${card[Math.round(head/45)%8]}`;
     renderer.render(sc,cam)})(t0);
 };
+
+/* ---------- nube completa (bajo demanda, en un marco aparte que se libera al salir) ---------- */
+(function(){const vw=document.getElementById('viewer'),btn=document.querySelector('[data-full]'),out=document.getElementById('fullOut');if(!vw||!btn)return;let ifr=null;
+  function openFull(){if(ifr)return;ifr=document.createElement('iframe');ifr.src='nube3d/?embed';ifr.title='Nube LiDAR completa de La Merced';ifr.className='fullcloud';ifr.allow='fullscreen';ifr.loading='eager';
+    vw.appendChild(ifr);vw.classList.add('is-full');window.__pfFull=true;btn.setAttribute('aria-pressed','true');out.hidden=false;
+    document.querySelectorAll('[data-vmode]').forEach(x=>x.setAttribute('aria-pressed','false'))}
+  function closeFull(){if(!ifr)return;ifr.remove();ifr=null;vw.classList.remove('is-full');window.__pfFull=false;btn.setAttribute('aria-pressed','false');out.hidden=true}
+  btn.addEventListener('click',openFull);
+  document.querySelectorAll('[data-vmode]').forEach(b=>b.addEventListener('click',closeFull));
+  addEventListener('hashchange',()=>{if(location.hash!=='#nube')closeFull()});
+})();
 
 /* ---------- páginas internas ---------- */
 function loadScript(src){return new Promise((ok,ko)=>{const t=document.createElement('script');t.src=src;t.onload=ok;t.onerror=ko;document.head.appendChild(t)})}
